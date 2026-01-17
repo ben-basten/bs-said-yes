@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import * as contentful from "contentful";
+import type { ContentfulEntry } from "~/types/ContentfulEntry";
 const { cmsSpace, cmsApiKey, cmsEnv } = useRuntimeConfig();
 const { data } = useAsyncData("landing", async () => {
   const client = contentful.createClient({
@@ -13,9 +14,8 @@ const { data } = useAsyncData("landing", async () => {
     accessToken: cmsApiKey,
     environment: cmsEnv,
   });
-  return client.getEntry<{
-    fields: { cmsName: string };
-    contentTypeId: string;
-  }>("1oC9jdPQvkqvDi6Qd2phIl");
+  return client.getEntry<ContentfulEntry<{ cmsName: string }>>(
+    "1oC9jdPQvkqvDi6Qd2phIl",
+  );
 });
 </script>
