@@ -10,6 +10,11 @@ export default defineNuxtConfig({
     },
   ],
   css: ["~/assets/css/main.css"],
+  runtimeConfig: {
+    cmsSpace: "",
+    cmsEnv: "",
+    cmsApiKey: "",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
