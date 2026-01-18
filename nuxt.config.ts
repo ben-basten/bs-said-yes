@@ -2,7 +2,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/fonts", "@nuxt/eslint"],
+  modules: ["@nuxt/fonts", "@nuxt/eslint", "nuxt-auth-utils"],
   components: [
     {
       path: "~/components",

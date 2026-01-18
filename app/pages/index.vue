@@ -1,3 +1,9 @@
+<script setup lang="ts">
+definePageMeta({
+  middleware: ["authenticated"],
+});
+</script>
+
 <template>
   <ContentContainer>
     <Heading as="h1">Mollit veniam laboris sit veniam commodo</Heading>
