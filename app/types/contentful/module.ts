@@ -7,6 +7,7 @@ export type ModuleProps<T extends EntrySkeletonType> = {
 export type HomepageHeroSkeleton = EntrySkeletonType<
   {
     heading: EntryFieldTypes.Text;
+    copy: EntryFieldTypes.RichText;
   },
   "homepageHero"
 >;

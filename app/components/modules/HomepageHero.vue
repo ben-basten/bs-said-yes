@@ -1,5 +1,8 @@
 <template>
-  <p>{{ data.fields.heading }}</p>
+  <section>
+    <p>{{ data.fields.heading }}</p>
+    <RichTextRenderer :json="data.fields.copy" />
+  </section>
 </template>
 
 <script setup lang="ts">

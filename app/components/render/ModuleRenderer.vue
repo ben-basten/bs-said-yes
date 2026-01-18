@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import type { Entry } from "contentful";
 import type { ContentModuleSkeleton } from "~/types/contentful/page";
-import ModuleHomepageHero from "./HomepageHero.vue";
+import ModuleHomepageHero from "~/components/modules/HomepageHero.vue";
 import type { Component } from "vue";
 
 const { data } = defineProps<{
