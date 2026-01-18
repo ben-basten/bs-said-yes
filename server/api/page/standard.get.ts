@@ -1,4 +1,4 @@
-import { cmsClient } from "~~/server/utils/client";
+import { GraphQLClient, gql } from "graphql-request";
 
 export default defineEventHandler(async (event) => {
   const { slug } = getQuery<{ slug: string }>(event);
@@ -10,18 +10,51 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const page = await cmsClient.getEntries({
-    content_type: "pageStandard",
-    "fields.slug": slug,
-    limit: 1,
+  const endpoint = process.env.CONTENTFUL_GRAPHQL_ENDPOINT;
+  const accessToken = process.env.CONTENTFUL_GRAPHQL_TOKEN;
+
+  const graphQLClient = new GraphQLClient(endpoint, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
 
-  if (page.items.length === 0) {
+  const query = gql`
+    query GetPageStandard($slug: String!) {
+      pageStandardCollection(where: { slug: $slug }, limit: 1) {
+        items {
+          sys {
+            id
+          }
+          cmsName
+          slug
+          contentModulesCollection {
+            items {
+              __typename
+              ... on HomepageHero {
+                sys {
+                  id
+                }
+                heading
+              }
+              # Add more fragments for other module types as needed
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = { slug };
+  const data = await graphQLClient.request(query, variables);
+  const page = data.pageStandardCollection.items[0];
+
+  if (!page) {
     throw createError({
       statusCode: 404,
       statusMessage: `Page with slug '${slug}' not found`,
     });
   }
 
-  return page.items[0];
+  return page;
 });

@@ -1,8 +1,8 @@
 <template>
   <ContentContainer>
-    <Heading as="h1">data: {{ content?.cmsName }}</Heading>
+    <Heading as="h1">data: {{ data?.cmsName }}</Heading>
     <ModuleRenderer
-      v-for="(item, index) in content?.contentModules"
+      v-for="(item, index) in contentModules"
       :key="index"
       :data="item"
     />
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PageStandard } from "~/types/contentful/page";
+import type { PageStandard } from "#shared/types/graphql";
 
 const { slug } = defineProps<{ slug: string }>();
 
@@ -26,5 +26,9 @@ if (error.value) {
   });
 }
 
-const content = computed(() => data.value?.fields);
+const contentModules = computed(() => {
+  return (data.value?.contentModulesCollection?.items || []).filter(
+    (item) => item !== null,
+  );
+});
 </script>
