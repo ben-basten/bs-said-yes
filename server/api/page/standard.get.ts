@@ -1,14 +1,14 @@
 import { cmsClient } from "~~/server/utils/client";
+import { z } from "zod";
+
+const querySchema = z.object({
+  slug: z.string().regex(/^[a-zA-Z0-9-]+$/, { message: "Invalid slug" }),
+});
 
 export default defineEventHandler(async (event) => {
-  const { slug } = getQuery<{ slug: string }>(event);
+  await requireUserSession(event);
 
-  if (!slug) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Missing 'slug' query parameter",
-    });
-  }
+  const { slug } = await getValidatedQuery(event, querySchema.parse);
 
   const page = await cmsClient.getEntries({
     content_type: "pageStandard",
