@@ -7,3 +7,9 @@
     <Footer class="isolate" />
   </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  meta: [{ name: "robots", content: "noindex, nofollow" }],
+});
+</script>
