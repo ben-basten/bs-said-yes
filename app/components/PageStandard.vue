@@ -12,7 +12,6 @@ const { slug } = defineProps<{ slug: string }>();
 
 const { data } = useAsyncData(`route-${slug}`, async () => {
   const { cmsSpace, cmsApiKey, cmsEnv } = useRuntimeConfig();
-  console.log("Fetching page for slug:", slug);
   const client = contentful.createClient({
     space: cmsSpace,
     accessToken: cmsApiKey,
