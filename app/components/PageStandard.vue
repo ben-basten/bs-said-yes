@@ -10,38 +10,21 @@
 </template>
 
 <script setup lang="ts">
-import { createClient } from "contentful";
 import type { PageStandard } from "~/types/contentful/page";
 
 const { slug } = defineProps<{ slug: string }>();
 
-const { data, error } = useAsyncData(`route-${slug}`, async () => {
-  const { cmsSpace, cmsApiKey, cmsEnv } = useRuntimeConfig();
-  const client = createClient({
-    space: cmsSpace,
-    accessToken: cmsApiKey,
-    environment: cmsEnv,
-  });
-  return client.withoutUnresolvableLinks.getEntries<PageStandard>({
-    content_type: "pageStandard",
-    "fields.slug": slug,
-    limit: 1,
-  });
+const { data, error } = useFetch<PageStandard>("/api/page/standard", {
+  params: { slug },
 });
 
 if (error.value) {
+  const statusCode = error.value.status || 500;
   throw createError({
-    statusCode: 500,
-    statusMessage: "Something went wrong",
+    statusCode,
+    statusMessage: statusCode === 404 ? "Not Found" : "Something went wrong",
   });
 }
 
-if (data.value?.items.length === 0) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: "Not Found",
-  });
-}
-
-const content = computed(() => data.value?.items?.[0]?.fields);
+const content = computed(() => data.value?.fields);
 </script>
