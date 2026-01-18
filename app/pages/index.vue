@@ -1,6 +1,6 @@
 <template>
   <ContentContainer>
-    <Heading as="h1">data: {{ data?.fields.cmsName }}</Heading>
+    <Heading as="h1">data: {{ content?.cmsName }}</Heading>
   </ContentContainer>
 </template>
 
@@ -14,8 +14,16 @@ const { data } = useAsyncData("landing", async () => {
     accessToken: cmsApiKey,
     environment: cmsEnv,
   });
-  return client.getEntry<ContentfulEntry<{ cmsName: string }>>(
-    "1oC9jdPQvkqvDi6Qd2phIl",
-  );
+  return client.getEntries<
+    ContentfulEntry<{
+      cmsName: contentful.EntryFieldTypes.Text;
+      slug: contentful.EntryFieldTypes.Text;
+    }>
+  >({
+    content_type: "pageStandard",
+    "fields.slug": "home",
+    limit: 1,
+  });
 });
+const content = computed(() => data.value?.items?.[0]?.fields);
 </script>
