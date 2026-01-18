@@ -17,6 +17,8 @@ export default defineNuxtConfig({
     cmsSpace: "",
     cmsEnv: "",
     cmsApiKey: "",
+    sessionPassword: "",
+    sitePassword: "",
   },
   vite: {
     plugins: [tailwindcss()],

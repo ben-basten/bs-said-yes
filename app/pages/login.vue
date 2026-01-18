@@ -1,4 +1,33 @@
+<template>
+  <div class="min-h-screen flex items-center justify-center bg-neutral-100 p-4">
+    <form class="w-full max-w-xs flex flex-col gap-4" @submit.prevent="login">
+      <input
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        class="w-full px-4 py-3 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
+        autocomplete="current-password"
+        autofocus
+      />
+
+      <p v-if="error" class="text-red-600 text-sm text-center">{{ error }}</p>
+
+      <button
+        type="submit"
+        class="w-full py-3 bg-neutral-900 text-white rounded-md hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
+        :disabled="isLoading"
+      >
+        {{ isLoading ? "..." : "Enter" }}
+      </button>
+    </form>
+  </div>
+</template>
+
 <script setup lang="ts">
+definePageMeta({
+  layout: "minimal",
+});
+
 const { loggedIn, fetch: refreshSession } = useUserSession();
 const password = ref("");
 const error = ref("");
@@ -31,131 +60,3 @@ async function login() {
   }
 }
 </script>
-
-<template>
-  <div class="login-container">
-    <div class="login-card">
-      <h1 class="login-title">Enter Password</h1>
-
-      <form class="login-form" @submit.prevent="login">
-        <div class="input-group">
-          <input
-            v-model="password"
-            type="password"
-            placeholder="Password"
-            class="password-input"
-            autocomplete="current-password"
-            autofocus
-          />
-        </div>
-
-        <p v-if="error" class="error-message">{{ error }}</p>
-
-        <button type="submit" class="submit-button" :disabled="isLoading">
-          {{ isLoading ? "Checking..." : "Enter" }}
-        </button>
-      </form>
-    </div>
-  </div>
-</template>
-
-<style scoped>
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  padding: 1rem;
-}
-
-.login-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.5rem;
-  padding: 3rem;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-.login-title {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 500;
-  color: #f8f8f8;
-  text-align: center;
-  margin-bottom: 2rem;
-  letter-spacing: 0.02em;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.input-group {
-  position: relative;
-}
-
-.password-input {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
-  font-family: inherit;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0.75rem;
-  color: #f8f8f8;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-.password-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.password-input:focus {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
-}
-
-.error-message {
-  color: #ff6b6b;
-  font-size: 0.875rem;
-  text-align: center;
-  margin: 0;
-}
-
-.submit-button {
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: inherit;
-  background: linear-gradient(135deg, #e94560 0%, #c73659 100%);
-  color: white;
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.submit-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -10px rgba(233, 69, 96, 0.5);
-}
-
-.submit-button:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.submit-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-</style>

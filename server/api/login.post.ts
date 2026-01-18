@@ -1,9 +1,13 @@
-export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const password = body?.password;
+import { z } from "zod";
 
-  // Get the site password from environment variable
-  const sitePassword = process.env.NUXT_SITE_PASSWORD;
+const bodySchema = z.object({
+  password: z.string().max(50).min(1),
+});
+
+export default defineEventHandler(async (event) => {
+  const { password } = await readValidatedBody(event, bodySchema.parse);
+
+  const { sitePassword } = useRuntimeConfig();
 
   if (password === sitePassword) {
     await setUserSession(event, {
