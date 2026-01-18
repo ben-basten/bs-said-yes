@@ -15,7 +15,7 @@ import type { PageStandard } from "~/types/contentful/page";
 
 const { slug } = defineProps<{ slug: string }>();
 
-const { data } = useAsyncData(`route-${slug}`, async () => {
+const { data, error } = useAsyncData(`route-${slug}`, async () => {
   const { cmsSpace, cmsApiKey, cmsEnv } = useRuntimeConfig();
   const client = createClient({
     space: cmsSpace,
@@ -28,5 +28,20 @@ const { data } = useAsyncData(`route-${slug}`, async () => {
     limit: 1,
   });
 });
+
+if (error.value) {
+  throw createError({
+    statusCode: 500,
+    statusMessage: "Something went wrong",
+  });
+}
+
+if (data.value?.items.length === 0) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Not Found",
+  });
+}
+
 const content = computed(() => data.value?.items?.[0]?.fields);
 </script>
