@@ -1,7 +1,13 @@
 <template>
-  <footer>
-    <ul>
-      <li class="text-center">Footer Navigation</li>
-    </ul>
+  <footer class="text-center">
+    <RichTextRenderer v-if="copy" :json="copy" />
   </footer>
 </template>
+
+<script setup lang="ts">
+import type { Document } from "@contentful/rich-text-types";
+
+defineProps<{
+  copy: Document | null;
+}>();
+</script>
