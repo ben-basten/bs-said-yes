@@ -1,6 +1,6 @@
 <template>
   <ContentContainer>
-    <Heading as="h1">data: {{ content?.cmsName }}</Heading>
+    <Heading as="h1">data: {{ data?.cmsName }}</Heading>
     <ModuleRenderer
       v-for="(item, index) in contentModules"
       :key="index"
@@ -10,11 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import type { PageStandard } from "~/types/contentful/page";
+import type { PageStandardFragment } from '~~/shared/types/graphql';
 
 const { slug } = defineProps<{ slug: string }>();
 
-const { data, error } = useFetch<PageStandard>("/api/page/standard", {
+const { data, error } = useFetch<PageStandardFragment>("/api/page/standard", {
   params: { slug },
 });
 
@@ -26,9 +26,7 @@ if (error.value) {
   });
 }
 
-const content = computed(() => data.value?.fields);
 const contentModules = computed(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  () => (content.value?.contentModules || []) as any[],
+  () => (data.value?.contentModulesCollection?.items || []),
 );
 </script>
