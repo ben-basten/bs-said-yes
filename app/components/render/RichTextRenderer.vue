@@ -28,15 +28,14 @@ import type {
 import { BLOCKS } from "@contentful/rich-text-types";
 import RichTextRenderer from "contentful-rich-text-vue-renderer";
 
-const { json: rawJson } = defineProps<{
-  json: { [x: string]: Document | undefined } | Document;
+const { json } = defineProps<{
+  json: Document | undefined;
 }>();
 
 /**
  * Removes trailing empty paragraph tags.
  */
 const filteredJson = computed((): Document | undefined => {
-  const json = rawJson as Document | undefined;
   if (!json?.content?.length) {
     return json;
   }

@@ -10,6 +10,9 @@ pnpm install
 
 # Populate the .env file
 cp .env.example .env
+
+# Generate GraphQL types
+pnpm generate:types:watch
 ```
 
 ## Development Server

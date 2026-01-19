@@ -1,15 +1,16 @@
 <template>
   <section>
-    <p>{{ data.fields.heading }}</p>
-    <RichTextRenderer :json="data.fields.copy" />
+    <p>{{ data.heading }}</p>
+    <RichTextRenderer :json="data.copy?.json" />
+    <ContentfulImage v-if="data.image?.url" :src="data.image?.url" :alt="data.image?.description ?? undefined" :sizes="undefined" />
   </section>
 </template>
 
 <script setup lang="ts">
 import type {
-  HomepageHeroSkeleton,
   ModuleProps,
-} from "~/types/contentful/module";
+} from "~/types/module";
+import type { HomepageHeroFragment } from "~~/shared/types/graphql";
 
-const { data } = defineProps<ModuleProps<HomepageHeroSkeleton>>();
+const { data } = defineProps<ModuleProps<HomepageHeroFragment>>();
 </script>

@@ -1,4 +1,9 @@
-import { cmsClient } from "~~/server/utils/client";
+import { fetchContentful } from "~~/server/utils/client";
+import { PAGE_STANDARD_QUERY } from "~~/server/graphql/queries/page-standard.query";
+import type {
+  PageStandardQuery,
+  PageStandardQueryVariables,
+} from "~~/shared/types/graphql";
 import { z } from "zod";
 
 const querySchema = z.object({
@@ -10,18 +15,21 @@ export default defineEventHandler(async (event) => {
 
   const { slug } = await getValidatedQuery(event, querySchema.parse);
 
-  const page = await cmsClient.getEntries({
-    content_type: "pageStandard",
-    "fields.slug": slug,
-    limit: 1,
+  const data = await fetchContentful<
+    PageStandardQuery,
+    PageStandardQueryVariables
+  >(PAGE_STANDARD_QUERY, {
+    slug,
   });
 
-  if (page.items.length === 0) {
+  const page = data.pageStandardCollection?.items[0];
+
+  if (!page) {
     throw createError({
       statusCode: 404,
       statusMessage: `Page with slug '${slug}' not found`,
     });
   }
 
-  return page.items[0];
+  return page;
 });
