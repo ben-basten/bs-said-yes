@@ -10,9 +10,12 @@ export const cmsClient = new GraphQLClient(endpoint, {
   },
 });
 
-export const fetchContentful = async <T>(
+export const fetchContentful = async <
+  Response,
+  Variables extends Record<string, unknown>,
+>(
   query: string,
-  variables?: Record<string, unknown>,
-): Promise<T> => {
-  return cmsClient.request<T>(query, variables);
+  variables?: Variables,
+): Promise<Response> => {
+  return cmsClient.request<Response>(query, variables);
 };

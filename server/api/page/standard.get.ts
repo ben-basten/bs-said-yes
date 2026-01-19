@@ -1,6 +1,9 @@
 import { fetchContentful } from "~~/server/utils/client";
 import { PAGE_STANDARD_QUERY } from "~~/server/graphql/queries/page-standard.query";
-import type { PageStandardQuery } from "~~/shared/types/graphql";
+import type {
+  PageStandardQuery,
+  PageStandardQueryVariables,
+} from "~~/shared/types/graphql";
 import { z } from "zod";
 
 const querySchema = z.object({
@@ -12,7 +15,10 @@ export default defineEventHandler(async (event) => {
 
   const { slug } = await getValidatedQuery(event, querySchema.parse);
 
-  const data = await fetchContentful<PageStandardQuery>(PAGE_STANDARD_QUERY, {
+  const data = await fetchContentful<
+    PageStandardQuery,
+    PageStandardQueryVariables
+  >(PAGE_STANDARD_QUERY, {
     slug,
   });
 
