@@ -36,7 +36,7 @@ const isLoading = ref(false);
 // Redirect if already logged in
 watchEffect(() => {
   if (loggedIn.value) {
-    navigateTo("/");
+    navigateTo("/", { replace: true });
   }
 });
 
@@ -51,7 +51,7 @@ async function login() {
     });
 
     await refreshSession();
-    await navigateTo("/");
+    await navigateTo("/", { replace: true });
     
   } catch (e: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
     if (e.status === 401) {
