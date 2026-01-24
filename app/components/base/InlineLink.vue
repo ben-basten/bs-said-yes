@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="href" :target="external ? '_blank' : undefined" class="group flex flex-row gap-px">
     <slot />
-    <IconArrowOutward v-if="external" aria-label="external"
+    <IconArrowOutward v-if="external" aria-label="opens in new tab"
       class="w-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-default ease-default" />
   </NuxtLink>
 </template>
