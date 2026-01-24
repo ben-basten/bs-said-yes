@@ -6,6 +6,7 @@
     "build": "pnpm generate:types && nuxt build",
     "dev": "nuxt dev",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "generate": "nuxt generate",
     "generate:types": "graphql-codegen --require dotenv/config --config codegen.ts",
     "generate:types:watch": "pnpm generate:types --watch",
