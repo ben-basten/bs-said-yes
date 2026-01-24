@@ -9,11 +9,11 @@ export const useMediaQuery = (query: string) => {
   onMounted(() => {
     mediaQuery = window.matchMedia(query);
     isMatch.value = mediaQuery.matches;
-    mediaQuery.addEventListener("change", handleChange);
+    mediaQuery?.addEventListener("change", handleChange);
   });
 
   onUnmounted(() => {
-    mediaQuery.removeEventListener("change", handleChange);
+    mediaQuery?.removeEventListener("change", handleChange);
   });
 
   return isMatch;
