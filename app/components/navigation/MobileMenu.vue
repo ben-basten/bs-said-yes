@@ -59,11 +59,18 @@ import type { LinkFragment } from "~~/shared/types/graphql";
 const route = useRoute();
 const navList = ref<HTMLUListElement | null>(null);
 const isOpen = ref(false);
+const isMobileNav = useMediaQuery('(max-width: 48rem)');
 
 const { links, cta } = defineProps<{
   links: (LinkFragment | null)[];
   cta: LinkFragment | null;
 }>();
+
+watch(isMobileNav, (isMobile) => {
+  if (!isMobile) {
+    onClose();
+  }
+});
 
 const isSelected = (path: string) => {
   return route.path === path;
