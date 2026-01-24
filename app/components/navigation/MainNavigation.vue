@@ -1,6 +1,7 @@
 <template>
   <nav class="relative z-100" aria-label="site" @focusin="handleFocusIn">
-    <div class="shadow-sm fixed top-0 left-0 right-0 bg-background transition-transform duration-default ease-default"
+    <div
+      class="hidden nav:block shadow-sm fixed top-0 left-0 right-0 bg-background transition-transform duration-default ease-default"
       :class="{
         '-translate-y-full': !isVisible
       }">
@@ -14,9 +15,9 @@
             </InlineLink>
           </li>
         </ul>
-        <MobileMenu :links="links" :cta="cta" />
       </ContentContainer>
     </div>
+    <MobileMenu :links="links" :cta="cta" />
     <NuxtLink v-if="cta?.url" :to="cta.url" :external="cta.external ?? false" :aria-selected="isSelected(cta.url)"
       class="hidden nav:block floating-button border-background border-2 text-lg button-md fixed top-1.5">
       {{ cta.text }}
