@@ -24,18 +24,18 @@
 
           <ul ref="navList" class="flex flex-col gap-y-10 text-center flex-1 justify-center items-center">
             <li v-for="(link, index) in links" :key="link?.url ?? index" class="nav-item opacity-0">
-              <NuxtLink v-if="link?.url" :to="link.url" :external="link.external ?? false"
+              <InlineLink v-if="link?.url" :href="link.url" :external="link.external ?? false"
                 :aria-selected="isSelected(link.url)"
                 class="text-2xl text-white no-underline px-4 py-2 hover:outline-2 outline-accent rounded-xl aria-selected:outline-accent aria-selected:outline-2"
                 @click="onLinkClick">
                 {{ link.text }}
-              </NuxtLink>
+              </InlineLink>
             </li>
             <li class="nav-item opacity-0">
-              <NuxtLink v-if="cta?.url" :to="cta.url" :external="cta.external ?? false"
+              <InlineLink v-if="cta?.url" :href="cta.url" :external="cta.external ?? false"
                 :aria-selected="isSelected(cta.url)" class="text-2xl button-lg">
                 {{ cta.text }}
-              </NuxtLink>
+              </InlineLink>
             </li>
           </ul>
         </ContentContainer>

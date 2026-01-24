@@ -7,11 +7,11 @@
       <ContentContainer class="flex justify-between items-center h-nav-height">
         <ul class="hidden nav:flex gap-x-3 xl:gap-x-8 justify-center items-center w-full">
           <li v-for="(link, index) in links" :key="link?.url ?? index">
-            <NuxtLink v-if="link?.url" :to="link.url" :external="link.external ?? false"
+            <InlineLink v-if="link?.url" :href="link.url" :external="link.external"
               :aria-selected="isSelected(link.url)"
               class="text-lg text-foreground no-underline px-4 py-2 hover:outline-2 outline-accent rounded-xl aria-selected:outline-accent aria-selected:outline-2">
               {{ link.text }}
-            </NuxtLink>
+            </InlineLink>
           </li>
         </ul>
         <MobileMenu :links="links" :cta="cta" />
