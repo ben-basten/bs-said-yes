@@ -1,0 +1,108 @@
+<template>
+  <DialogRoot v-model:open="isOpen" @update:open="onOpenChange">
+    <DialogTrigger
+      class="fixed top-3 right-side-mobile md:right-side z-50 nav:hidden bg-background hover:bg-slate hover:text-white transition-colors duration-default ease-default border-2 border-foreground"
+      as-child>
+      <IconButton label="Open navigation">
+        <IconHamburger class="w-7" />
+      </IconButton>
+    </DialogTrigger>
+    <DialogPortal>
+      <DialogContent
+        class="nav:hidden data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed z-100 inset-0 bg-slate focus:outline-none">
+        <ContentContainer class="h-full flex flex-col relative">
+          <DialogTitle class="sr-only">
+            Navigation
+          </DialogTitle>
+          <DialogClose
+            class="absolute top-3 right-side-mobile md:right-side text-white hover:bg-background hover:text-foreground transition-colors duration-default ease-default border-2 border-background"
+            as-child>
+            <IconButton label="Close navigation">
+              <IconClose class="w-7" />
+            </IconButton>
+          </DialogClose>
+
+          <ul ref="navList" class="flex flex-col gap-y-10 text-center flex-1 justify-center items-center">
+            <li v-for="(link, index) in links" :key="link?.url ?? index" class="nav-item opacity-0">
+              <NuxtLink v-if="link?.url" :to="link.url" :external="link.external ?? false"
+                :aria-selected="isSelected(link.url)"
+                class="text-2xl text-white no-underline px-4 py-2 hover:outline-2 outline-accent rounded-xl aria-selected:outline-accent aria-selected:outline-2"
+                @click="onLinkClick">
+                {{ link.text }}
+              </NuxtLink>
+            </li>
+            <li class="nav-item opacity-0">
+              <NuxtLink v-if="cta?.url" :to="cta.url" :external="cta.external ?? false"
+                :aria-selected="isSelected(cta.url)" class="text-2xl button-lg">
+                {{ cta.text }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </ContentContainer>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
+</template>
+
+<script setup lang="ts">
+import {
+  DialogClose,
+  DialogContent,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+} from 'reka-ui';
+import gsap from 'gsap';
+import type { LinkFragment } from "~~/shared/types/graphql";
+
+const route = useRoute();
+const navList = ref<HTMLUListElement | null>(null);
+const isOpen = ref(false);
+
+const { links, cta } = defineProps<{
+  links: (LinkFragment | null)[];
+  cta: LinkFragment | null;
+}>();
+
+const isSelected = (path: string) => {
+  return route.path === path;
+};
+
+const onLinkClick = () => {
+  onClose();
+};
+
+const onClose = () => {
+  isOpen.value = false;
+  document.body.style.overflow = 'auto';
+};
+
+const onOpenChange = (open: boolean) => {
+  if (!open) {
+    onClose();
+    return;
+  }
+  document.body.style.overflow = 'hidden';
+  nextTick(() => {
+    if (navList.value) {
+      const items = navList.value.querySelectorAll('.nav-item');
+      gsap.fromTo(
+        items,
+        {
+          opacity: 0,
+          y: 20,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power2.out',
+          delay: 0.15,
+        }
+      );
+    }
+  });
+};
+</script>

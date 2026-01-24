@@ -1,3 +1,33 @@
+@utility animate-contentShow {
+  animation: contentShow 150ms var(--ease-default);
+}
+
+@utility animate-contentHide {
+  animation: contentHide 100ms var(--ease-default);
+}
+
 @utility duration-default {
-  transition-duration: 250ms;
+  transition-duration: var(--duration-default);
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

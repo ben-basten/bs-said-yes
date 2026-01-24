@@ -15,10 +15,14 @@
   --color-link: #023b50;
   --color-link-hover: #0d769c;
 
+  /* Breakpoints */
+  --breakpoint-nav: 48rem;
+
   /* Fonts */
   --font-primary: "EB Garamond", serif;
 
   /* Animation */
+  --duration-default: 250ms;
   --ease-default: cubic-bezier(0.516, 0.005, 0.198, 0.843);
 
   /* Spacing */
@@ -27,9 +31,16 @@
   --spacing-side: 50px;
   --spacing-side-mobile: 25px;
   --spacing-max-width: 1500px;
+
+  /* Navigation */
+  --spacing-nav-height: 4.375rem;
 }
 
 @layer base {
+  html {
+    scroll-padding-top: var(--spacing-nav-height);
+  }
+
   body {
     font-size: 100%;
     font-family: var(--font-primary);
@@ -44,7 +55,7 @@
   }
 
   *:focus-visible {
-    @apply outline-foreground outline-2 outline-offset-2 transition-none;
+    @apply outline-accent outline-2 outline-offset-2 transition-none;
   }
 
   a {
