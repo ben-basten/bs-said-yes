@@ -52,8 +52,8 @@ async function login() {
 
     await refreshSession();
     await navigateTo("/", { replace: true });
-    
-  } catch (e: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
+    // eslint-disable-line @typescript-eslint/no-explicit-any
     if (e.status === 401) {
       error.value = "Invalid password";
     } else {

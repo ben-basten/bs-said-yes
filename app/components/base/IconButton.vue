@@ -1,6 +1,11 @@
 <template>
-  <button type="button" class="cursor-pointer rounded-full p-2" :aria-label="label" :title="label"
-    @click="$emit('click')">
+  <button
+    type="button"
+    class="cursor-pointer rounded-full p-2"
+    :aria-label="label"
+    :title="label"
+    @click="$emit('click')"
+  >
     <slot aria-hidden />
   </button>
 </template>
@@ -11,6 +16,6 @@ const { label } = defineProps<{
 }>();
 
 defineEmits<{
-  (e: 'click'): void;
+  (e: "click"): void;
 }>();
 </script>
