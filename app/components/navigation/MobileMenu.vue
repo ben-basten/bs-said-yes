@@ -10,18 +10,17 @@
     <DialogPortal>
       <DialogContent
         class="nav:hidden data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed z-100 inset-0 bg-slate focus:outline-none">
-        <ContentContainer class="h-full flex flex-col relative">
-          <DialogTitle class="sr-only">
-            Navigation
-          </DialogTitle>
-          <DialogClose
-            class="absolute top-3 right-side-mobile md:right-side text-white hover:bg-background hover:text-foreground transition-colors duration-default ease-default border-2 border-background"
-            as-child>
-            <IconButton label="Close navigation">
-              <IconClose class="w-7" />
-            </IconButton>
-          </DialogClose>
-
+        <DialogTitle class="sr-only">
+          Navigation
+        </DialogTitle>
+        <DialogClose
+          class="absolute z-1000 top-3 right-side-mobile md:right-side text-white hover:bg-background hover:text-foreground transition-colors duration-default ease-default border-2 border-background"
+          as-child>
+          <IconButton label="Close navigation">
+            <IconClose class="w-7" />
+          </IconButton>
+        </DialogClose>
+        <ContentContainer class="h-full flex flex-col relative py-20 overflow-y-auto">
           <ul ref="navList" class="flex flex-col gap-y-10 text-center flex-1 justify-center items-center">
             <li v-for="(link, index) in links" :key="link?.url ?? index" class="nav-item opacity-0">
               <InlineLink v-if="link?.url" :href="link.url" :external="link.external ?? false"
