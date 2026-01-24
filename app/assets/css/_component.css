@@ -1,0 +1,15 @@
+@utility button {
+  @apply cursor-pointer bg-action text-foreground font-semibold rounded-xl no-underline w-fit;
+}
+
+@utility button-sm {
+  @apply button px-4 py-2 text-base;
+}
+
+@utility button-md {
+  @apply button px-6 py-3 text-lg;
+}
+
+@utility button-lg {
+  @apply button px-8 py-4 text-xl;
+}

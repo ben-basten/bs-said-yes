@@ -2,14 +2,21 @@
 @import "./_typography.css";
 @import "./_reset.css";
 @import "./_animation.css";
+@import "./_component.css";
 
 @theme {
   /* Colors */
-  --color-background: #ffffff;
-  --color-foreground: black;
+  --color-background: #f3ebe4;
+  --color-secondary: #d7c2b0;
+  --color-foreground: #141115;
+  --color-action: #f19a3e;
+  --color-accent: #4f695c;
+  --color-slate: #333333;
+  --color-link: #023b50;
+  --color-link-hover: #0d769c;
 
   /* Fonts */
-  --font-primary: sans-serif;
+  --font-primary: "EB Garamond", serif;
 
   /* Animation */
   --ease-default: cubic-bezier(0.516, 0.005, 0.198, 0.843);
@@ -28,6 +35,7 @@
     font-family: var(--font-primary);
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-weight: 500;
   }
 
   button:not(:disabled),
@@ -37,5 +45,9 @@
 
   *:focus-visible {
     @apply outline-foreground outline-2 outline-offset-2 transition-none;
+  }
+
+  a {
+    @apply underline font-semibold text-link hover:text-link-hover transition-colors duration-default ease-default;
   }
 }

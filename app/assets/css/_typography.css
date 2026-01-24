@@ -11,5 +11,5 @@
   @apply text-xl font-semibold;
 }
 @utility type-body {
-  @apply text-base font-normal;
+  @apply text-base font-medium;
 }

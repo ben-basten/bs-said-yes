@@ -12,6 +12,16 @@ export default defineNuxtConfig({
   image: {
     contentful: {},
   },
+  fonts: {
+    families: [
+      {
+        name: "EB Garamond",
+        provider: "google",
+        weights: ["400", "500", "600", "700", "800"],
+        styles: ["normal", "italic"],
+      },
+    ],
+  },
   css: ["~/assets/css/main.css"],
   runtimeConfig: {
     cmsSpace: "",

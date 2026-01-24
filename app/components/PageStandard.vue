@@ -1,16 +1,16 @@
 <template>
-  <ContentContainer>
+  <div>
     <Heading as="h1">{{ data?.cmsName }}</Heading>
     <ModuleRenderer
       v-for="(item, index) in contentModules"
       :key="index"
       :data="item"
     />
-  </ContentContainer>
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { PageStandardFragment } from '~~/shared/types/graphql';
+import type { PageStandardFragment } from "~~/shared/types/graphql";
 
 const { slug } = defineProps<{ slug: string }>();
 
@@ -27,6 +27,6 @@ if (error.value) {
 }
 
 const contentModules = computed(
-  () => (data.value?.contentModulesCollection?.items || []),
+  () => data.value?.contentModulesCollection?.items || [],
 );
 </script>
