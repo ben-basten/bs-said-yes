@@ -7,7 +7,9 @@ import ModuleHomepageHero from "~/components/modules/HomepageHero.vue";
 import type { Component } from "vue";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
-type ContentModules = NonNullable<PageStandardFragment['contentModulesCollection']>['items'][number];
+type ContentModules = NonNullable<
+  PageStandardFragment["contentModulesCollection"]
+>["items"][number];
 
 const { data } = defineProps<{
   data: ContentModules;
