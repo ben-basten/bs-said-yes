@@ -1,6 +1,8 @@
 import { gql } from "graphql-request";
 import { HOMEPAGE_HERO_FRAGMENT } from "../modules/homepage-hero.fragment";
 import { IMAGE_FRAGMENT } from "../fragments/Image.fragment";
+import { FIFTY_FIFTY_FRAGMENT } from "../modules/fifty-fifty.fragment";
+import { LINK_FRAGMENT } from "../fragments/Link.fragment";
 
 export const PAGE_STANDARD_QUERY = gql`
   query PageStandard($slug: String!) {
@@ -21,9 +23,14 @@ export const PAGE_STANDARD_QUERY = gql`
         ... on HomepageHero {
           ...HomepageHero
         }
+        ... on ModuleFiftyfifty {
+          ...FiftyFifty
+        }
       }
     }
   }
   ${HOMEPAGE_HERO_FRAGMENT}
+  ${FIFTY_FIFTY_FRAGMENT}
   ${IMAGE_FRAGMENT}
+  ${LINK_FRAGMENT}
 `;

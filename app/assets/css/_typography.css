@@ -13,3 +13,9 @@
 @utility type-body {
   @apply text-base font-medium;
 }
+@utility type-eyebrow {
+  @apply text-sm uppercase tracking-wide;
+}
+@utility max-w-copy {
+  @apply max-w-[64ch];
+}

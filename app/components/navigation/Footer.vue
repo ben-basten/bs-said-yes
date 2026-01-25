@@ -1,6 +1,7 @@
 <template>
-  <footer class="text-center">
-    <RichTextRenderer v-if="copy" :json="copy" />
+  <footer class="text-center mx-auto w-fit max-w-copy">
+    <div class="divider mx-auto" />
+    <RichTextRenderer v-if="copy" :json="copy" class="py-10" />
   </footer>
 </template>
 

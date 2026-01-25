@@ -13,3 +13,7 @@
 @utility button-lg {
   @apply button px-8 py-4 text-xl;
 }
+
+@utility divider {
+  @apply h-2 w-30 bg-accent;
+}
