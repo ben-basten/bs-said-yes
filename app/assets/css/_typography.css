@@ -13,3 +13,6 @@
 @utility type-body {
   @apply text-base font-medium;
 }
+@utility max-w-copy {
+  @apply max-w-[64ch];
+}
