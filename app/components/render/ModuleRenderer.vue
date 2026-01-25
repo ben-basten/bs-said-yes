@@ -3,7 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import ModuleHomepageHero from "~/components/modules/HomepageHero.vue";
+import HomepageHero from "~/components/modules/HomepageHero.vue";
+import FiftyFifty from "~/components/modules/FiftyFifty.vue";
 import type { Component } from "vue";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
@@ -16,7 +17,8 @@ const { data } = defineProps<{
 }>();
 
 const modules: Record<string, Component> = {
-  HomepageHero: ModuleHomepageHero,
+  HomepageHero: HomepageHero,
+  ModuleFiftyfifty: FiftyFifty,
 };
 
 const component = computed(() => {
