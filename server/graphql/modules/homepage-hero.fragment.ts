@@ -6,7 +6,7 @@ export const HOMEPAGE_HERO_FRAGMENT = gql`
     heading
     date
     location
-    imagesCollection(limit: 2) {
+    imagesCollection(limit: 4) {
       items {
         ...Image
       }
