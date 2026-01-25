@@ -5,7 +5,7 @@
     class="mb-vertical md:mb-vertical-lg gap-y-7"
   >
     <div
-      class="col-span-12 max-md:order-2 md:col-span-5 max-w-copy flex flex-col justify-center gap-y-6 mb-8 md:mb-0 md:pr-10"
+      class="col-span-12 max-md:order-2 md:col-span-5 max-w-copy flex flex-col justify-center gap-y-6 mb-8 md:mb-0"
       :class="{
         'md:order-2 md:col-start-8': align === 'Left',
       }"
