@@ -12,5 +12,6 @@ export const FIFTY_FIFTY_FRAGMENT = gql`
     image {
       ...Image
     }
+    imageAlignment
   }
 `;
