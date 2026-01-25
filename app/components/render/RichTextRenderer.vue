@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { Heading } from "#components";
+import { Heading, InlineLink } from "#components";
 import type {
   Document,
   Heading1,
@@ -23,9 +23,10 @@ import type {
   Heading4,
   Heading5,
   Heading6,
+  Hyperlink,
   Paragraph,
 } from "@contentful/rich-text-types";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import RichTextRenderer from "contentful-rich-text-vue-renderer";
 
 const { json } = defineProps<{
@@ -90,6 +91,20 @@ function renderNodes() {
       };
 
       return h("p", { key }, next(updatedNode.content, key, next));
+    },
+    [INLINES.HYPERLINK]: (node: Hyperlink) => {
+      const href = node.data.uri;
+      if (!href) {
+        return null;
+      }
+      return h(
+        InlineLink,
+        {
+          href,
+          external: /^(https?:)?\/\//.test(href),
+        },
+        () => node.content?.[0]?.value,
+      );
     },
     [BLOCKS.HEADING_1]: (node: Heading1) => {
       // @ts-expect-error - needed to render heading content

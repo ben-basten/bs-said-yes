@@ -6,12 +6,7 @@
       ref="inputRef"
       v-model="model"
       :type
-      :name
-      :placeholder
-      :autocomplete
-      :autofocus
-      :disabled
-      :required
+      v-bind="rest"
       class="bg-background border-2 border-foreground user-invalid:border-error rounded-xl px-4 py-2"
     />
   </div>
@@ -22,7 +17,11 @@ const model = defineModel<string>();
 const id = useId();
 const inputRef = ref<HTMLInputElement | null>(null);
 
-const { type = "text" } = defineProps<{
+const {
+  type = "text",
+  label,
+  ...rest
+} = defineProps<{
   type?: "password" | "text" | "email";
   placeholder?: string;
   autocomplete?: string;

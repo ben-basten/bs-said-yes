@@ -1,5 +1,5 @@
 @utility button {
-  @apply cursor-pointer bg-action text-white font-semibold rounded-xl no-underline w-fit;
+  @apply cursor-pointer disabled:cursor-not-allowed bg-action text-white font-semibold rounded-xl no-underline w-fit;
 }
 
 @utility button-sm {
