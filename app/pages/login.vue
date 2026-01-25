@@ -1,37 +1,50 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-neutral-100 p-4">
-    <form class="w-full max-w-xs flex flex-col gap-4" @submit.prevent="login">
-      <input
-        v-model="password"
-        type="password"
-        placeholder="Password"
-        class="w-full px-4 py-3 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
-        autocomplete="current-password"
-        autofocus
-      />
-
-      <p v-if="error" class="text-red-600 text-sm text-center">{{ error }}</p>
-
-      <button
-        type="submit"
-        class="w-full py-3 bg-neutral-900 text-white rounded-md hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
-        :disabled="isLoading"
-      >
-        {{ isLoading ? "..." : "Enter" }}
-      </button>
-    </form>
+  <div class="min-h-screen flex items-center justify-center p-4">
+    <div
+      class="bg-secondary w-full max-w-xl p-10 rounded-xl flex flex-col gap-y-5 items-center"
+    >
+      <Heading as="h1" variant="h2">Login</Heading>
+      <p class="type-body">Enter the password from your save the date.</p>
+      <form class="w-full max-w-sm flex flex-col gap-4" @submit.prevent="login">
+        <div>
+          <FormInput
+            ref="passwordRef"
+            type="password"
+            name="password"
+            label="Password"
+            autocomplete="current-password"
+            autofocus
+            required
+          />
+          <div aria-live="polite">
+            <p v-if="error" class="text-error text-sm text-left mt-2">
+              {{ error }}
+            </p>
+          </div>
+        </div>
+        <button type="submit" class="button-md w-full" :disabled="isLoading">
+          {{ isLoading ? "Loading..." : "Enter" }}
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import FormInput from "~/components/form/FormInput.vue";
+
 definePageMeta({
   layout: "minimal",
 });
 
+useHead({
+  title: "Login",
+});
+
 const { loggedIn, fetch: refreshSession } = useUserSession();
-const password = ref("");
-const error = ref("");
-const isLoading = ref(false);
+const error = shallowRef("");
+const isLoading = shallowRef(false);
+const passwordRef = ref<InstanceType<typeof FormInput> | null>(null);
 
 // Redirect if already logged in
 watchEffect(() => {
@@ -40,14 +53,15 @@ watchEffect(() => {
   }
 });
 
-async function login() {
+async function login(event: SubmitEvent) {
   error.value = "";
   isLoading.value = true;
+  const formData = new FormData(event.target as HTMLFormElement);
 
   try {
     await $fetch("/api/login", {
       method: "POST",
-      body: { password: password.value },
+      body: { password: formData.get("password") },
     });
 
     await refreshSession();
@@ -59,7 +73,7 @@ async function login() {
     } else {
       error.value = "An error occurred";
     }
-    password.value = "";
+    passwordRef.value?.inputRef?.focus();
   } finally {
     isLoading.value = false;
   }
