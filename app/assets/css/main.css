@@ -7,11 +7,11 @@
 @theme {
   /* Colors */
   --color-background: #f3ebe4;
-  --color-secondary: #d7c2b0;
+  --color-secondary: #ddcabb;
   --color-foreground: #141115;
-  --color-action: #f19a3e;
-  --color-accent: #4f695c;
-  --color-slate: #333333;
+  --color-action: #c04f30;
+  --color-accent: #527c5f;
+  --color-slate: #2a2a2a;
   --color-link: #023b50;
   --color-link-hover: #0d769c;
 

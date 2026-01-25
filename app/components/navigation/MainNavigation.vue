@@ -16,7 +16,7 @@
               :href="link.url"
               :external="link.external"
               :aria-selected="isSelected(link.url)"
-              class="text-lg text-foreground no-underline px-4 py-2 hover:outline-2 outline-accent rounded-xl aria-selected:outline-accent aria-selected:outline-2"
+              class="text-lg text-foreground no-underline px-4 py-2 hover:border-foreground border-2 border-transparent rounded-xl aria-selected:border-foreground"
             >
               {{ link.text }}
             </InlineLink>

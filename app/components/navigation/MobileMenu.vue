@@ -38,7 +38,7 @@
                 :href="link.url"
                 :external="link.external ?? false"
                 :aria-selected="isSelected(link.url)"
-                class="text-2xl text-white no-underline px-4 py-2 hover:outline-2 outline-accent rounded-xl aria-selected:outline-accent aria-selected:outline-2"
+                class="text-2xl text-white no-underline px-4 py-2 border-2 border-transparent hover:border-white rounded-xl aria-selected:border-white"
                 @click="onLinkClick"
               >
                 {{ link.text }}
