@@ -34,16 +34,16 @@
 
     <div
       v-if="data.image?.url"
-      class="col-span-12 max-md:order-1 md:col-span-6"
+      class="col-span-12 max-md:order-1 md:col-span-6 my-auto"
       :class="{
         'md:col-start-7': align === 'Right',
       }"
     >
       <ContentfulImage
         :src="data.image.url"
-        alt="Couple celebrating"
-        :sizes="undefined"
-        class="object-cover rounded-xl aspect-7/5"
+        :alt="data.image.description ?? ''"
+        sizes="95vw md:50vw lg:730px"
+        class="object-cover rounded-xl aspect-4/3 w-full"
       />
     </div>
   </ContentContainer>
