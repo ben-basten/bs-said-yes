@@ -32,9 +32,9 @@
         :key="image.url ?? index"
         :src="image.url!"
         :alt="image.description ?? ''"
-        :sizes="undefined"
+        sizes="50vw md:200px lg:400px"
         :class="[
-          'col-span-1 aspect-4/3 object-cover rounded-xl',
+          'col-span-1 w-full aspect-4/3 object-cover rounded-xl',
           { 'mt-8': index === 1, '-mt-8': index === 2 },
         ]"
       />
