@@ -37,6 +37,10 @@
   --spacing-nav-height: 4.375rem;
 }
 
+@utility grid-12 {
+  @apply grid grid-cols-12 gap-x-0 md:gap-x-5;
+}
+
 @layer base {
   html {
     scroll-padding-top: var(--spacing-nav-height);
