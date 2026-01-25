@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Heading as="h1">{{ data?.cmsName }}</Heading>
     <ModuleRenderer
       v-for="(item, index) in contentModules"
       :key="index"
