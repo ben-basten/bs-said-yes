@@ -28,32 +28,15 @@
       class="col-span-12 md:col-span-7 md:col-start-6 grid grid-cols-2 gap-2 md:gap-4"
     >
       <ContentfulImage
-        v-if="images[0]?.url"
-        :src="images[0].url"
-        :alt="images[0].description ?? ''"
+        v-for="(image, index) in images"
+        :key="image.url ?? index"
+        :src="image.url!"
+        :alt="image.description ?? ''"
         :sizes="undefined"
-        class="col-span-1 aspect-4/3 object-cover rounded-xl"
-      />
-      <ContentfulImage
-        v-if="images[1]?.url"
-        :src="images[1].url"
-        :alt="images[1].description ?? ''"
-        :sizes="undefined"
-        class="col-span-1 aspect-4/3 object-cover rounded-xl mt-8"
-      />
-      <ContentfulImage
-        v-if="images[2]?.url"
-        :src="images[2].url"
-        :alt="images[2].description ?? ''"
-        :sizes="undefined"
-        class="col-span-1 aspect-4/3 object-cover rounded-xl -mt-8"
-      />
-      <ContentfulImage
-        v-if="images[3]?.url"
-        :src="images[3].url"
-        :alt="images[3].description ?? ''"
-        :sizes="undefined"
-        class="col-span-1 aspect-4/3 object-cover rounded-xl"
+        :class="[
+          'col-span-1 aspect-4/3 object-cover rounded-xl',
+          { 'mt-8': index === 1, '-mt-8': index === 2 },
+        ]"
       />
     </div>
   </ContentContainer>
@@ -65,5 +48,7 @@ import type { HomepageHeroFragment } from "~~/shared/types/graphql";
 
 const { data } = defineProps<ModuleProps<HomepageHeroFragment>>();
 
-const images = computed(() => data.imagesCollection?.items ?? []);
+const images = computed(() =>
+  (data.imagesCollection?.items ?? []).filter((image) => image !== null),
+);
 </script>
