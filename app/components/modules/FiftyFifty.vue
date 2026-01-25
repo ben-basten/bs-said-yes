@@ -12,14 +12,24 @@
     >
       <Heading as="h2">{{ data.heading }}</Heading>
       <RichTextRenderer :json="data?.copy?.json" />
-      <InlineLink
-        v-if="data.callToAction?.url"
-        :href="data.callToAction.url"
-        :external="data.callToAction.external"
-        class="button-md"
-      >
-        {{ data.callToAction.text }}
-      </InlineLink>
+      <div class="flex flex-wrap gap-x-5 gap-y-3">
+        <InlineLink
+          v-if="data.callToAction?.url"
+          :href="data.callToAction.url"
+          :external="data.callToAction.external"
+          class="button-md"
+        >
+          {{ data.callToAction.text }}
+        </InlineLink>
+        <InlineLink
+          v-if="data.secondaryCallToAction?.url"
+          :href="data.secondaryCallToAction.url"
+          :external="data.secondaryCallToAction.external"
+          class="button-md"
+        >
+          {{ data.secondaryCallToAction.text }}
+        </InlineLink>
+      </div>
     </div>
 
     <div
