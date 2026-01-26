@@ -30,6 +30,8 @@
   --spacing-vertical: 50px;
   --spacing-vertical-lg: 100px;
   --spacing-side: 50px;
+  --spacing-side-sm: 10px;
+  --spacing-side-offset: calc(var(--spacing-side) - var(--spacing-side-sm));
   --spacing-side-mobile: 25px;
   --spacing-max-width: 1500px;
 

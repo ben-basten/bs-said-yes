@@ -17,3 +17,8 @@
 @utility divider {
   @apply h-2 w-30 bg-accent;
 }
+
+/* Dark variant links for fifty-fifty module */
+.fifty-fifty-dark a {
+  @apply text-white/90 hover:text-white;
+}
