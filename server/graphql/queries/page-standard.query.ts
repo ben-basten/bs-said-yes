@@ -18,6 +18,7 @@ export const PAGE_STANDARD_QUERY = gql`
   fragment PageStandard on PageStandard {
     cmsName
     slug
+    seoTitle
     contentModulesCollection(limit: 15) {
       items {
         __typename
