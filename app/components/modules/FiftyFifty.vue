@@ -11,6 +11,7 @@
       }"
     >
       <Heading as="h2">{{ data.heading }}</Heading>
+      <p class="type-eyebrow order-first">{{ data.eyebrow }}</p>
       <RichTextRenderer :json="data?.copy?.json" />
       <div class="flex flex-wrap gap-x-5 gap-y-3">
         <InlineLink
