@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 import { HOMEPAGE_HERO_FRAGMENT } from "../modules/homepage-hero.fragment";
-import { IMAGE_FRAGMENT } from "../fragments/Image.fragment";
+import { IMAGE_FRAGMENT } from "../fragments/image.fragment";
 import { FIFTY_FIFTY_FRAGMENT } from "../modules/fifty-fifty.fragment";
-import { LINK_FRAGMENT } from "../fragments/Link.fragment";
+import { LINK_FRAGMENT } from "../fragments/link.fragment";
 import { ACCORDION_FRAGMENT } from "../modules/accordion.fragment";
 
 export const PAGE_STANDARD_QUERY = gql`

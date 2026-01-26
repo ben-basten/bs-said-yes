@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import { LINK_FRAGMENT } from "../fragments/Link.fragment";
+import { LINK_FRAGMENT } from "../fragments/link.fragment";
 
 export const NAVIGATION_QUERY = gql`
   query Navigation {
