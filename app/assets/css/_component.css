@@ -3,7 +3,7 @@
 }
 
 @utility button-secondary {
-  @apply cursor-pointer disabled:cursor-not-allowed bg-transparent border-2 border-action text-action font-semibold rounded-lg no-underline w-fit transition-colors duration-default ease-default hover:border-accent hover:text-accent;
+  @apply cursor-pointer disabled:cursor-not-allowed bg-transparent border-2 border-action text-slate font-semibold rounded-lg no-underline w-fit transition-colors duration-default ease-default hover:border-accent hover:text-accent;
 }
 
 @utility button-sm {

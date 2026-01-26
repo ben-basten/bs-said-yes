@@ -5,5 +5,9 @@ export const LINK_FRAGMENT = gql`
     text
     url
     external
+    icon
+    fileDownload {
+      url
+    }
   }
 `;
