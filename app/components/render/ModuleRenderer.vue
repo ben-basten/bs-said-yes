@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import HomepageHero from "~/components/modules/HomepageHero.vue";
 import FiftyFifty from "~/components/modules/FiftyFifty.vue";
+import Accordion from "~/components/modules/Accordion.vue";
 import type { Component } from "vue";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
@@ -19,6 +20,7 @@ const { data } = defineProps<{
 const modules: Record<string, Component> = {
   HomepageHero: HomepageHero,
   ModuleFiftyfifty: FiftyFifty,
+  ModuleAccordion: Accordion,
 };
 
 const component = computed(() => {
