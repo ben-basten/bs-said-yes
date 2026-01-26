@@ -25,6 +25,10 @@ if (error.value) {
   });
 }
 
+useHead({
+  title: data.value?.seoTitle || undefined,
+});
+
 const contentModules = computed(
   () => data.value?.contentModulesCollection?.items || [],
 );

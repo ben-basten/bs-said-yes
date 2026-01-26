@@ -31,3 +31,29 @@
     transform: translateY(0);
   }
 }
+
+@utility animate-slideDown {
+  animation: slideDown var(--duration-default) var(--ease-default);
+}
+
+@utility animate-slideUp {
+  animation: slideUp var(--duration-default) var(--ease-default);
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--reka-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--reka-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
