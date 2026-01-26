@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-span-12 md:col-span-6 md:col-start-7">
-      <AccordionRoot type="multiple" collapsible class="flex flex-col">
+      <AccordionRoot type="multiple" class="flex flex-col">
         <AccordionItem
           v-for="(item, index) in items"
           :key="index"
@@ -23,6 +23,7 @@
             >
               <span>{{ item.title }}</span>
               <IconChevronDown
+                aria-hidden
                 class="size-5 shrink-0 transition-transform duration-default ease-default group-data-[state=open]:rotate-180"
               />
             </AccordionTrigger>
