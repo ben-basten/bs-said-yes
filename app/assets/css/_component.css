@@ -1,5 +1,5 @@
 @utility button {
-  @apply cursor-pointer disabled:cursor-not-allowed bg-action text-white hover:bg-accent font-semibold rounded-lg no-underline w-fit transition-colors ease-default duration-default;
+  @apply cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500 bg-action text-white hover:bg-accent font-semibold rounded-lg no-underline w-fit transition-colors ease-default duration-default;
 }
 
 @utility button-secondary {
