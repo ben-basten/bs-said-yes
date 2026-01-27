@@ -2,7 +2,7 @@
   <div class="sr-only focus-within:not-sr-only">
     <button
       type="button"
-      class="button-sm fixed top-1.5 left-1.5 z-1000"
+      class="button button-sm fixed top-1.5 left-1.5 z-1000"
       @click="handleClick"
     >
       <slot />

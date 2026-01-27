@@ -30,7 +30,7 @@
       :to="cta.url"
       :external="cta.external ?? false"
       :aria-selected="isSelected(cta.url)"
-      class="hidden nav:block floating-button border-background border-2 text-lg button-md fixed top-1.5"
+      class="hidden nav:block floating-button border-background border-2 text-lg button button-md fixed top-1.5"
     >
       {{ cta.text }}
     </NuxtLink>

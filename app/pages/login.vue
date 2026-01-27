@@ -22,7 +22,11 @@
             </p>
           </div>
         </div>
-        <button type="submit" class="button-md w-full" :disabled="isLoading">
+        <button
+          type="submit"
+          class="button button-md w-full"
+          :disabled="isLoading"
+        >
           {{ isLoading ? "Loading..." : "Enter" }}
         </button>
       </form>

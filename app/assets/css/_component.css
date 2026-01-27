@@ -1,17 +1,21 @@
 @utility button {
-  @apply cursor-pointer disabled:cursor-not-allowed bg-action text-white font-semibold rounded-xl no-underline w-fit;
+  @apply cursor-pointer disabled:cursor-not-allowed bg-action text-white hover:bg-accent font-semibold rounded-xl no-underline w-fit transition-colors ease-default duration-default;
+}
+
+@utility button-secondary {
+  @apply cursor-pointer disabled:cursor-not-allowed bg-transparent border-2 border-action text-action font-semibold rounded-xl no-underline w-fit transition-colors duration-default ease-default hover:border-accent hover:text-accent;
 }
 
 @utility button-sm {
-  @apply button px-4 py-2 text-base;
+  @apply px-4 py-2 text-base;
 }
 
 @utility button-md {
-  @apply button px-6 py-3 text-lg;
+  @apply px-6 py-3 text-lg;
 }
 
 @utility button-lg {
-  @apply button px-8 py-4 text-xl;
+  @apply px-8 py-4 text-xl;
 }
 
 @utility divider {

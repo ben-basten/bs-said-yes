@@ -50,7 +50,7 @@
                 :href="cta.url"
                 :external="cta.external ?? false"
                 :aria-selected="isSelected(cta.url)"
-                class="text-2xl button-lg"
+                class="text-2xl button button-lg"
               >
                 {{ cta.text }}
               </InlineLink>

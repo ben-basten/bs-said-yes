@@ -25,7 +25,7 @@
             v-if="data.callToAction?.url"
             :href="data.callToAction.url"
             :external="data.callToAction.external"
-            class="button-md"
+            class="button button-md"
           >
             {{ data.callToAction.text }}
           </InlineLink>
@@ -33,7 +33,7 @@
             v-if="data.secondaryCallToAction?.url"
             :href="data.secondaryCallToAction.url"
             :external="data.secondaryCallToAction.external"
-            class="button-md"
+            class="button-secondary button-md"
           >
             {{ data.secondaryCallToAction.text }}
           </InlineLink>
