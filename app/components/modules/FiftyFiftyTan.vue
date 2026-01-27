@@ -1,12 +1,12 @@
 <template>
   <div
-    class="grid-12 gap-y-7 bg-secondary -mx-side-mobile md:px-0 md:rounded-2xl overflow-hidden"
+    class="grid-12 bg-secondary -mx-side-mobile md:px-0 md:rounded-2xl overflow-hidden"
   >
     <div
-      class="col-span-12 max-md:order-2 md:col-span-5 max-w-copy flex flex-col justify-center gap-y-6 mb-8 md:mb-0 px-side-mobile py-10"
+      class="col-span-12 max-md:order-2 md:col-span-5 max-w-copy max-md:mx-side-mobile flex flex-col justify-center gap-y-6 py-10"
       :class="{
-        'md:order-2 md:col-start-8 md:mr-side md:ml-0': align === 'Left',
-        'md:ml-side md:mr-0': align === 'Right',
+        'md:order-2 md:col-start-8 md:mr-side': align === 'Left',
+        'md:ml-side': align === 'Right',
       }"
     >
       <Heading as="h2">{{ data.heading }}</Heading>
