@@ -1,6 +1,6 @@
 <template>
   <ContentContainer as="section" class="mb-vertical md:mb-vertical-lg">
-    <FiftyFiftyTan v-if="background === 'Tan'" :data="data" />
+    <FiftyFiftySecondary v-if="background === 'Tan'" :data="data" />
     <FiftyFiftyWhite v-else :data="data" />
   </ContentContainer>
 </template>
