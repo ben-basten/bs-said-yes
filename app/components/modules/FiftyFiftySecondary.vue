@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid-12 bg-secondary -mx-side-mobile md:px-0 md:rounded-2xl overflow-hidden"
+    class="grid-12 bg-secondary max-md:-mx-side-mobile md:px-0 md:rounded-2xl overflow-hidden"
   >
     <div
       class="col-span-12 max-md:order-2 md:col-span-5 max-w-copy max-md:mx-side-mobile flex flex-col justify-center gap-y-6 py-10"

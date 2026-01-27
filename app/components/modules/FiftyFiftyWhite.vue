@@ -39,7 +39,7 @@
         :src="data.image.url"
         :alt="data.image.description ?? ''"
         sizes="95vw md:50vw lg:730px"
-        class="object-cover aspect-4/3 w-full md:h-full rounded-xl"
+        class="object-cover aspect-4/3 w-full md:h-full rounded-lg"
       />
     </div>
   </div>
