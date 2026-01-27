@@ -34,7 +34,7 @@
         :alt="image.description ?? ''"
         sizes="50vw md:200px lg:400px"
         :class="[
-          'col-span-1 w-full aspect-4/3 object-cover rounded-xl',
+          'col-span-1 w-full aspect-4/3 object-cover rounded-lg',
           { 'mt-8': index === 1, '-mt-8': index === 2 },
         ]"
       />

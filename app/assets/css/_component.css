@@ -1,9 +1,9 @@
 @utility button {
-  @apply cursor-pointer disabled:cursor-not-allowed bg-action text-white hover:bg-accent font-semibold rounded-xl no-underline w-fit transition-colors ease-default duration-default;
+  @apply cursor-pointer disabled:cursor-not-allowed bg-action text-white hover:bg-accent font-semibold rounded-lg no-underline w-fit transition-colors ease-default duration-default;
 }
 
 @utility button-secondary {
-  @apply cursor-pointer disabled:cursor-not-allowed bg-transparent border-2 border-action text-action font-semibold rounded-xl no-underline w-fit transition-colors duration-default ease-default hover:border-accent hover:text-accent;
+  @apply cursor-pointer disabled:cursor-not-allowed bg-transparent border-2 border-action text-action font-semibold rounded-lg no-underline w-fit transition-colors duration-default ease-default hover:border-accent hover:text-accent;
 }
 
 @utility button-sm {
