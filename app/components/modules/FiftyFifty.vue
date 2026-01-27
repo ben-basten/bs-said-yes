@@ -1,6 +1,8 @@
 <template>
-  <FiftyFiftyTan v-if="background === 'Tan'" :data="data" />
-  <FiftyFiftyWhite v-else :data="data" />
+  <ContentContainer as="section" class="mb-vertical md:mb-vertical-lg">
+    <FiftyFiftyTan v-if="background === 'Tan'" :data="data" />
+    <FiftyFiftyWhite v-else :data="data" />
+  </ContentContainer>
 </template>
 
 <script setup lang="ts">
