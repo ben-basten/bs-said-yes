@@ -1,9 +1,5 @@
 <template>
-  <ContentContainer
-    as="section"
-    grid
-    class="gap-y-12 mt-nav-height mb-vertical md:mb-vertical-lg"
-  >
+  <ContentContainer as="section" grid margin class="gap-y-12 mt-nav-height">
     <div
       class="col-span-12 md:col-span-5 md:col-start-1 flex flex-col gap-y-5 my-auto"
     >

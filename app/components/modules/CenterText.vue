@@ -1,5 +1,5 @@
 <template>
-  <ContentContainer as="section" class="mb-vertical md:mb-vertical-lg">
+  <ContentContainer as="section" margin>
     <div class="max-w-160 mx-auto">
       <Heading as="h2" class="mb-5">{{ data.heading }}</Heading>
       <RichTextRenderer

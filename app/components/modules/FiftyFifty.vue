@@ -1,5 +1,5 @@
 <template>
-  <ContentContainer as="section" class="mb-vertical md:mb-vertical-lg">
+  <ContentContainer as="section" margin>
     <FiftyFiftySecondary v-if="background === 'Tan'" :data="data" />
     <FiftyFiftyWhite v-else :data="data" />
   </ContentContainer>

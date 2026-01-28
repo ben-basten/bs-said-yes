@@ -1,9 +1,5 @@
 <template>
-  <ContentContainer
-    as="section"
-    grid
-    class="mb-vertical md:mb-vertical-lg gap-y-7"
-  >
+  <ContentContainer as="section" grid margin class="gap-y-7">
     <div class="col-span-12 md:col-span-5 max-w-copy flex flex-col gap-y-6">
       <Heading as="h2">{{ data.heading }}</Heading>
       <RichTextRenderer :json="data?.copy?.json" />
