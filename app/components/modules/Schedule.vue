@@ -23,7 +23,7 @@
       <div
         v-for="(event, index) in events"
         :key="index"
-        class="bg-surface rounded-xl p-6 text-center bg-secondary"
+        class="rounded-xl p-6 text-center bg-secondary"
       >
         <Heading as="h4" class="mb-2">{{ event.title }}</Heading>
         <RichTextRenderer
