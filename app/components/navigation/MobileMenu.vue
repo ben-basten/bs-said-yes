@@ -38,7 +38,7 @@
                 :href="link.url"
                 :external="link.external ?? false"
                 :aria-selected="isSelected(link.url)"
-                class="text-2xl text-white no-underline px-4 py-2 border-2 border-transparent hover:border-white rounded-xl aria-selected:border-white"
+                class="text-2xl text-white no-underline px-4 py-2 border-2 border-transparent hover:border-white rounded-lg aria-selected:border-white"
                 @click="onLinkClick"
               >
                 {{ link.text }}
@@ -50,7 +50,7 @@
                 :href="cta.url"
                 :external="cta.external ?? false"
                 :aria-selected="isSelected(cta.url)"
-                class="text-2xl button-lg"
+                class="text-2xl button button-lg"
               >
                 {{ cta.text }}
               </InlineLink>

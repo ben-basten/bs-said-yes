@@ -16,7 +16,7 @@
               :href="link.url"
               :external="link.external"
               :aria-selected="isSelected(link.url)"
-              class="text-lg text-foreground no-underline px-4 py-2 hover:border-foreground border-2 border-transparent rounded-xl aria-selected:border-foreground"
+              class="text-lg text-foreground no-underline px-4 py-2 hover:border-foreground border-2 border-transparent rounded-lg aria-selected:border-foreground"
             >
               {{ link.text }}
             </InlineLink>
@@ -30,7 +30,7 @@
       :to="cta.url"
       :external="cta.external ?? false"
       :aria-selected="isSelected(cta.url)"
-      class="hidden nav:block floating-button border-background border-2 text-lg button-md fixed top-1.5"
+      class="hidden nav:block floating-button border-background border-2 text-lg button button-md fixed top-1.5"
     >
       {{ cta.text }}
     </NuxtLink>
