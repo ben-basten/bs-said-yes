@@ -36,7 +36,7 @@
     <LinkCollection
       :links="data.callToActionCollection?.items"
       align="center"
-      class="col-span-full mx-auto px-side-mobile md:px-side"
+      class="col-span-full mx-auto md:px-side"
     />
   </ContentContainer>
 </template>
