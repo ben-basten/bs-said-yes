@@ -9,11 +9,12 @@
       <Heading as="h2">{{ data.heading }}</Heading>
       <p class="type-eyebrow order-first">{{ data.eyebrow }}</p>
       <RichTextRenderer :json="data?.copy?.json" />
-      <div class="flex flex-wrap gap-x-5 gap-y-3">
+      <div v-if="ctaStyle === 'Button'" class="flex flex-wrap gap-x-5 gap-y-3">
         <InlineLink
           v-if="data.callToAction?.url"
           :href="data.callToAction.url"
           :external="data.callToAction.external"
+          :icon="data.callToAction.icon"
           class="button button-md"
         >
           {{ data.callToAction.text }}
@@ -22,11 +23,16 @@
           v-if="data.secondaryCallToAction?.url"
           :href="data.secondaryCallToAction.url"
           :external="data.secondaryCallToAction.external"
+          :icon="data.secondaryCallToAction.icon"
           class="button-secondary button-md"
         >
           {{ data.secondaryCallToAction.text }}
         </InlineLink>
       </div>
+      <LinkCollection
+        v-else
+        :links="[data.callToAction, data.secondaryCallToAction]"
+      />
     </div>
     <div
       v-if="data.image?.url"
@@ -52,4 +58,7 @@ import type { FiftyFiftyFragment } from "~~/shared/types/graphql";
 const { data } = defineProps<ModuleProps<FiftyFiftyFragment>>();
 
 const align = computed(() => data.imageAlignment as "Left" | "Right");
+const ctaStyle = computed(
+  () => data.callToActionStyle as "Button" | "Arrow Link",
+);
 </script>
