@@ -1,4 +1,5 @@
 import { GraphQLClient } from "graphql-request";
+import gqlmin from "gqlmin";
 
 const { cmsSpace, cmsApiKey, cmsEnv } = useRuntimeConfig();
 
@@ -17,5 +18,6 @@ export const fetchContentful = async <
   query: string,
   variables?: Variables,
 ): Promise<Response> => {
-  return cmsClient.request<Response>(query, variables);
+  const minifiedQuery = gqlmin(query);
+  return cmsClient.request<Response>(minifiedQuery, variables);
 };
