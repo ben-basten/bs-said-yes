@@ -4,6 +4,7 @@ import { IMAGE_FRAGMENT } from "../fragments/image.fragment";
 import { FIFTY_FIFTY_FRAGMENT } from "../modules/fifty-fifty.fragment";
 import { LINK_FRAGMENT } from "../fragments/link.fragment";
 import { ACCORDION_FRAGMENT } from "../modules/accordion.fragment";
+import { SCHEDULE_FRAGMENT } from "../modules/schedule.fragment";
 
 export const PAGE_STANDARD_QUERY = gql`
   query PageStandard($slug: String!) {
@@ -31,12 +32,16 @@ export const PAGE_STANDARD_QUERY = gql`
         ... on ModuleAccordion {
           ...Accordion
         }
+        ... on ModuleSchedule {
+          ...Schedule
+        }
       }
     }
   }
   ${HOMEPAGE_HERO_FRAGMENT}
   ${FIFTY_FIFTY_FRAGMENT}
   ${ACCORDION_FRAGMENT}
+  ${SCHEDULE_FRAGMENT}
   ${IMAGE_FRAGMENT}
   ${LINK_FRAGMENT}
 `;

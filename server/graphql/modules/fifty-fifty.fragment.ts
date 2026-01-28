@@ -14,6 +14,7 @@ export const FIFTY_FIFTY_FRAGMENT = gql`
     secondaryCallToAction {
       ...Link
     }
+    callToActionStyle
     image {
       ...Image
     }
