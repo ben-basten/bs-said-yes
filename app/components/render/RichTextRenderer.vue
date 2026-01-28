@@ -14,8 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { Heading, InlineLink } from "#components";
+import { ContentfulImage, Heading, InlineLink } from "#components";
 import type {
+  AssetLinkBlock,
   Document,
   Heading1,
   Heading2,
@@ -29,9 +30,24 @@ import type {
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import RichTextRenderer from "contentful-rich-text-vue-renderer";
 
-const { json } = defineProps<{
+export type EmbeddedAsset = {
+  sys: { id: string };
+  url: string | null;
+  description: string | null;
+};
+
+const { json, assets } = defineProps<{
   json: Document | undefined;
+  assets?: EmbeddedAsset[];
 }>();
+
+/**
+ * Creates a map of asset IDs to asset data for quick lookup
+ */
+const assetMap = computed(() => {
+  if (!assets?.length) return new Map<string, EmbeddedAsset>();
+  return new Map(assets.map((asset) => [asset.sys.id, asset]));
+});
 
 /**
  * Removes trailing empty paragraph tags.
@@ -129,6 +145,20 @@ function renderNodes() {
     [BLOCKS.HEADING_6]: (node: Heading6) => {
       // @ts-expect-error - needed to render heading content
       return h(Heading, { as: "h6" }, () => node.content?.[0]?.value);
+    },
+    [BLOCKS.EMBEDDED_ASSET]: (node: AssetLinkBlock) => {
+      const assetId = node.data?.target?.sys?.id;
+      if (!assetId) return null;
+
+      const asset = assetMap.value.get(assetId);
+      if (!asset?.url) return null;
+
+      return h(ContentfulImage, {
+        src: asset.url,
+        alt: asset.description ?? "",
+        sizes: "100vw md:400px",
+        class: "h-full rounded-lg aspect-4/3 object-cover max-h-70 mx-auto",
+      });
     },
   };
 }

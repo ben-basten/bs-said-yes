@@ -1,9 +1,5 @@
 <template>
-  <ContentContainer
-    as="section"
-    class="pb-vertical md:pb-vertical-lg gap-y-7 md:gap-y-10"
-    grid
-  >
+  <ContentContainer as="section" margin grid class="gap-y-7 md:gap-y-10">
     <div class="col-span-full max-w-copy mx-auto text-center">
       <Heading as="h2" class="mb-6">{{ data.heading }}</Heading>
       <RichTextRenderer :json="data?.copy?.json" class="type-body text-muted" />
@@ -18,7 +14,7 @@
     </div>
 
     <div
-      class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      class="col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
     >
       <div
         v-for="(event, index) in events"

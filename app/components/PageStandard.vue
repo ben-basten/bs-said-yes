@@ -25,9 +25,15 @@ if (error.value) {
   });
 }
 
-useHead({
-  title: data.value?.seoTitle || undefined,
-});
+watch(
+  data,
+  () => {
+    useHead({
+      title: data.value?.seoTitle || undefined,
+    });
+  },
+  { immediate: true },
+);
 
 const contentModules = computed(
   () => data.value?.contentModulesCollection?.items || [],

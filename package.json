@@ -23,6 +23,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "contentful-rich-text-vue-renderer": "^3.2.1",
     "eslint": "^9.39.2",
+    "gqlmin": "^0.3.1",
     "graphql-request": "^7.4.0",
     "gsap": "^3.14.2",
     "nuxt": "^4.2.2",

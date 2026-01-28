@@ -7,6 +7,8 @@ import HomepageHero from "~/components/modules/HomepageHero.vue";
 import FiftyFifty from "~/components/modules/FiftyFifty.vue";
 import Accordion from "~/components/modules/Accordion.vue";
 import Schedule from "~/components/modules/Schedule.vue";
+import SimpleHero from "~/components/modules/SimpleHero.vue";
+import CenterText from "~/components/modules/CenterText.vue";
 import type { Component } from "vue";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
@@ -23,6 +25,8 @@ const modules: Record<string, Component> = {
   ModuleFiftyfifty: FiftyFifty,
   ModuleAccordion: Accordion,
   ModuleSchedule: Schedule,
+  ModuleSimpleHero: SimpleHero,
+  ModuleCenterText: CenterText,
 };
 
 const component = computed(() => {
