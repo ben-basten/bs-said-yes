@@ -9,14 +9,16 @@
       />
     </div>
 
-    <div class="max-w-copy mx-auto text-center mt-7 md:mt-10">
-      <Heading as="h1" class="mb-5">{{ data.heading }}</Heading>
-      <RichTextRenderer
-        v-if="data.copy?.json"
-        :json="data.copy.json"
-        class="type-body text-muted mx-auto"
-      />
-    </div>
+    <ContentContainer>
+      <div class="max-w-copy mx-auto text-center mt-7 md:mt-10">
+        <Heading as="h1" class="mb-5">{{ data.heading }}</Heading>
+        <RichTextRenderer
+          v-if="data.copy?.json"
+          :json="data.copy.json"
+          class="type-body text-muted mx-auto"
+        />
+      </div>
+    </ContentContainer>
   </section>
 </template>
 
