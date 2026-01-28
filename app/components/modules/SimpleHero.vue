@@ -14,7 +14,7 @@
       <RichTextRenderer
         v-if="data.copy?.json"
         :json="data.copy.json"
-        class="type-body text-muted max-w-copy mx-auto"
+        class="type-body text-muted mx-auto"
       />
     </div>
   </section>
