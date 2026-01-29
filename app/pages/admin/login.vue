@@ -3,6 +3,10 @@ definePageMeta({
   layout: "minimal",
 });
 
+useHead({
+  title: "Admin Login",
+});
+
 const route = useRoute();
 const { loggedIn, user } = useUserSession();
 
