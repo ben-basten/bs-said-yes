@@ -9,22 +9,25 @@ useHead({
 
 const route = useRoute();
 const { loggedIn, user } = useUserSession();
+const errorMessage = ref<string | null>(null);
+
+const errorParam = route.query.error;
+if (errorParam === "unauthorized") {
+  errorMessage.value = "You are not authorized to access the admin dashboard.";
+} else if (errorParam === "oauth_failed") {
+  errorMessage.value = "Authentication failed. Please try again.";
+}
+
+onMounted(() => {
+  if (route.query.error) {
+    navigateTo(route.path, { replace: true });
+  }
+});
 
 watchEffect(() => {
   if (loggedIn.value && user.value?.permission === "admin") {
     navigateTo("/admin/dashboard", { replace: true });
   }
-});
-
-const error = computed(() => {
-  const errorParam = route.query.error;
-  if (errorParam === "unauthorized") {
-    return "You are not authorized to access the admin dashboard.";
-  }
-  if (errorParam === "oauth_failed") {
-    return "Authentication failed. Please try again.";
-  }
-  return null;
 });
 </script>
 
@@ -39,8 +42,8 @@ const error = computed(() => {
       </p>
 
       <div class="w-full max-w-sm flex flex-col gap-4">
-        <div v-if="error" aria-live="polite" class="text-left">
-          <p class="text-error text-sm mt-2">{{ error }}</p>
+        <div v-if="errorMessage" aria-live="polite">
+          <p class="text-error text-sm">{{ errorMessage }}</p>
         </div>
         <a
           href="/auth/github"
