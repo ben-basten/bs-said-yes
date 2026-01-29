@@ -58,6 +58,10 @@ export default defineOAuthGitHubEventHandler({
         .where(eq(users.githubUsername, githubUser.login));
     }
 
+    if (!existingUser[0]) {
+      return sendRedirect(event, "/admin/login?error=oauth_failed");
+    }
+
     // Set user session
     await setUserSession(event, {
       user: {
