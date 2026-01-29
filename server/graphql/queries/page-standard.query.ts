@@ -7,6 +7,7 @@ import { ACCORDION_FRAGMENT } from "../modules/accordion.fragment";
 import { SCHEDULE_FRAGMENT } from "../modules/schedule.fragment";
 import { SIMPLE_HERO_FRAGMENT } from "../modules/simple-hero.fragment";
 import { CENTER_TEXT_FRAGMENT } from "../modules/center-text.fragment";
+import { FORM_FRAGMENT } from "../modules/form.fragment";
 
 export const PAGE_STANDARD_QUERY = gql`
   query PageStandard($slug: String!) {
@@ -43,6 +44,9 @@ export const PAGE_STANDARD_QUERY = gql`
         ... on ModuleCenterText {
           ...CenterText
         }
+        ... on ModuleForm {
+          ...Form
+        }
       }
     }
   }
@@ -54,4 +58,5 @@ export const PAGE_STANDARD_QUERY = gql`
   ${LINK_FRAGMENT}
   ${SIMPLE_HERO_FRAGMENT}
   ${CENTER_TEXT_FRAGMENT}
+  ${FORM_FRAGMENT}
 `;

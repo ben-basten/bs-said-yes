@@ -5,7 +5,6 @@
       :key="index"
       :data="item"
     />
-    <Memory />
   </div>
 </template>
 
