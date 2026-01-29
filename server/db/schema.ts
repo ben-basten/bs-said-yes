@@ -1,12 +1,15 @@
 import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
 
-/**
- * Allowed GitHub users - allowlist for who can log in to the admin dashboard
- * Add GitHub usernames here to grant access
- */
 export const allowedUsers = pgTable("allowed_users", {
   id: serial("id").primaryKey(),
   githubEmail: varchar("github_email", { length: 255 }).notNull().unique(),
+});
+
+export const stories = pgTable("stories", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  author: varchar("author", { length: 255 }),
+  story: varchar("story", { length: 5000 }).notNull(),
 });
 
 // Type exports for use throughout the application

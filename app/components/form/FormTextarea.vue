@@ -1,11 +1,10 @@
 <template>
   <div class="flex flex-col">
     <label :for="id" class="text-lg font-semibold">{{ label }}</label>
-    <input
+    <textarea
       :id
-      ref="inputRef"
+      ref="textareaRef"
       v-model="model"
-      :type
       v-bind="rest"
       class="bg-background border-2 border-foreground user-invalid:border-error rounded-xl px-4 py-2"
     />
@@ -15,24 +14,18 @@
 <script setup lang="ts">
 const model = defineModel<string>();
 const id = useId();
-const inputRef = ref<HTMLInputElement | null>(null);
+const textareaRef = ref<HTMLTextAreaElement | null>(null);
 
-const {
-  type = "text",
-  label,
-  ...rest
-} = defineProps<{
-  type?: "password" | "text" | "email";
-  placeholder?: string;
-  autocomplete?: string;
-  autofocus?: boolean;
-  disabled?: boolean;
-  required?: boolean;
+const { label, ...rest } = defineProps<{
   label: string;
   name: string;
+  rows?: number | string;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
 }>();
 
 defineExpose({
-  inputRef,
+  textareaRef,
 });
 </script>
