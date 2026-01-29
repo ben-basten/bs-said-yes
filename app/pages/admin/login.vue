@@ -1,10 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: "authenticated",
   layout: "minimal",
 });
 
 const route = useRoute();
+const { loggedIn, user } = useUserSession();
+
+watchEffect(() => {
+  if (loggedIn.value && user.value?.permission === "admin") {
+    navigateTo("/admin/dashboard", { replace: true });
+  }
+});
 
 const error = computed(() => {
   const errorParam = route.query.error;
