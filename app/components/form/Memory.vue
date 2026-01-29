@@ -1,10 +1,10 @@
 <template>
   <ContentContainer margin>
     <div
-      class="relative bg-secondary rounded-lg p-10 max-w-160 mx-auto w-full flex flex-col gap-y-7"
+      class="relative rounded-lg overflow-hidden p-10 max-w-160 mx-auto w-full flex flex-col gap-y-7"
     >
       <Heading as="h2">Memories</Heading>
-      <p>
+      <p class="max-w-copy">
         Tell us your favorite memory or moment you have of Ben/Sydney/both. You
         can write your name or leave it anonymous. Feel free to fill it out
         multiple times.
