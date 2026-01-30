@@ -3,13 +3,14 @@
 </template>
 
 <script setup lang="ts">
-import { IconApple, IconDownload, IconGoogle } from "#components";
-export type IconType = "Download" | "Apple" | "Google";
+import { IconApple, IconDownload, IconGoogle, IconSpotify } from "#components";
+export type IconType = "Download" | "Apple" | "Google" | "Spotify";
 
 const icons: Record<IconType, Component> = {
   Download: IconDownload,
   Apple: IconApple,
   Google: IconGoogle,
+  Spotify: IconSpotify,
 };
 const props = defineProps<{
   icon: IconType | null | undefined;

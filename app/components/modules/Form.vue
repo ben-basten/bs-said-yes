@@ -1,5 +1,6 @@
 <template>
   <Memory v-if="formType === 'Memory'" />
+  <RSVP v-else-if="formType === 'RSVP'" />
 </template>
 
 <script setup lang="ts">

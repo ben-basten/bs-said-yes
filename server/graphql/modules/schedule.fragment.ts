@@ -15,10 +15,7 @@ export const SCHEDULE_FRAGMENT = gql`
     eventsCollection(limit: 15) {
       items {
         ... on ComponentTitleCopy {
-          title
-          copy {
-            json
-          }
+          ...TitleCopy
         }
       }
     }

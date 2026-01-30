@@ -39,7 +39,6 @@
                 :external="link.external ?? false"
                 :aria-current="ariaCurrent(link.url, route.path)"
                 class="text-2xl text-white no-underline px-4 py-2 border-2 border-transparent hover:border-white rounded-lg aria-[current=page]:border-white"
-                @click="onLinkClick"
               >
                 {{ link.text }}
               </InlineLink>
@@ -74,6 +73,7 @@ import {
 import gsap from "gsap";
 import type { LinkFragment } from "~~/shared/types/graphql";
 
+const nuxtApp = useNuxtApp();
 const route = useRoute();
 const navList = ref<HTMLUListElement | null>(null);
 const isOpen = ref(false);
@@ -84,15 +84,17 @@ const { links, cta } = defineProps<{
   cta: LinkFragment | null;
 }>();
 
+nuxtApp.hooks.hook("page:loading:end", () => {
+  if (isOpen.value) {
+    onClose();
+  }
+});
+
 watch(isMobileNav, (isMobile) => {
   if (!isMobile) {
     onClose();
   }
 });
-
-const onLinkClick = () => {
-  onClose();
-};
 
 const onClose = () => {
   isOpen.value = false;
