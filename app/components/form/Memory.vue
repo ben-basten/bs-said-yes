@@ -1,7 +1,7 @@
 <template>
   <ContentContainer margin>
     <div
-      class="relative rounded-lg overflow-hidden p-10 max-w-160 mx-auto w-full flex flex-col gap-y-7"
+      class="relative bg-secondary rounded-lg overflow-hidden p-10 max-w-160 mx-auto w-full flex flex-col gap-y-7"
     >
       <Heading as="h2">Memories</Heading>
       <p class="max-w-copy">
