@@ -1,20 +1,37 @@
 <script setup lang="ts">
+import type { AuthError } from "~~/shared/types/auth";
+
 definePageMeta({
-  middleware: "authenticated",
   layout: "minimal",
 });
 
-const route = useRoute();
+useHead({
+  title: "Admin Login",
+});
 
-const error = computed(() => {
-  const errorParam = route.query.error;
-  if (errorParam === "unauthorized") {
-    return "You are not authorized to access the admin dashboard.";
+const route = useRoute();
+const { loggedIn, user } = useUserSession();
+const errorMessage = ref<string | null>(null);
+
+const errorParam = route.query.error as AuthError | undefined;
+if (errorParam === "unauthorized") {
+  errorMessage.value = "You are not authorized to access the admin dashboard.";
+} else if (errorParam === "oauth_failed") {
+  errorMessage.value = "Authentication failed.";
+} else if (errorParam === "unknown") {
+  errorMessage.value = "An unknown error occurred.";
+}
+
+onMounted(() => {
+  if (route.query.error) {
+    navigateTo(route.path, { replace: true });
   }
-  if (errorParam === "oauth_failed") {
-    return "Authentication failed. Please try again.";
+});
+
+watchEffect(() => {
+  if (loggedIn.value && user.value?.permission === "admin") {
+    navigateTo("/admin/dashboard", { replace: true });
   }
-  return null;
 });
 </script>
 
@@ -29,8 +46,8 @@ const error = computed(() => {
       </p>
 
       <div class="w-full max-w-sm flex flex-col gap-4">
-        <div v-if="error" aria-live="polite" class="text-left">
-          <p class="text-error text-sm mt-2">{{ error }}</p>
+        <div v-if="errorMessage" aria-live="polite">
+          <p class="text-error text-sm">{{ errorMessage }}</p>
         </div>
         <a
           href="/auth/github"

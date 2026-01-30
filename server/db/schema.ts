@@ -12,6 +12,5 @@ export const stories = pgTable("stories", {
   story: varchar("story", { length: 5000 }).notNull(),
 });
 
-// Type exports for use throughout the application
 export type AllowedUser = typeof allowedUsers.$inferSelect;
 export type NewAllowedUser = typeof allowedUsers.$inferInsert;
