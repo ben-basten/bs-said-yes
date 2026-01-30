@@ -5,7 +5,7 @@ definePageMeta({
 });
 
 useHead({
-  title: "Admin Dashboard",
+  title: "Dashboard | Admin",
 });
 
 const { user } = useUserSession();
