@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     story,
   })
     .then(() => {
-      postToDiscord(`New memory received!\n**Title:** ${title}`);
+      postToDiscord(`**New memory received!**\nTitle: ${title}`);
       return { success: true };
     })
     .catch((error) => {
