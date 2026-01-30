@@ -10,6 +10,7 @@ import Schedule from "~/components/modules/Schedule.vue";
 import SimpleHero from "~/components/modules/SimpleHero.vue";
 import CenterText from "~/components/modules/CenterText.vue";
 import Form from "~/components/modules/Form.vue";
+import CallToAction from "~/components/modules/CallToAction.vue";
 import type { Component } from "vue";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
@@ -29,6 +30,7 @@ const modules: Record<string, Component> = {
   ModuleSimpleHero: SimpleHero,
   ModuleCenterText: CenterText,
   ModuleForm: Form,
+  ModuleCallToAction: CallToAction,
 };
 
 const component = computed(() => {
