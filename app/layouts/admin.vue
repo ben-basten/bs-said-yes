@@ -26,7 +26,7 @@ const route = useRoute();
             :key="item.path"
             :href="item.path"
             :aria-current="ariaCurrent(item.path, route.path)"
-            class="no-underline aria-[current=page]:underline"
+            class="no-underline aria-[current=page]:underline text-foreground hover:text-foreground/60"
           >
             {{ item.label }}
           </InlineLink>
