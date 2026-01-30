@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import type { ModuleProps } from "~/types/module";
+import type { FormFragment } from "~~/shared/types/graphql";
 
 const { data } = defineProps<ModuleProps<FormFragment>>();
 
