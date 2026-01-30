@@ -21,6 +21,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
     "@nuxt/eslint": "^1.9.0",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/image": "^2.0.0",
@@ -33,7 +34,6 @@
     "gsap": "^3.14.2",
     "nuxt": "^4.2.2",
     "nuxt-auth-utils": "^0.5.27",
-    "postgres": "^3.4.8",
     "reka-ui": "^2.7.0",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.26",
