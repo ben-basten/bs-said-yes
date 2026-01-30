@@ -16,7 +16,5 @@ export default defineEventHandler(async (event) => {
     querySchema.parse,
   );
 
-  const memories = await getMemories(limit, page);
-
-  return { memories };
+  return await getMemories(limit, page);
 });
