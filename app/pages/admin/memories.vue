@@ -35,7 +35,7 @@
       v-else-if="status !== 'pending'"
       class="text-center py-20 bg-secondary rounded-2xl"
     >
-      <p class="text-gray-500 font-medium">No memories submitted yet.</p>
+      <p class="text-lg">No memories submitted yet.</p>
     </div>
 
     <!-- Pagination -->
