@@ -5,22 +5,19 @@
         class="bg-black/40 fixed inset-0 z-50 transition-all duration-300"
       />
       <DialogContent
-        class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-150 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white p-8 shadow-2xl focus:outline-none overflow-y-auto"
+        class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-150 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-background p-8 shadow-2xl focus:outline-none overflow-y-auto"
       >
         <div class="flex items-start justify-between mb-6">
-          <DialogTitle v-if="title" class="text-3xl font-serif">
-            {{ title }}
+          <DialogTitle v-if="title">
+            <Heading as="h1" variant="h2">{{ title }}</Heading>
           </DialogTitle>
           <DialogClose as-child>
-            <IconButton
-              label="Close"
-              class="hover:bg-gray-100 transition-colors -mr-2"
-            >
+            <IconButton label="Close" class="border-2 border-foreground -mr-2">
               <IconClose class="size-6" />
             </IconButton>
           </DialogClose>
         </div>
-        <DialogDescription v-if="description" class="mb-4 text-gray-500 italic">
+        <DialogDescription v-if="description" class="mb-4">
           {{ description }}
         </DialogDescription>
         <div>

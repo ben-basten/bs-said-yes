@@ -11,6 +11,7 @@
       <button
         v-for="item in data.memories"
         :key="item.id"
+        type="button"
         class="text-left bg-secondary rounded-2xl p-6 transition-all cursor-pointer group"
         @click="openMemory(item)"
       >
@@ -93,7 +94,7 @@ useHead({
 });
 
 const page = ref(1);
-const limit = ref(6);
+const limit = 10;
 
 interface Memory {
   id: number;
@@ -115,7 +116,7 @@ const { data, status } = useFetch<{ memories: Memory[]; total: number }>(
 
 const totalPages = computed(() => {
   if (!data.value) return 0;
-  return Math.ceil(data.value.total / limit.value);
+  return Math.ceil(data.value.total / limit);
 });
 
 const isModalOpen = ref(false);
