@@ -57,3 +57,7 @@
     height: 0;
   }
 }
+
+@utility animate-hide {
+  @apply opacity-0 noscript:opacity-100 motion-reduce:opacity-100;
+}

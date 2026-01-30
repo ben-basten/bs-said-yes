@@ -1,7 +1,8 @@
 <template>
   <ContentContainer as="section" grid margin class="gap-y-12 mt-nav-height">
     <div
-      class="col-span-12 md:col-span-5 md:col-start-1 flex flex-col gap-y-5 my-auto"
+      ref="heroText"
+      class="animate-hide col-span-12 md:col-span-5 md:col-start-1 flex flex-col gap-y-5 my-auto"
     >
       <p class="type-eyebrow">
         {{ data.eyebrow }}
@@ -30,7 +31,7 @@
         :alt="image.description ?? ''"
         sizes="50vw md:200px lg:400px"
         :class="[
-          'col-span-1 w-full aspect-4/3 object-cover rounded-lg',
+          'animate-hide hero-image col-span-1 w-full aspect-4/3 object-cover rounded-lg',
           { 'mt-8': index === 1, '-mt-8': index === 2 },
         ]"
       />
@@ -39,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from "gsap";
 import type { ModuleProps } from "~/types/module";
 import type { HomepageHeroFragment } from "~~/shared/types/graphql";
 
@@ -47,4 +49,37 @@ const { data } = defineProps<ModuleProps<HomepageHeroFragment>>();
 const images = computed(() =>
   (data.imagesCollection?.items ?? []).filter((image) => image !== null),
 );
+
+const heroText = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  const tl = gsap.timeline({
+    defaults: {
+      duration: 1,
+      ease: "power3.out",
+    },
+  });
+
+  tl.to(heroText.value, {
+    opacity: 1,
+    y: 0,
+    startAt: { y: -20 },
+  });
+
+  const allImages = gsap.utils.toArray<HTMLElement>(".hero-image");
+  const order = [0, 3, 1, 2];
+  const orderedImages = order.map((index) => allImages[index]).filter(Boolean);
+
+  tl.to(
+    orderedImages,
+    {
+      opacity: 1,
+      y: 0,
+      stagger: 0.25,
+      duration: 1.2,
+      startAt: { y: -10 },
+    },
+    "-=0.6",
+  );
+});
 </script>
