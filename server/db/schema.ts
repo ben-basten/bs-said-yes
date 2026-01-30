@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import { pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const allowedUsers = pgTable("allowed_users", {
   id: serial("id").primaryKey(),
@@ -10,6 +10,7 @@ export const stories = pgTable("stories", {
   title: varchar("title", { length: 255 }).notNull(),
   author: varchar("author", { length: 255 }),
   story: varchar("story", { length: 5000 }).notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 export type AllowedUser = typeof allowedUsers.$inferSelect;
