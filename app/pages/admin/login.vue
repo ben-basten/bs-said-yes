@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { AuthError } from "~~/shared/types/auth";
+
 definePageMeta({
   layout: "minimal",
 });
@@ -11,11 +13,13 @@ const route = useRoute();
 const { loggedIn, user } = useUserSession();
 const errorMessage = ref<string | null>(null);
 
-const errorParam = route.query.error;
+const errorParam = route.query.error as AuthError | undefined;
 if (errorParam === "unauthorized") {
   errorMessage.value = "You are not authorized to access the admin dashboard.";
 } else if (errorParam === "oauth_failed") {
-  errorMessage.value = "Authentication failed. Please try again.";
+  errorMessage.value = "Authentication failed.";
+} else if (errorParam === "unknown") {
+  errorMessage.value = "An unknown error occurred.";
 }
 
 onMounted(() => {

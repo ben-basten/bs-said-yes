@@ -1,4 +1,6 @@
 import { eq } from "drizzle-orm";
+import type { AuthError } from "~~/shared/types/auth";
+import type { AllowedUser } from "../../db";
 import { db, allowedUsers } from "../../db";
 
 export default defineOAuthGitHubEventHandler({
@@ -7,19 +9,27 @@ export default defineOAuthGitHubEventHandler({
   },
   async onSuccess(event, { user: githubUser }) {
     if (!githubUser.email) {
-      return sendRedirect(event, "/admin/login?error=unauthorized");
+      const errorCode: AuthError = "unauthorized";
+      return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
-    // Check if user is in the allowlist
-    const allowedUser = await db
-      .select()
-      .from(allowedUsers)
-      .where(eq(allowedUsers.githubEmail, githubUser.email))
-      .limit(1);
+    let allowedUser: AllowedUser[];
+    try {
+      // Check if user is in the allowlist
+      allowedUser = await db
+        .select()
+        .from(allowedUsers)
+        .where(eq(allowedUsers.githubEmail, githubUser.email))
+        .limit(1);
+    } catch {
+      const errorCode: AuthError = "unknown";
+      return sendRedirect(event, `/admin/login?error=${errorCode}`);
+    }
 
     if (allowedUser.length === 0) {
       // User is not authorized
-      return sendRedirect(event, "/admin/login?error=unauthorized");
+      const errorCode: AuthError = "unauthorized";
+      return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
     // Set user session
@@ -32,8 +42,8 @@ export default defineOAuthGitHubEventHandler({
 
     return sendRedirect(event, "/admin/dashboard");
   },
-  onError(event, error) {
-    console.error("GitHub OAuth error:", error);
-    return sendRedirect(event, "/admin/login?error=oauth_failed");
+  onError(event) {
+    const errorCode: AuthError = "oauth_failed";
+    return sendRedirect(event, `/admin/login?error=${errorCode}`);
   },
 });
