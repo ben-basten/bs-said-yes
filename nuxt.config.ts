@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     cmsApiKey: "",
     sessionPassword: "",
     sitePassword: "",
+    discordWebhookUrl: "",
   },
   vite: {
     plugins: [tailwindcss()],
