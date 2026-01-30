@@ -5,7 +5,11 @@
       'mt-nav-height nav:mt-10': !data.image?.url,
     }"
   >
-    <div v-if="data.image?.url" class="w-full overflow-hidden">
+    <div
+      v-if="data.image?.url"
+      ref="image"
+      class="w-full overflow-hidden animate-hide"
+    >
       <ContentfulImage
         :src="data.image.url"
         :alt="data.image.description ?? ''"
@@ -29,7 +33,24 @@
 
 <script setup lang="ts">
 import type { ModuleProps } from "~/types/module";
+import gsap from "gsap";
 import type { SimpleHeroFragment } from "~~/shared/types/graphql";
 
+const imageRef = useTemplateRef<HTMLElement | null>("image");
+
 const { data } = defineProps<ModuleProps<SimpleHeroFragment>>();
+
+onMounted(() => {
+  const tl = gsap.timeline({
+    defaults: {
+      duration: 0.5,
+      ease: "power3.out",
+    },
+  });
+
+  tl.to(imageRef.value, {
+    opacity: 1,
+    y: 0,
+  });
+});
 </script>
