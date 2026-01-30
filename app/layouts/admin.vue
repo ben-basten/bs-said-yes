@@ -5,6 +5,17 @@ async function logout() {
   await clear();
   navigateTo("/admin/login");
 }
+
+const menuItems = [
+  { label: "Home", path: "/" },
+  { label: "Dashboard", path: "/admin/dashboard" },
+  { label: "Memories", path: "/admin/memories" },
+];
+const route = useRoute();
+
+const isSelected = (path: string) => {
+  return route.path === path;
+};
 </script>
 
 <template>
@@ -13,7 +24,17 @@ async function logout() {
       <header
         class="flex items-center justify-between border-b-2 border-secondary py-4"
       >
-        <Heading as="h1" variant="h3" class="text-foreground"> Admin </Heading>
+        <div class="flex gap-3">
+          <InlineLink
+            v-for="item in menuItems"
+            :key="item.path"
+            :href="item.path"
+            :aria-selected="isSelected(item.path)"
+            class="no-underline aria-selected:underline"
+          >
+            {{ item.label }}
+          </InlineLink>
+        </div>
         <div class="flex items-center gap-3 md:gap-10">
           <div class="flex items-center gap-3">
             <span class="font-medium text-foreground hidden sm:inline">
