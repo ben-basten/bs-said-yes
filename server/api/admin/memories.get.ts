@@ -1,11 +1,11 @@
 import { desc } from "drizzle-orm";
-import z from "zod";
+import { z } from "zod";
 import { db } from "~~/server/db";
 import { stories } from "~~/server/db/schema";
 
 const querySchema = z.object({
-  limit: z.number().min(1).max(100).optional(),
-  page: z.number().min(1).optional(),
+  limit: z.coerce.number().min(1).max(100).optional(),
+  page: z.coerce.number().min(1).optional(),
 });
 
 export default defineEventHandler(async (event) => {

@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { db, stories } from "../db";
+import { db, stories } from "~~/server/db";
 
 const bodySchema = z.object({
-  title: z.string().max(255),
+  title: z.string().min(1).max(255),
   author: z.string().max(255).optional(),
-  story: z.string().max(5000),
+  story: z.string().min(1).max(5000),
 });
 
 export default defineEventHandler(async (event) => {
