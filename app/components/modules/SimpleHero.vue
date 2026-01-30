@@ -41,6 +41,7 @@ const imageRef = useTemplateRef<HTMLElement | null>("image");
 const { data } = defineProps<ModuleProps<SimpleHeroFragment>>();
 
 onMounted(() => {
+  if (!imageRef.value) return;
   const tl = gsap.timeline({
     defaults: {
       duration: 0.5,
