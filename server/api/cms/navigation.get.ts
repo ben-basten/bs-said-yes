@@ -5,7 +5,8 @@ import type {
   NavigationQueryVariables,
 } from "~~/shared/types/graphql";
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  await requireUserSession(event);
   const data = await fetchContentful<NavigationQuery, NavigationQueryVariables>(
     NAVIGATION_QUERY,
   );

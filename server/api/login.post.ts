@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   if (isValidPassword) {
     await setUserSession(event, {
       user: {
-        authenticated: true,
+        permission: "guest",
       },
     });
     return { success: true };
