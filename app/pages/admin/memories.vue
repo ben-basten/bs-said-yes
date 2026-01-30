@@ -1,7 +1,7 @@
 <template>
   <ContentContainer margin class="mt-10">
     <div
-      class="flex flex-col gap-5 items-center justify-between md:flex-row mb-vertical"
+      class="flex flex-col gap-5 items-center text-center justify-between md:flex-row mb-vertical"
     >
       <Heading as="h1">Memory Submissions</Heading>
       <div v-if="data" class="text-sm font-medium">Total: {{ data.total }}</div>
@@ -46,7 +46,7 @@
       <IconButton
         label="Previous Page"
         :disabled="page === 1"
-        class="disabled:opacity-20 disabled:cursor-not-allowed bg-secondary hover:bg-secondary/80"
+        class="disabled:opacity-20 disabled:cursor-not-allowed text-white bg-action hover:bg-action/80"
         @click="page--"
       >
         <div class="rotate-180">
@@ -61,7 +61,7 @@
       <IconButton
         label="Next Page"
         :disabled="page === totalPages"
-        class="disabled:opacity-20 disabled:cursor-not-allowed bg-secondary hover:bg-secondary/80"
+        class="disabled:opacity-20 disabled:cursor-not-allowed text-white bg-action hover:bg-action/80"
         @click="page++"
       >
         <IconArrowForward class="size-6" />
@@ -69,16 +69,14 @@
     </div>
 
     <!-- Memory Detail Modal -->
-    <Modal
-      v-model:open="isModalOpen"
-      :title="selectedMemory?.title"
-      :description="
-        selectedMemory?.author ? `By ${selectedMemory.author}` : undefined
-      "
-    >
-      <div class="whitespace-pre-wrap leading-relaxed text-lg text-gray-700">
+    <Modal v-model:open="isModalOpen" :title="selectedMemory?.title">
+      <Heading as="h2" variant="h4">
+        Shared by:
+        {{ selectedMemory?.author ? selectedMemory.author : "Anonymous" }}
+      </Heading>
+      <p class="type-body">
         {{ selectedMemory?.story }}
-      </div>
+      </p>
     </Modal>
   </ContentContainer>
 </template>
