@@ -1,7 +1,6 @@
-import { eq } from "drizzle-orm";
 import type { AuthError } from "~~/shared/types/auth";
-import type { AllowedUser } from "../../db";
-import { db, allowedUsers } from "../../db";
+import { getAllowedUserByEmail } from "../../repository/users";
+import type { AllowedUser } from "~~/server/db";
 
 export default defineOAuthGitHubEventHandler({
   config: {
@@ -13,20 +12,16 @@ export default defineOAuthGitHubEventHandler({
       return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
-    let allowedUser: AllowedUser[];
+    let allowedUser: AllowedUser | null = null;
     try {
       // Check if user is in the allowlist
-      allowedUser = await db
-        .select()
-        .from(allowedUsers)
-        .where(eq(allowedUsers.githubEmail, githubUser.email))
-        .limit(1);
+      allowedUser = await getAllowedUserByEmail(githubUser.email);
     } catch {
       const errorCode: AuthError = "unknown";
       return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
-    if (allowedUser.length === 0) {
+    if (!allowedUser) {
       // User is not authorized
       const errorCode: AuthError = "unauthorized";
       return sendRedirect(event, `/admin/login?error=${errorCode}`);

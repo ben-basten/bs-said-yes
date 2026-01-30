@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { db, stories } from "~~/server/db";
+import { createMemory } from "~~/server/repository/memories";
 
 const bodySchema = z.object({
   title: z.string().min(1).max(255),
@@ -14,13 +14,11 @@ export default defineEventHandler(async (event) => {
     bodySchema.parse,
   );
 
-  return db
-    .insert(stories)
-    .values({
-      title,
-      author,
-      story,
-    })
+  return createMemory({
+    title,
+    author,
+    story,
+  })
     .then(() => {
       return { success: true };
     })

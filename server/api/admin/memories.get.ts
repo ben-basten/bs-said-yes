@@ -1,7 +1,5 @@
-import { desc } from "drizzle-orm";
 import { z } from "zod";
-import { db } from "~~/server/db";
-import { stories } from "~~/server/db/schema";
+import { getMemories } from "~~/server/repository/memories";
 
 const querySchema = z.object({
   limit: z.coerce.number().min(1).max(100).optional(),
@@ -18,16 +16,7 @@ export default defineEventHandler(async (event) => {
     querySchema.parse,
   );
 
-  const memories = await db
-    .select({
-      id: stories.id,
-      title: stories.title,
-      author: stories.author,
-    })
-    .from(stories)
-    .orderBy(desc(stories.createdAt))
-    .limit(limit)
-    .offset((page - 1) * limit);
+  const memories = await getMemories(limit, page);
 
   return { memories };
 });
