@@ -1,5 +1,10 @@
 <template>
-  <ContentContainer as="section" grid margin class="gap-y-12 mt-nav-height">
+  <ContentContainer
+    as="section"
+    grid
+    margin
+    class="gap-y-12 mt-nav-height md:mt-10"
+  >
     <div
       ref="heroText"
       class="animate-hide col-span-12 md:col-span-5 md:col-start-1 flex flex-col gap-y-5 my-auto"

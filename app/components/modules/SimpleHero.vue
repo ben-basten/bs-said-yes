@@ -1,5 +1,10 @@
 <template>
-  <section class="mb-vertical md:mb-vertical-lg">
+  <section
+    class="mb-vertical md:mb-vertical-lg flex flex-col gap-y-7 md:gap-y-10"
+    :class="{
+      'mt-nav-height nav:mt-10': !data.image?.url,
+    }"
+  >
     <div v-if="data.image?.url" class="w-full overflow-hidden">
       <ContentfulImage
         :src="data.image.url"
@@ -10,7 +15,7 @@
     </div>
 
     <ContentContainer>
-      <div class="max-w-copy mx-auto text-center mt-7 md:mt-10">
+      <div class="max-w-copy mx-auto text-center">
         <Heading as="h1" class="mb-5">{{ data.heading }}</Heading>
         <RichTextRenderer
           v-if="data.copy?.json"

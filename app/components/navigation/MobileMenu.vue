@@ -51,6 +51,7 @@
                 :external="cta.external ?? false"
                 :aria-current="ariaCurrent(cta.url, route.path)"
                 class="text-2xl button button-lg"
+                @click="onLinkClick"
               >
                 {{ cta.text }}
               </InlineLink>
