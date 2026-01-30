@@ -12,10 +12,6 @@ const menuItems = [
   { label: "Memories", path: "/admin/memories" },
 ];
 const route = useRoute();
-
-const isSelected = (path: string) => {
-  return route.path === path;
-};
 </script>
 
 <template>
@@ -29,8 +25,8 @@ const isSelected = (path: string) => {
             v-for="item in menuItems"
             :key="item.path"
             :href="item.path"
-            :aria-selected="isSelected(item.path)"
-            class="no-underline aria-selected:underline"
+            :aria-current="ariaCurrent(item.path, route.path)"
+            class="no-underline aria-[current=page]:underline"
           >
             {{ item.label }}
           </InlineLink>

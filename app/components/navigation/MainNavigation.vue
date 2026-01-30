@@ -15,8 +15,8 @@
               v-if="link?.url"
               :href="link.url"
               :external="link.external"
-              :aria-selected="isSelected(link.url)"
-              class="text-lg text-foreground no-underline px-4 py-2 hover:border-foreground border-2 border-transparent rounded-lg aria-selected:border-foreground"
+              :aria-current="ariaCurrent(link.url, route.path)"
+              class="text-lg text-foreground no-underline px-4 py-2 hover:border-foreground border-2 border-transparent rounded-lg aria-[current=page]:border-foreground"
             >
               {{ link.text }}
             </InlineLink>
@@ -29,7 +29,7 @@
       v-if="cta?.url"
       :to="cta.url"
       :external="cta.external ?? false"
-      :aria-selected="isSelected(cta.url)"
+      :aria-current="ariaCurrent(cta.url, route.path)"
       class="hidden nav:block floating-button border-background border-2 text-lg button button-md fixed top-1.5"
     >
       {{ cta.text }}
@@ -48,10 +48,6 @@ const { links, cta } = defineProps<{
 }>();
 
 const route = useRoute();
-
-const isSelected = (path: string) => {
-  return route.path === path;
-};
 
 const isVisible = shallowRef(true);
 

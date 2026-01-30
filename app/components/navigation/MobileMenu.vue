@@ -37,8 +37,8 @@
                 v-if="link?.url"
                 :href="link.url"
                 :external="link.external ?? false"
-                :aria-selected="isSelected(link.url)"
-                class="text-2xl text-white no-underline px-4 py-2 border-2 border-transparent hover:border-white rounded-lg aria-selected:border-white"
+                :aria-current="ariaCurrent(link.url, route.path)"
+                class="text-2xl text-white no-underline px-4 py-2 border-2 border-transparent hover:border-white rounded-lg aria-[current=page]:border-white"
                 @click="onLinkClick"
               >
                 {{ link.text }}
@@ -49,7 +49,7 @@
                 v-if="cta?.url"
                 :href="cta.url"
                 :external="cta.external ?? false"
-                :aria-selected="isSelected(cta.url)"
+                :aria-current="ariaCurrent(cta.url, route.path)"
                 class="text-2xl button button-lg"
               >
                 {{ cta.text }}
@@ -89,10 +89,6 @@ watch(isMobileNav, (isMobile) => {
     onClose();
   }
 });
-
-const isSelected = (path: string) => {
-  return route.path === path;
-};
 
 const onLinkClick = () => {
   onClose();
