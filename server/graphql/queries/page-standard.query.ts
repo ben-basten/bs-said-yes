@@ -9,6 +9,8 @@ import { SIMPLE_HERO_FRAGMENT } from "../modules/simple-hero.fragment";
 import { CENTER_TEXT_FRAGMENT } from "../modules/center-text.fragment";
 import { FORM_FRAGMENT } from "../modules/form.fragment";
 import { CALL_TO_ACTION_FRAGMENT } from "../modules/call-to-action.fragment";
+import { TITLE_COPY_FRAGMENT } from "../fragments/title-copy.fragment";
+import { TEXT_CALLOUTS_FRAGMENT } from "../modules/text-callouts.fragment";
 
 export const PAGE_STANDARD_QUERY = gql`
   query PageStandard($slug: String!) {
@@ -51,6 +53,9 @@ export const PAGE_STANDARD_QUERY = gql`
         ... on ModuleCallToAction {
           ...CallToAction
         }
+        ... on ModuleTextCallouts {
+          ...TextCallouts
+        }
       }
     }
   }
@@ -60,8 +65,10 @@ export const PAGE_STANDARD_QUERY = gql`
   ${SCHEDULE_FRAGMENT}
   ${IMAGE_FRAGMENT}
   ${LINK_FRAGMENT}
+  ${TITLE_COPY_FRAGMENT}
   ${SIMPLE_HERO_FRAGMENT}
   ${CENTER_TEXT_FRAGMENT}
   ${FORM_FRAGMENT}
   ${CALL_TO_ACTION_FRAGMENT}
+  ${TEXT_CALLOUTS_FRAGMENT}
 `;

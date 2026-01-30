@@ -1,12 +1,9 @@
 import { gql } from "graphql-request";
 
-export const ACCORDION_FRAGMENT = gql`
-  fragment Accordion on ModuleAccordion {
+export const TEXT_CALLOUTS_FRAGMENT = gql`
+  fragment TextCallouts on ModuleTextCallouts {
     heading
-    copy {
-      json
-    }
-    itemsCollection(limit: 15) {
+    calloutsCollection(limit: 10) {
       items {
         ... on ComponentTitleCopy {
           ...TitleCopy

@@ -11,6 +11,7 @@ import SimpleHero from "~/components/modules/SimpleHero.vue";
 import CenterText from "~/components/modules/CenterText.vue";
 import Form from "~/components/modules/Form.vue";
 import CallToAction from "~/components/modules/CallToAction.vue";
+import TextCallouts from "~/components/modules/TextCallouts.vue";
 import type { Component } from "vue";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
@@ -31,6 +32,7 @@ const modules: Record<string, Component> = {
   ModuleCenterText: CenterText,
   ModuleForm: Form,
   ModuleCallToAction: CallToAction,
+  ModuleTextCallouts: TextCallouts,
 };
 
 const component = computed(() => {
