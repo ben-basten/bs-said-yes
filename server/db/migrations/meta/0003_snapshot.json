@@ -1,5 +1,5 @@
 {
-  "id": "a91d0f50-e7c2-4f7f-adc8-4365aeaba1b2",
+  "id": "4e99925f-b8fe-4074-8155-03c53ea94261",
   "prevId": "81271979-f1ec-4776-8dd6-a146bef11979",
   "version": "7",
   "dialect": "postgresql",
@@ -45,6 +45,12 @@
           "primaryKey": true,
           "notNull": true,
           "default": "gen_random_uuid()"
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
         },
         "mailing_address": {
           "name": "mailing_address",
@@ -117,12 +123,6 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
-        },
-        "expected_name": {
-          "name": "expected_name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
         },
         "relationship_type": {
           "name": "relationship_type",
