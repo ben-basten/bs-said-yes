@@ -4,40 +4,29 @@
     description="Select all members of your party who will be attending the wedding."
     primary-text="Next"
     secondary-text="Previous"
-    @submit.prevent="handleSubmit"
+    @submit.prevent="rsvpStore.nextStep()"
+    @secondary="rsvpStore.reset()"
   >
     <fieldset class="flex flex-col gap-y-4">
-      <div v-for="member in household" :key="member.id" class="relative">
-        <input
-          :id="member.id"
-          type="checkbox"
-          :name="member.id"
-          class="peer sr-only"
-        />
-        <label
-          :for="member.id"
-          class="block rounded-lg py-4 pl-4 pr-10 border-2 border-foreground text-lg cursor-pointer peer-checked:bg-green-800/10 peer-focus-visible:outline-2 outline-offset-2 outline-accent select-none transition-colors ease-out duration-default"
-        >
-          {{ member.name }}
-        </label>
-        <IconCheck
-          aria-hidden
-          class="size-7 absolute right-3 top-1/2 -translate-y-1/2 invisible peer-checked:visible"
-        />
-      </div>
+      <FormCheckbox
+        v-model="rsvpStore.attendingIds"
+        :label="rsvpStore.self?.name || ''"
+        :value="rsvpStore.self?.id || ''"
+        name="attending"
+      />
+      <!-- TODO: handle unknown names -->
+      <FormCheckbox
+        v-for="member in rsvpStore.guests"
+        :key="member.id"
+        v-model="rsvpStore.attendingIds"
+        :label="member.name || 'Unknown'"
+        :value="member.id"
+        name="attending"
+      />
     </fieldset>
   </StepContainer>
 </template>
 
 <script setup lang="ts">
-const household = [
-  { name: "Alice Johnson", id: "alice-johnson" },
-  { name: "Bob Johnson", id: "bob-johnson" },
-  { name: "Charlie Johnson", id: "charlie-johnson" },
-];
-
 const rsvpStore = useRsvpStore();
-const handleSubmit = (_: SubmitEvent) => {
-  rsvpStore.nextStep();
-};
 </script>

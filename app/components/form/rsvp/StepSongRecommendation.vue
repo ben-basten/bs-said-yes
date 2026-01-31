@@ -5,8 +5,10 @@
     primary-text="Submit"
     secondary-text="Previous"
     @submit.prevent="handleSubmit"
+    @secondary="rsvpStore.previousStep()"
   >
     <FormTextarea
+      v-model="rsvpStore.songRequests"
       label="Recommendation (optional)"
       name="song-recommendations"
       placeholder="E.g., your favorite song, artist, genre, etc."
@@ -18,6 +20,16 @@
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
 const handleSubmit = (_: SubmitEvent) => {
-  rsvpStore.nextStep();
+  $fetch("/api/rsvp/submit", {
+    method: "PUT",
+    body: {
+      mainGuestId: rsvpStore.self?.id,
+      attendingGuestIds: rsvpStore.attendingIds,
+      accommodations: rsvpStore.accommodations,
+      songRecommendations: rsvpStore.songRequests,
+    },
+  }).then(() => {
+    rsvpStore.nextStep();
+  });
 };
 </script>

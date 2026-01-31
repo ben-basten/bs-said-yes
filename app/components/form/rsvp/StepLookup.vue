@@ -5,13 +5,39 @@
     primary-text="Search"
     @submit.prevent="handleSubmit"
   >
-    <FormInput label="First and Last Name" name="name" required />
+    <FormInput
+      label="First and Last Name"
+      name="name"
+      required
+      :maxlength="255"
+      :error="errorMessage"
+    />
   </StepContainer>
 </template>
 
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
-const handleSubmit = (_: SubmitEvent) => {
-  rsvpStore.nextStep();
+const errorMessage = ref<string | undefined>(undefined);
+
+const handleSubmit = async (event: SubmitEvent) => {
+  errorMessage.value = undefined;
+  const formData = new FormData(event.target as HTMLFormElement);
+  const name = (formData.get("name") as string).trim();
+
+  $fetch("/api/rsvp/lookup", {
+    method: "GET",
+    query: { name },
+  })
+    .then((res) => {
+      rsvpStore.setLookupResponse(res);
+      rsvpStore.nextStep();
+    })
+    .catch((error) => {
+      if (error?.status === 404) {
+        errorMessage.value = "No matching guest found.";
+      } else {
+        errorMessage.value = "An unknown error occurred. Please try again.";
+      }
+    });
 };
 </script>
