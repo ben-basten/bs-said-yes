@@ -1,5 +1,6 @@
 CREATE TABLE "households" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"nickname" varchar(255) NOT NULL,
 	"mailing_address" text NOT NULL,
 	"invite_sent" boolean DEFAULT false NOT NULL,
 	"invite_code" varchar(6) DEFAULT lpad(floor(random() * 1000000)::text, 6, '0') NOT NULL,
@@ -12,7 +13,6 @@ CREATE TABLE "members" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"household_id" uuid NOT NULL,
 	"name" varchar(255) NOT NULL,
-	"expected_name" varchar(255),
 	"relationship_type" varchar(20) NOT NULL,
 	"is_attending" boolean,
 	"is_searchable" boolean DEFAULT true NOT NULL,
