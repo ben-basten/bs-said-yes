@@ -5,6 +5,7 @@
     >
       <ProgressBar :current-step="current" :total-steps="4" />
       <StepLookup />
+      <!-- <StepHousehold /> -->
     </div>
   </ContentContainer>
 </template>
