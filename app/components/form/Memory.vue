@@ -13,7 +13,11 @@
         <FormInput ref="titleInput" label="Title" name="title" required />
         <FormInput label="Author (optional)" name="author" />
         <FormTextarea label="Story" name="story" rows="6" required />
-        <button type="submit" class="button button-lg" :disabled="isSubmitting">
+        <button
+          type="submit"
+          class="button button-lg ml-auto"
+          :disabled="isSubmitting"
+        >
           {{ isSubmitting ? "Submitting..." : "Submit" }}
         </button>
         <p v-if="error" class="text-error font-medium text-center">

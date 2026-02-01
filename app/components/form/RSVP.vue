@@ -1,13 +1,18 @@
 <template>
   <ContentContainer margin>
     <div
-      class="relative bg-secondary rounded-lg overflow-hidden p-10 max-w-160 mx-auto w-full flex flex-col gap-y-7"
+      class="relative bg-secondary rounded-lg overflow-hidden px-10 pb-10 pt-15 max-w-160 mx-auto w-full"
     >
-      <Heading as="h2">RSVP</Heading>
-      <p class="max-w-copy">
-        Please let us know if you will be able to attend our wedding! We can't
-        wait to celebrate with you.
-      </p>
+      <ProgressBar :current-step="rsvpStore.currentStep" :total-steps="5" />
+      <StepLookup v-if="rsvpStore.currentStep === 1" />
+      <StepHousehold v-if="rsvpStore.currentStep === 2" />
+      <StepAccommodations v-if="rsvpStore.currentStep === 3" />
+      <StepSongRecommendation v-if="rsvpStore.currentStep === 4" />
+      <SubmissionMessage v-if="rsvpStore.currentStep === 5" />
     </div>
   </ContentContainer>
 </template>
+
+<script setup lang="ts">
+const rsvpStore = useRsvpStore();
+</script>
