@@ -1,4 +1,4 @@
-import { fetchContentful } from "~~/server/utils/client";
+import { fetchContentful } from "~~/server/service/contentful";
 import { PAGE_STANDARD_QUERY } from "~~/server/graphql/queries/page-standard.query";
 import type {
   PageStandardQuery,

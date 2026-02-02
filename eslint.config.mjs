@@ -6,5 +6,6 @@ export default withNuxt({
     "vue/require-default-prop": "off",
     "vue/html-self-closing": "off",
     "vue/first-attribute-linebreak": "off",
+    "no-console": "error",
   },
 });

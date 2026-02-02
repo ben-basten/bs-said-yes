@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AuthError } from "~~/shared/types/auth";
+import type { AuthError } from "~~/shared/types/AuthError";
 
 definePageMeta({
   layout: "minimal",

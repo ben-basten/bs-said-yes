@@ -25,6 +25,7 @@ export default defineEventHandler(async (event) => {
       return { success: true };
     })
     .catch((error) => {
+      // eslint-disable-next-line no-console
       console.error("Error inserting story:", error);
       throw createError({
         statusCode: 500,

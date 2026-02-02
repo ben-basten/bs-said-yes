@@ -1,4 +1,4 @@
-import type { AuthError } from "~~/shared/types/auth";
+import type { AuthError } from "~~/shared/types/AuthError";
 import { getAllowedUserByEmail } from "../../repository/users";
 import type { AllowedUser } from "~~/server/db";
 
