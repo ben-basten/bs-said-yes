@@ -12,9 +12,11 @@
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
 const { slug } = defineProps<{ slug: string }>();
+const { query } = useRoute();
 
 const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
   params: { slug },
+  query: { preview: query.preview || undefined },
 });
 
 if (error.value) {
