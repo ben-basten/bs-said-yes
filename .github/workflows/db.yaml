@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - main
+      - staging
 
 jobs:
-  lint:
-    name: Production migrations
+  migrate:
+    name: Run ${{ github.ref_name == 'main' && 'Production' || 'Staging' }} migrations
     runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
