@@ -6,15 +6,21 @@
       :data="item"
     />
   </div>
+  <div
+    v-if="isPreview"
+    class="p-4 bg-accent text-background fixed bottom-2 left-2"
+  >
+    Preview Mode
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { PageStandardFragment } from "~~/shared/types/graphql";
+import type { StandardApiResponse } from "~~/shared/types/StandardApiResponse";
 
 const { slug } = defineProps<{ slug: string }>();
 const { query } = useRoute();
 
-const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
+const { data, error } = useFetch<StandardApiResponse>("/api/cms/standard", {
   params: { slug },
   query: { preview: query.preview || undefined },
 });
@@ -31,13 +37,15 @@ watch(
   data,
   () => {
     useHead({
-      title: data.value?.seoTitle || undefined,
+      title: data.value?.page?.seoTitle || undefined,
     });
   },
   { immediate: true },
 );
 
 const contentModules = computed(
-  () => data.value?.contentModulesCollection?.items || [],
+  () => data.value?.page?.contentModulesCollection?.items || [],
 );
+
+const isPreview = computed(() => data.value?.preview || false);
 </script>

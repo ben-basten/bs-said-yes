@@ -4,6 +4,7 @@ import type {
   PageStandardQuery,
   PageStandardQueryVariables,
 } from "~~/shared/types/graphql";
+import type { StandardApiResponse } from "~~/shared/types/StandardApiResponse";
 import { z } from "zod";
 
 const querySchema = z.object({
@@ -11,29 +12,31 @@ const querySchema = z.object({
   preview: z.coerce.boolean().optional().default(false),
 });
 
-export default defineEventHandler(async (event) => {
-  await requireUserSession(event);
+export default defineEventHandler(
+  async (event): Promise<StandardApiResponse> => {
+    await requireUserSession(event);
 
-  const { slug, preview } = await getValidatedQuery(event, querySchema.parse);
+    const { slug, preview } = await getValidatedQuery(event, querySchema.parse);
 
-  const isPreview = preview && event.context.isAdmin === true;
+    const isPreview = preview && event.context.isAdmin === true;
 
-  const data = await fetchContentful<
-    PageStandardQuery,
-    PageStandardQueryVariables
-  >(PAGE_STANDARD_QUERY, {
-    slug,
-    preview: isPreview,
-  });
-
-  const page = data.pageStandardCollection?.items[0];
-
-  if (!page) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: `Page with slug '${slug}' not found`,
+    const data = await fetchContentful<
+      PageStandardQuery,
+      PageStandardQueryVariables
+    >(PAGE_STANDARD_QUERY, {
+      slug,
+      preview: isPreview,
     });
-  }
 
-  return page;
-});
+    const page = data.pageStandardCollection?.items[0];
+
+    if (!page) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: `Page with slug '${slug}' not found`,
+      });
+    }
+
+    return { page, preview: isPreview };
+  },
+);
