@@ -4,7 +4,7 @@
     description="Select all members of your party who will be attending the wedding."
     primary-text="Next"
     secondary-text="Previous"
-    @submit.prevent="rsvpStore.nextStep()"
+    @submit.prevent="handleSubmit"
     @secondary="rsvpStore.reset()"
   >
     <fieldset class="flex flex-col gap-y-4">
@@ -29,4 +29,12 @@
 
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
+
+const handleSubmit = () => {
+  if (!rsvpStore.isAttending()) {
+    rsvpStore.toEnd();
+    return;
+  }
+  rsvpStore.nextStep();
+};
 </script>

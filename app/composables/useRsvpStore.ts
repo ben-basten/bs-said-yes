@@ -35,6 +35,18 @@ export const useRsvpStore = defineStore("rsvp", () => {
     }
   };
 
+  const toBeginning = () => {
+    currentStep.value = 2;
+  };
+
+  const toEnd = () => {
+    currentStep.value = 5;
+  };
+
+  const isAttending = () => {
+    return attendingIds.value.length > 0;
+  };
+
   const setLookupResponse = (response: LookupResponse) => {
     self.value = response.self;
     guests.value = response.guests;
@@ -47,9 +59,12 @@ export const useRsvpStore = defineStore("rsvp", () => {
     guests,
     self,
     songRequests,
+    isAttending,
     nextStep,
     previousStep,
     reset,
     setLookupResponse,
+    toBeginning,
+    toEnd,
   };
 });
