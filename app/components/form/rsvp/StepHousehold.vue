@@ -2,7 +2,7 @@
   <StepContainer
     heading="Who will be attending?"
     description="Select all members of your party who will be attending the wedding."
-    primary-text="Next"
+    :primary-text="rsvpStore.isAttending() ? 'Next' : 'Submit'"
     secondary-text="Previous"
     @submit.prevent="handleSubmit"
     @secondary="rsvpStore.reset()"
