@@ -1,6 +1,6 @@
 import { desc, count } from "drizzle-orm";
-import { db } from "../db";
-import { stories } from "../db/schema";
+import { db } from "~~/server/db";
+import { stories } from "~~/server/db/schema";
 
 export const getMemories = async (limit: number = 20, page: number = 1) => {
   const [memories, totalResult] = await Promise.all([

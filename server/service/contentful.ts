@@ -37,7 +37,7 @@ export const fetchContentful = async <
     }
     throw createError({
       statusCode: 500,
-      statusMessage: "Failed to fetch data from Contentful CMS",
+      statusMessage: "Failed to fetch CMS data.",
     });
   });
 };
