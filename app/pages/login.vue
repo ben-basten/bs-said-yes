@@ -40,14 +40,20 @@ useHead({
 });
 
 const { loggedIn, fetch: refreshSession } = useUserSession();
+const route = useRoute();
 const error = shallowRef("");
 const isLoading = shallowRef(false);
 const passwordRef = ref<InstanceType<typeof FormInput> | null>(null);
 
+const proceedToSite = async () => {
+  const redirect = (route.query.redirect as string) || "/";
+  await navigateTo(redirect, { replace: true });
+};
+
 // Redirect if already logged in
 watchEffect(() => {
   if (loggedIn.value) {
-    navigateTo("/", { replace: true });
+    proceedToSite();
   }
 });
 
@@ -63,7 +69,7 @@ async function login(event: SubmitEvent) {
     });
 
     await refreshSession();
-    await navigateTo("/", { replace: true });
+    proceedToSite();
   } catch (e) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((e as any).status === 401) {
