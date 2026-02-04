@@ -13,8 +13,12 @@ import { TITLE_COPY_FRAGMENT } from "../fragments/title-copy.fragment";
 import { TEXT_CALLOUTS_FRAGMENT } from "../modules/text-callouts.fragment";
 
 export const PAGE_STANDARD_QUERY = gql`
-  query PageStandard($slug: String!) {
-    pageStandardCollection(where: { slug: $slug }, limit: 1) {
+  query PageStandard($slug: String!, $preview: Boolean!) {
+    pageStandardCollection(
+      where: { slug: $slug }
+      limit: 1
+      preview: $preview
+    ) {
       items {
         ... on PageStandard {
           ...PageStandard

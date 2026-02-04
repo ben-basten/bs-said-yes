@@ -36,3 +36,9 @@ Locally preview production build:
 ```bash
 pnpm preview
 ```
+
+## Preview Mode
+
+To view a page in preview mode, append the query parameter `?token=[NUXT_PREVIEW_SECRET]` to the end of the URL. After logging in, you will be able to view the preview version of the page.
+
+For example: <http://localhost:3000/travel?token=abc123>

@@ -8,18 +8,30 @@ import { z } from "zod";
 
 const querySchema = z.object({
   slug: z.string().regex(/^[a-zA-Z0-9-]+$/, { message: "Invalid slug" }),
+  token: z.string().optional(),
 });
+
+const { previewSecret } = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   await requireUserSession(event);
 
-  const { slug } = await getValidatedQuery(event, querySchema.parse);
+  const { slug, token } = await getValidatedQuery(event, querySchema.parse);
+
+  const shouldPreview = token === previewSecret;
+  if (token && !shouldPreview) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: "Forbidden",
+    });
+  }
 
   const data = await fetchContentful<
     PageStandardQuery,
     PageStandardQueryVariables
   >(PAGE_STANDARD_QUERY, {
     slug,
+    preview: shouldPreview,
   });
 
   const page = data.pageStandardCollection?.items[0];

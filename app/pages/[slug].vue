@@ -10,6 +10,6 @@ definePageMeta({
 const route = useRoute();
 const slug = computed(() => route.params.slug as string);
 if (slug.value === "home") {
-  throw createError({ statusCode: 404, statusMessage: "Not Found" });
+  await navigateTo({ path: "/", query: route.query }, { replace: true });
 }
 </script>
