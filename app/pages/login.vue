@@ -15,12 +15,8 @@
             autocomplete="current-password"
             autofocus
             required
+            :error
           />
-          <div aria-live="polite">
-            <p v-if="error" class="text-error text-sm text-left mt-2">
-              {{ error }}
-            </p>
-          </div>
         </div>
         <button
           type="submit"

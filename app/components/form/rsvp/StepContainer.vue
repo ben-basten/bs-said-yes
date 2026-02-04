@@ -6,22 +6,22 @@
     <p class="max-w-copy">{{ description }}</p>
     <slot />
     <div
-      class="flex gap-x-5"
+      class="flex gap-x-5 flex-row-reverse"
       :class="{
-        'justify-end': !secondaryText,
+        'justify-start': !secondaryText,
         'justify-between': secondaryText,
       }"
     >
+      <button type="submit" class="button button-md" :disabled>
+        {{ primaryText }}
+      </button>
       <button
         v-if="secondaryText"
         type="button"
         class="button-secondary button-md"
-        @click="$emit('secondaryClick')"
+        @click="$emit('secondary')"
       >
         {{ secondaryText }}
-      </button>
-      <button type="submit" class="button button-md">
-        {{ primaryText }}
       </button>
     </div>
   </form>
@@ -35,10 +35,11 @@ defineProps<{
   description: string;
   primaryText: string;
   secondaryText?: string;
+  disabled?: boolean;
 }>();
 
 defineEmits<{
-  (e: "secondaryClick"): void;
+  (e: "secondary"): void;
   (e: "submit", event: SubmitEvent): void;
 }>();
 
