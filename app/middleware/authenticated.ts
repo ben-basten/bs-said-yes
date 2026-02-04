@@ -35,7 +35,7 @@ export default defineNuxtRouteMiddleware((to) => {
     const isRoot = to.fullPath === "/";
     return navigateTo({
       path: "/login",
-      query: { redirect: isRoot ? undefined : to.fullPath },
+      query: { redirect: isRoot ? undefined : encodeURIComponent(to.fullPath) },
     });
   }
 });

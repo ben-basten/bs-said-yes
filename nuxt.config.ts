@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     cmsEnv: "",
     cmsApiKey: "",
     cmsPreviewApiKey: "",
+    previewSecret: "",
     sessionPassword: "",
     sitePassword: "",
     discordWebhookUrl: "",

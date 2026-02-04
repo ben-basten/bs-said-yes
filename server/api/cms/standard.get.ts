@@ -9,21 +9,33 @@ import { z } from "zod";
 const querySchema = z.object({
   slug: z.string().regex(/^[a-zA-Z0-9-]+$/, { message: "Invalid slug" }),
   preview: z.coerce.boolean().optional().default(false),
+  token: z.string().optional(),
 });
+
+const { previewSecret } = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   await requireUserSession(event);
 
-  const { slug, preview } = await getValidatedQuery(event, querySchema.parse);
+  const { slug, preview, token } = await getValidatedQuery(
+    event,
+    querySchema.parse,
+  );
 
-  const isPreview = preview && event.context.isAdmin === true;
+  const shouldPreview = preview && token === previewSecret;
+  if ((token || preview) && !shouldPreview) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: "Forbidden",
+    });
+  }
 
   const data = await fetchContentful<
     PageStandardQuery,
     PageStandardQueryVariables
   >(PAGE_STANDARD_QUERY, {
     slug,
-    preview: isPreview,
+    preview: shouldPreview,
   });
 
   const page = data.pageStandardCollection?.items[0];

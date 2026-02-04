@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import type { NuxtError } from "nuxt/app";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
 const { slug } = defineProps<{ slug: string }>();
@@ -22,11 +23,14 @@ const { query } = useRoute();
 
 const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
   params: { slug },
-  query: { preview: query.preview || undefined },
+  query: {
+    preview: query.preview || undefined,
+    token: query.token || undefined,
+  },
 });
 
 if (error.value) {
-  const statusCode = error.value.statusCode || 500;
+  const statusCode = (error.value as NuxtError).statusCode || 500;
   throw createError({
     statusCode,
     statusMessage: statusCode === 404 ? "Not Found" : "Something went wrong",
