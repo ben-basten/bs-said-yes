@@ -1,4 +1,4 @@
-import { getAttendanceStatus } from "~~/server/repository/members";
+import { getAttendanceStatus } from "~~/server/repository/guests";
 
 export default defineEventHandler(async (event) => {
   if (!event.context.isAdmin) {

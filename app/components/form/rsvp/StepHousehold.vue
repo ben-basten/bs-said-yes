@@ -17,11 +17,11 @@
         name="attending"
       />
       <FormCheckbox
-        v-for="member in rsvpStore.guests"
-        :key="member.id"
+        v-for="guest in rsvpStore.guests"
+        :key="guest.id"
         v-model="rsvpStore.attendingIds"
-        :label="member.name"
-        :value="member.id"
+        :label="guest.name"
+        :value="guest.id"
         name="attending"
       />
     </fieldset>
