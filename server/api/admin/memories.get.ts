@@ -2,7 +2,7 @@ import { z } from "zod";
 import { getMemories } from "~~/server/repository/memories";
 
 const querySchema = z.object({
-  limit: z.coerce.number().min(1).max(100).optional(),
+  limit: z.coerce.number().min(1).max(50).optional(),
   page: z.coerce.number().min(1).optional(),
 });
 
