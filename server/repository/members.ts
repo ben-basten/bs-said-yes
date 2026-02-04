@@ -1,4 +1,4 @@
-import { eq, isNull, not, inArray, and } from "drizzle-orm";
+import { eq, isNull, not, inArray, and, count, sql } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { members } from "~~/server/db/schema";
 
@@ -51,4 +51,18 @@ export const updateHouseholdAttendance = async (
         );
     }
   });
+};
+
+export const getAttendanceStatus = async () => {
+  return db
+    .select({
+      attending: count(sql`CASE WHEN ${members.isAttending} = true THEN 1 END`),
+      notAttending: count(
+        sql`CASE WHEN ${members.isAttending} = false THEN 1 END`,
+      ),
+      notResponded: count(
+        sql`CASE WHEN ${members.isAttending} IS NULL THEN 1 END`,
+      ),
+    })
+    .from(members);
 };
