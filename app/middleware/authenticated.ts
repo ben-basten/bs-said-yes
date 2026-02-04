@@ -24,13 +24,18 @@ export default defineNuxtRouteMiddleware((to) => {
   if (to.path === "/login") {
     // If already logged in with site password, redirect to home
     if (loggedIn.value) {
-      return navigateTo("/");
+      const redirect = (to.query.redirect as string) || "/";
+      return navigateTo(redirect);
     }
     return;
   }
 
   // All other pages require site password authentication
   if (!loggedIn.value) {
-    return navigateTo("/login");
+    const isRoot = to.fullPath === "/";
+    return navigateTo({
+      path: "/login",
+      query: { redirect: isRoot ? undefined : to.fullPath },
+    });
   }
 });
