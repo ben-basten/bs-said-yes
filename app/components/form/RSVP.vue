@@ -1,8 +1,6 @@
 <template>
   <ContentContainer margin>
-    <div
-      class="relative bg-secondary rounded-lg overflow-hidden px-side-mobile md:px-10 pb-10 pt-15 max-w-160 mx-auto w-full"
-    >
+    <div class="relative form-container pt-15 mx-auto">
       <ProgressBar :current-step="rsvpStore.currentStep" :total-steps="5" />
       <StepLookup v-if="rsvpStore.currentStep === 1" />
       <StepHousehold v-if="rsvpStore.currentStep === 2" />

@@ -37,9 +37,7 @@ watchEffect(() => {
 
 <template>
   <div class="min-h-screen flex items-center justify-center p-4">
-    <div
-      class="bg-secondary w-full max-w-xl p-10 rounded-xl flex flex-col gap-y-5 items-center"
-    >
+    <div class="form-container flex flex-col gap-y-5 items-center">
       <Heading as="h1" variant="h2">Admin Login</Heading>
       <p class="type-body">
         Sign in with GitHub to access the admin dashboard.
