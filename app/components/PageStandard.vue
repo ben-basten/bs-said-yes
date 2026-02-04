@@ -15,12 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import type { StandardApiResponse } from "~~/shared/types/StandardApiResponse";
+import type { PageStandardFragment } from "~~/shared/types/graphql";
 
 const { slug } = defineProps<{ slug: string }>();
 const { query } = useRoute();
 
-const { data, error } = useFetch<StandardApiResponse>("/api/cms/standard", {
+const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
   params: { slug },
   query: { preview: query.preview || undefined },
 });
@@ -37,15 +37,15 @@ watch(
   data,
   () => {
     useHead({
-      title: data.value?.page?.seoTitle || undefined,
+      title: data.value?.seoTitle || undefined,
     });
   },
   { immediate: true },
 );
 
 const contentModules = computed(
-  () => data.value?.page?.contentModulesCollection?.items || [],
+  () => data.value?.contentModulesCollection?.items || [],
 );
 
-const isPreview = computed(() => data.value?.preview || false);
+const isPreview = computed(() => !!query.token || false);
 </script>
