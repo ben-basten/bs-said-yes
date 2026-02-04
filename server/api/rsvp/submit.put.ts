@@ -2,9 +2,10 @@ import { z } from "zod";
 import { eq, inArray, and } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { members, rsvpResponses } from "~~/server/db/schema";
+import { findMemberById } from "~~/server/repository/members";
 
 const bodySchema = z.object({
-  mainGuestId: z.string().uuid(),
+  mainGuestId: z.uuid(),
   attendingGuestIds: z.array(z.uuid()),
   accommodations: z.string().max(1000).optional(),
   songRecommendations: z.string().max(1000).optional(),
@@ -15,9 +16,7 @@ export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, bodySchema.parse);
 
   // 1. Find the household for the main guest
-  const member = await db.query.members.findFirst({
-    where: eq(members.id, body.mainGuestId),
-  });
+  const member = await findMemberById(body.mainGuestId);
 
   if (!member) {
     throw createError({
@@ -28,7 +27,6 @@ export default defineEventHandler(async (event) => {
 
   const householdId = member.householdId;
 
-  // 2. Update database using batch (since neon-http doesn't support interactive transactions)
   await db.batch([
     // Update all members of the household to not attending first
     db

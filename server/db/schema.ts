@@ -54,6 +54,7 @@ export const members = pgTable(
     householdId: uuid("household_id")
       .notNull()
       .references(() => households.id, { onDelete: "cascade" }),
+    // Name is intentionally unique to prevent needing to handle looking up multiple guests with the same name, will address if this becomes a problem
     name: varchar("name", { length: 255 }).unique(),
     relationshipType: varchar("relationship_type", { length: 20 }).notNull(),
     isAttending: boolean("is_attending"),

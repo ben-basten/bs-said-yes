@@ -1,4 +1,5 @@
-import { db } from "~~/server/db";
+import { eq } from "drizzle-orm";
+import { db, members } from "~~/server/db";
 
 export const findMemberByName = async (name: string) => {
   const trimmedName = name.trim();
@@ -9,9 +10,14 @@ export const findMemberByName = async (name: string) => {
       household: {
         with: {
           members: true,
-          // rsvpResponse: true,
         },
       },
     },
+  });
+};
+
+export const findMemberById = async (id: string) => {
+  return db.query.members.findFirst({
+    where: eq(members.id, id),
   });
 };
