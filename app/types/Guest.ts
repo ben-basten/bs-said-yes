@@ -1,6 +1,6 @@
 export type Guest = {
   id: string;
-  name: string | null;
+  name: string;
   relationshipType?: string;
   attending: boolean | null;
 };

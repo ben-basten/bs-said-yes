@@ -9,17 +9,17 @@
   >
     <fieldset class="flex flex-col gap-y-4">
       <FormCheckbox
+        v-if="rsvpStore.self"
         v-model="rsvpStore.attendingIds"
-        :label="rsvpStore.self?.name || ''"
-        :value="rsvpStore.self?.id || ''"
+        :label="rsvpStore.self.name"
+        :value="rsvpStore.self.id"
         name="attending"
       />
-      <!-- TODO: handle unknown names -->
       <FormCheckbox
         v-for="member in rsvpStore.guests"
         :key="member.id"
         v-model="rsvpStore.attendingIds"
-        :label="member.name || 'Unknown'"
+        :label="member.name"
         :value="member.id"
         name="attending"
       />

@@ -1,11 +1,15 @@
-import { eq } from "drizzle-orm";
+import { eq, isNull, not } from "drizzle-orm";
 import { db, members } from "~~/server/db";
 
 export const findMemberByName = async (name: string) => {
   const trimmedName = name.trim();
   return db.query.members.findFirst({
     where: (members, { ilike, and, eq }) =>
-      and(ilike(members.name, trimmedName), eq(members.isSearchable, true)),
+      and(
+        ilike(members.name, trimmedName),
+        eq(members.isSearchable, true),
+        not(isNull(members.name)),
+      ),
     with: {
       household: {
         with: {

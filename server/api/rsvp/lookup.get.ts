@@ -21,11 +21,14 @@ export default defineEventHandler(async (event) => {
   return {
     self: {
       id: member.id,
-      name: member.name,
+      name: member.name as string,
       attending: member.isAttending,
     },
     guests: member.household.members
-      .filter((m) => m.id !== member.id && m.name !== null)
+      .filter(
+        (m): m is typeof m & { name: string } =>
+          m.id !== member.id && m.name !== null,
+      )
       .sort((a, b) => {
         const order: Record<string, number> = {
           primary: 0,
@@ -46,6 +49,7 @@ export default defineEventHandler(async (event) => {
       .filter((m) => m.id !== member.id && m.name === null)
       .map((m) => ({
         id: m.id,
+        name: m.name,
         relationshipType: m.relationshipType,
         attending: m.isAttending,
       })),
