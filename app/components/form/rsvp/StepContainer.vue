@@ -12,7 +12,7 @@
         'justify-between': secondaryText,
       }"
     >
-      <button type="submit" class="button button-md">
+      <button type="submit" class="button button-md" :disabled>
         {{ primaryText }}
       </button>
       <button
@@ -35,6 +35,7 @@ defineProps<{
   description: string;
   primaryText: string;
   secondaryText?: string;
+  disabled?: boolean;
 }>();
 
 defineEmits<{
