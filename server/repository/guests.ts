@@ -67,22 +67,23 @@ export const getAttendanceStatus = async () => {
     .from(guests);
 };
 
-export const getTotalGuestCount = async () => {
-  return db.$count(guests);
-};
-
 export const paginatedGuestList = async (limit: number, offset: number) => {
-  return db
-    .select({
-      id: guests.id,
-      name: guests.name,
-      isAttending: guests.isAttending,
-      relationshipType: guests.relationshipType,
-      householdNickname: households.nickname,
-    })
-    .from(guests)
-    .leftJoin(households, eq(guests.householdId, households.id))
-    .orderBy(desc(guests.updatedAt))
-    .limit(limit)
-    .offset(offset);
+  const [guestList, totalCount] = await Promise.all([
+    db
+      .select({
+        id: guests.id,
+        name: guests.name,
+        isAttending: guests.isAttending,
+        relationshipType: guests.relationshipType,
+        householdNickname: households.nickname,
+      })
+      .from(guests)
+      .leftJoin(households, eq(guests.householdId, households.id))
+      .orderBy(desc(guests.updatedAt))
+      .limit(limit)
+      .offset(offset),
+    db.$count(guests),
+  ]);
+
+  return { guestList, totalCount };
 };

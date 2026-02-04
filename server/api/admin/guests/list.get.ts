@@ -1,8 +1,5 @@
 import { z } from "zod";
-import {
-  getTotalGuestCount,
-  paginatedGuestList,
-} from "~~/server/repository/guests";
+import { paginatedGuestList } from "~~/server/repository/guests";
 
 const querySchema = z.object({
   limit: z.coerce.number().min(1).max(50).optional().default(10),
@@ -21,10 +18,7 @@ export default defineEventHandler(async (event) => {
 
   const offset = (page - 1) * pageSize;
 
-  const [guestList, totalCount] = await Promise.all([
-    paginatedGuestList(pageSize, offset),
-    getTotalGuestCount(),
-  ]);
+  const { guestList, totalCount } = await paginatedGuestList(pageSize, offset);
 
   return {
     guests: guestList,

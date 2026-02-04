@@ -101,16 +101,13 @@ interface Memory {
   story: string;
 }
 
-const { data, status } = useFetch<{ memories: Memory[]; total: number }>(
-  "/api/admin/memories",
-  {
-    query: {
-      page,
-      limit,
-    },
-    watch: [page],
+const { data, status } = useFetch("/api/admin/memories", {
+  query: {
+    page,
+    limit,
   },
-);
+  watch: [page],
+});
 
 const totalPages = computed(() => {
   if (!data.value) return 0;
