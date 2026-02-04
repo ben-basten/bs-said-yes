@@ -8,7 +8,6 @@ import { z } from "zod";
 
 const querySchema = z.object({
   slug: z.string().regex(/^[a-zA-Z0-9-]+$/, { message: "Invalid slug" }),
-  preview: z.coerce.boolean().optional().default(false),
   token: z.string().optional(),
 });
 
@@ -17,13 +16,10 @@ const { previewSecret } = useRuntimeConfig();
 export default defineEventHandler(async (event) => {
   await requireUserSession(event);
 
-  const { slug, preview, token } = await getValidatedQuery(
-    event,
-    querySchema.parse,
-  );
+  const { slug, token } = await getValidatedQuery(event, querySchema.parse);
 
-  const shouldPreview = preview && token === previewSecret;
-  if ((token || preview) && !shouldPreview) {
+  const shouldPreview = token === previewSecret;
+  if (token && !shouldPreview) {
     throw createError({
       statusCode: 403,
       statusMessage: "Forbidden",

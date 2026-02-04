@@ -24,7 +24,6 @@ const { query } = useRoute();
 const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
   params: { slug },
   query: {
-    preview: query.preview || undefined,
     token: query.token || undefined,
   },
 });
