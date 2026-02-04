@@ -1,8 +1,6 @@
 <template>
   <div class="min-h-screen flex items-center justify-center p-4">
-    <div
-      class="bg-secondary w-full max-w-xl p-10 rounded-xl flex flex-col gap-y-5 items-center"
-    >
+    <div class="form-container flex flex-col gap-y-5 items-center">
       <Heading as="h1" variant="h2">Login</Heading>
       <p class="type-body">Enter the password from your save the date.</p>
       <form class="w-full max-w-sm flex flex-col gap-4" @submit.prevent="login">
