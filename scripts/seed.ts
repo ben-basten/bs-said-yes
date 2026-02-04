@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { db } from "../server/db/index";
-import { households, members } from "../server/db/schema";
+import { households, guests } from "../server/db/schema";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,7 +68,7 @@ async function seed() {
     console.log(
       `👤 Adding guest: ${guestName || "Unspecified"} (${relationshipType})`,
     );
-    await db.insert(members).values({
+    await db.insert(guests).values({
       householdId: householdId,
       name: guestName || undefined,
       relationshipType: relationshipType as "primary" | "plus_one" | "child",

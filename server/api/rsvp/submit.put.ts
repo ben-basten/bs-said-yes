@@ -1,8 +1,8 @@
 import { z } from "zod";
 import {
-  findMemberById,
+  findGuestById,
   updateHouseholdAttendance,
-} from "~~/server/repository/members";
+} from "~~/server/repository/guests";
 import { upsertRsvpResponse } from "~~/server/repository/rsvp";
 
 const bodySchema = z.object({
@@ -17,16 +17,16 @@ export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, bodySchema.parse);
 
   // 1. Find the household for the main guest
-  const member = await findMemberById(body.mainGuestId);
+  const guest = await findGuestById(body.mainGuestId);
 
-  if (!member) {
+  if (!guest) {
     throw createError({
       statusCode: 404,
       statusMessage: "Guest not found",
     });
   }
 
-  const householdId = member.householdId;
+  const householdId = guest.householdId;
 
   // Update household attendance and RSVP response
   await updateHouseholdAttendance(householdId, body.attendingGuestIds);
