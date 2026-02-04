@@ -8,7 +8,7 @@
   </div>
   <div
     v-if="isPreview"
-    class="p-4 bg-accent text-background fixed bottom-2 left-2"
+    class="p-4 bg-action text-background fixed bottom-2 left-2"
   >
     Preview Mode
   </div>
