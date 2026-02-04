@@ -40,15 +40,15 @@ export const households = pgTable("households", {
 });
 
 export const householdsRelations = relations(households, ({ many, one }) => ({
-  members: many(members),
+  guests: many(guests),
   rsvpResponse: one(rsvpResponses, {
     fields: [households.id],
     references: [rsvpResponses.householdId],
   }),
 }));
 
-export const members = pgTable(
-  "members",
+export const guests = pgTable(
+  "guests",
   {
     id: uuid("id").primaryKey().defaultRandom(),
     householdId: uuid("household_id")
@@ -73,9 +73,9 @@ export const members = pgTable(
   ],
 );
 
-export const membersRelations = relations(members, ({ one }) => ({
+export const guestsRelations = relations(guests, ({ one }) => ({
   household: one(households, {
-    fields: [members.householdId],
+    fields: [guests.householdId],
     references: [households.id],
   }),
 }));
@@ -108,8 +108,8 @@ export type NewAllowedUser = typeof allowedUsers.$inferInsert;
 export type Household = typeof households.$inferSelect;
 export type NewHousehold = typeof households.$inferInsert;
 
-export type Member = typeof members.$inferSelect;
-export type NewMember = typeof members.$inferInsert;
+export type Guest = typeof guests.$inferSelect;
+export type NewGuest = typeof guests.$inferInsert;
 
 export type RSVPResponse = typeof rsvpResponses.$inferSelect;
 export type NewRSVPResponse = typeof rsvpResponses.$inferInsert;

@@ -1,5 +1,5 @@
 import z from "zod";
-import { findMemberByName } from "~~/server/repository/members";
+import { findGuestByName } from "~~/server/repository/guests";
 
 const querySchema = z.object({
   name: z.string().min(1).max(255),
@@ -9,9 +9,9 @@ export default defineEventHandler(async (event) => {
   await requireUserSession(event);
   const { name } = await getValidatedQuery(event, querySchema.parse);
 
-  const member = await findMemberByName(name);
+  const guest = await findGuestByName(name);
 
-  if (!member) {
+  if (!guest) {
     throw createError({
       statusCode: 404,
       statusMessage: `Person not found`,
@@ -20,14 +20,14 @@ export default defineEventHandler(async (event) => {
 
   return {
     self: {
-      id: member.id,
-      name: member.name as string,
-      attending: member.isAttending,
+      id: guest.id,
+      name: guest.name as string,
+      attending: guest.isAttending,
     },
-    guests: member.household.members
+    guests: guest.household.guests
       .filter(
-        (m): m is typeof m & { name: string } =>
-          m.id !== member.id && m.name !== null,
+        (g): g is typeof g & { name: string } =>
+          g.id !== guest.id && g.name !== null,
       )
       .sort((a, b) => {
         const order: Record<string, number> = {
@@ -39,19 +39,19 @@ export default defineEventHandler(async (event) => {
           (order[a.relationshipType] ?? 3) - (order[b.relationshipType] ?? 3)
         );
       })
-      .map((m) => ({
-        id: m.id,
-        name: m.name,
-        relationshipType: m.relationshipType,
-        attending: m.isAttending,
+      .map((g) => ({
+        id: g.id,
+        name: g.name,
+        relationshipType: g.relationshipType,
+        attending: g.isAttending,
       })),
-    unknownGuests: member.household.members
-      .filter((m) => m.id !== member.id && m.name === null)
-      .map((m) => ({
-        id: m.id,
-        name: m.name,
-        relationshipType: m.relationshipType,
-        attending: m.isAttending,
+    unknownGuests: guest.household.guests
+      .filter((g) => g.id !== g.id && g.name === null)
+      .map((g) => ({
+        id: g.id,
+        name: g.name,
+        relationshipType: g.relationshipType,
+        attending: g.isAttending,
       })),
   };
 });
