@@ -1,6 +1,6 @@
-import { eq, isNull, not, inArray, and, count, sql } from "drizzle-orm";
+import { eq, isNull, not, inArray, and, count, sql, desc } from "drizzle-orm";
 import { db } from "~~/server/db";
-import { guests } from "~~/server/db/schema";
+import { guests, households } from "~~/server/db/schema";
 
 export const findGuestByName = async (name: string) => {
   const trimmedName = name.trim();
@@ -65,4 +65,25 @@ export const getAttendanceStatus = async () => {
       ),
     })
     .from(guests);
+};
+
+export const paginatedGuestList = async (limit: number, offset: number) => {
+  const [guestList, totalCount] = await Promise.all([
+    db
+      .select({
+        id: guests.id,
+        name: guests.name,
+        isAttending: guests.isAttending,
+        relationshipType: guests.relationshipType,
+        householdNickname: households.nickname,
+      })
+      .from(guests)
+      .leftJoin(households, eq(guests.householdId, households.id))
+      .orderBy(desc(guests.updatedAt))
+      .limit(limit)
+      .offset(offset),
+    db.$count(guests),
+  ]);
+
+  return { guestList, totalCount };
 };

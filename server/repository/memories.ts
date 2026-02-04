@@ -1,4 +1,4 @@
-import { desc, count } from "drizzle-orm";
+import { desc } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { stories } from "~~/server/db/schema";
 
@@ -15,10 +15,10 @@ export const getMemories = async (limit: number = 20, page: number = 1) => {
       .orderBy(desc(stories.createdAt))
       .limit(limit)
       .offset((page - 1) * limit),
-    db.select({ value: count() }).from(stories),
+    db.$count(stories),
   ]);
 
-  const total = totalResult[0]?.value ?? 0;
+  const total = totalResult ?? 0;
   return { memories, total };
 };
 

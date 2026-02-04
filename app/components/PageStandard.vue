@@ -22,7 +22,7 @@ const { slug } = defineProps<{ slug: string }>();
 const { query } = useRoute();
 
 const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
-  params: { slug, token: query.token || undefined },
+  query: { slug, token: query.token || undefined },
 });
 
 if (error.value) {
