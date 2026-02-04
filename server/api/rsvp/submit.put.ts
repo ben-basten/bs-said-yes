@@ -7,8 +7,8 @@ import { findMemberById } from "~~/server/repository/members";
 const bodySchema = z.object({
   mainGuestId: z.uuid(),
   attendingGuestIds: z.array(z.uuid()),
-  accommodations: z.string().max(1000).optional(),
-  songRecommendations: z.string().max(1000).optional(),
+  accommodations: z.string().max(1000).optional().nullable(),
+  songRecommendations: z.string().max(1000).optional().nullable(),
 });
 
 export default defineEventHandler(async (event) => {

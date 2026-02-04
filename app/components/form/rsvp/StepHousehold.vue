@@ -32,7 +32,14 @@ const rsvpStore = useRsvpStore();
 
 const handleSubmit = () => {
   if (!rsvpStore.isAttending()) {
-    rsvpStore.toEnd();
+    submitRsvp({
+      mainGuestId: rsvpStore.self?.id,
+      attendingGuestIds: rsvpStore.attendingIds,
+      accommodations: null,
+      songRecommendations: null,
+    }).then(() => {
+      rsvpStore.toEnd();
+    });
     return;
   }
   rsvpStore.nextStep();

@@ -19,17 +19,14 @@
 
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
-const handleSubmit = (_: SubmitEvent) => {
-  $fetch("/api/rsvp/submit", {
-    method: "PUT",
-    body: {
-      mainGuestId: rsvpStore.self?.id,
-      attendingGuestIds: rsvpStore.attendingIds,
-      accommodations: rsvpStore.accommodations,
-      songRecommendations: rsvpStore.songRequests,
-    },
+const handleSubmit = () => {
+  submitRsvp({
+    mainGuestId: rsvpStore.self?.id,
+    attendingGuestIds: rsvpStore.attendingIds,
+    accommodations: rsvpStore.accommodations,
+    songRecommendations: rsvpStore.songRequests,
   }).then(() => {
-    rsvpStore.nextStep();
+    rsvpStore.toEnd();
   });
 };
 </script>
