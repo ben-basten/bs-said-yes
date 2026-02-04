@@ -10,6 +10,3 @@ if (!connectionString) {
 
 const pool = new Pool({ connectionString });
 export const db = drizzle({ client: pool, schema });
-
-// Export schema for convenience
-export * from "./schema";
