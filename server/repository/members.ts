@@ -1,5 +1,6 @@
 import { eq, isNull, not, inArray, and } from "drizzle-orm";
-import { db, members } from "~~/server/db";
+import { db } from "~~/server/db";
+import { members } from "~~/server/db/schema";
 
 export const findMemberByName = async (name: string) => {
   const trimmedName = name.trim();

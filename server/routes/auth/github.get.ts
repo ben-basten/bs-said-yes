@@ -1,6 +1,6 @@
 import type { AuthError } from "~~/shared/types/AuthError";
 import { getAllowedUserByEmail } from "../../repository/users";
-import type { AllowedUser } from "~~/server/db";
+import type { AllowedUser } from "~~/server/db/schema";
 
 export default defineOAuthGitHubEventHandler({
   config: {

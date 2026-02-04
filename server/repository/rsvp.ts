@@ -1,4 +1,5 @@
-import { db, rsvpResponses } from "~~/server/db";
+import { db } from "~~/server/db";
+import { rsvpResponses } from "~~/server/db/schema";
 
 export const upsertRsvpResponse = async (
   householdId: string,
