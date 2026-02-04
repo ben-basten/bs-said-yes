@@ -1,8 +1,9 @@
 import { z } from "zod";
-import { eq, inArray, and } from "drizzle-orm";
-import { db } from "~~/server/db";
-import { members, rsvpResponses } from "~~/server/db/schema";
-import { findMemberById } from "~~/server/repository/members";
+import {
+  findMemberById,
+  updateHouseholdAttendance,
+} from "~~/server/repository/members";
+import { upsertRsvpResponse } from "~~/server/repository/rsvp";
 
 const bodySchema = z.object({
   mainGuestId: z.uuid(),
@@ -27,45 +28,13 @@ export default defineEventHandler(async (event) => {
 
   const householdId = member.householdId;
 
-  await db.batch([
-    // Update all members of the household to not attending first
-    db
-      .update(members)
-      .set({ isAttending: false })
-      .where(eq(members.householdId, householdId)),
-
-    // Update attending members (only if there are any)
-    ...(body.attendingGuestIds.length > 0
-      ? [
-          db
-            .update(members)
-            .set({ isAttending: true })
-            .where(
-              and(
-                eq(members.householdId, householdId),
-                inArray(members.id, body.attendingGuestIds),
-              ),
-            ),
-        ]
-      : []),
-
-    // Upsert RSVP response
-    db
-      .insert(rsvpResponses)
-      .values({
-        householdId,
-        accommodations: body.accommodations,
-        songRecommendations: body.songRecommendations,
-      })
-      .onConflictDoUpdate({
-        target: [rsvpResponses.householdId],
-        set: {
-          accommodations: body.accommodations,
-          songRecommendations: body.songRecommendations,
-          updatedAt: new Date(),
-        },
-      }),
-  ]);
+  // Update household attendance and RSVP response
+  await updateHouseholdAttendance(householdId, body.attendingGuestIds);
+  await upsertRsvpResponse(
+    householdId,
+    body.accommodations,
+    body.songRecommendations,
+  );
 
   return { success: true };
 });
