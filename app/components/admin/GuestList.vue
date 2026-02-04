@@ -99,12 +99,8 @@
 <script setup lang="ts">
 const currentPage = ref(1);
 
-const { data: listData, refresh } = await useFetch(
-  () => `/api/admin/guests/list?page=${currentPage.value}&limit=10`,
-);
-
-watch(currentPage, async () => {
-  await refresh();
+const { data: listData } = await useFetch(() => "/api/admin/guests/list", {
+  query: { page: currentPage, limit: 20 },
 });
 
 const resultsMessage = computed(() => {
