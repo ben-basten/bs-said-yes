@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { db } from "~~/server/db";
-import { guests, households } from "~~/server/db/schema";
-import { desc, eq } from "drizzle-orm";
+import {
+  getTotalGuestCount,
+  paginatedGuestList,
+} from "~~/server/repository/guests";
 
 const querySchema = z.object({
   limit: z.coerce.number().min(1).max(50).optional().default(10),
@@ -21,20 +22,8 @@ export default defineEventHandler(async (event) => {
   const offset = (page - 1) * pageSize;
 
   const [guestList, totalCount] = await Promise.all([
-    db
-      .select({
-        id: guests.id,
-        name: guests.name,
-        isAttending: guests.isAttending,
-        relationshipType: guests.relationshipType,
-        householdNickname: households.nickname,
-      })
-      .from(guests)
-      .leftJoin(households, eq(guests.householdId, households.id))
-      .orderBy(desc(guests.createdAt))
-      .limit(pageSize)
-      .offset(offset),
-    db.$count(guests),
+    paginatedGuestList(pageSize, offset),
+    getTotalGuestCount(),
   ]);
 
   return {
