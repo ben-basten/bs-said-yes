@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col">
-    <SkipLink>Skip to main content</SkipLink>
+    <SkipLink class="max-nav:hidden">Skip to main content</SkipLink>
     <MainNavigation
       v-if="navigation"
       class="isolate"
