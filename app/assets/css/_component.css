@@ -22,6 +22,10 @@
   @apply h-2 w-30 bg-accent;
 }
 
+@utility form-container {
+  @apply bg-secondary rounded-lg overflow-hidden px-side-mobile md:px-10 py-10 max-w-160 w-full;
+}
+
 /* Dark variant links for fifty-fifty module */
 .fifty-fifty-dark a {
   @apply text-white/90 hover:text-white;
