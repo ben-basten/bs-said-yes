@@ -29,8 +29,12 @@ export default defineEventHandler(async (event) => {
           message: "Failed to save story",
         });
       }
-      postToDiscord(
-        `**New memory received!**\nTitle: ${title}\n${getMemoryUrl(memory.id)}`,
+      const requestUrl = getRequestURL(event);
+      event.waitUntil(
+        postToDiscord(
+          `**New memory received!**\nTitle: ${title}\n${getMemoryUrl(requestUrl.origin, memory.id)}`,
+          "memory",
+        ),
       );
       return { success: true };
     })

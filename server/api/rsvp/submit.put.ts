@@ -51,7 +51,12 @@ export default defineEventHandler(async (event) => {
   ])
     .then(() => {
       const initials = getInitials(guest.name);
-      postToDiscord(`**RSVP response received!**\nSubmitted by: ${initials}`);
+      event.waitUntil(
+        postToDiscord(
+          `**RSVP response received!**\nSubmitted by: ${initials}`,
+          "rsvp",
+        ),
+      );
       return { success: true };
     })
     .catch((error) => {

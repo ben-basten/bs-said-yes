@@ -6,7 +6,6 @@ export const getInitials = (name: string | null): string => {
     .join("");
 };
 
-export const getMemoryUrl = (id: string) => {
-  const { domain } = useRuntimeConfig();
-  return `https://${domain}/memory/${id}`;
+export const getMemoryUrl = (origin: string, id: string) => {
+  return `${origin}/memory/${id}`;
 };
