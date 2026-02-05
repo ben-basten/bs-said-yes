@@ -2,7 +2,7 @@
   <ContentContainer as="section" grid margin class="gap-y-7">
     <div class="col-span-12 md:col-span-5 max-w-copy flex flex-col gap-y-6">
       <Heading as="h2">{{ data.heading }}</Heading>
-      <RichTextRenderer :json="data?.copy?.json" />
+      <RichTextRenderer v-if="data?.copy" :json="data?.copy?.json" />
     </div>
 
     <div class="col-span-12 md:col-span-6 md:col-start-7">
