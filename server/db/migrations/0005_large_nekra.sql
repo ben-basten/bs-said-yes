@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "plus_one_per_household_idx" ON "guests" USING btree ("household_id") WHERE "guests"."relationship_type" = 'plus_one';

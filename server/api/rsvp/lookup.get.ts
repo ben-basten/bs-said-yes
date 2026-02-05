@@ -18,17 +18,15 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const guestName = guest.name as string;
   return {
     self: {
       id: guest.id,
-      name: guest.name as string,
+      displayName: guestName,
       attending: guest.isAttending,
     },
     guests: guest.household.guests
-      .filter(
-        (g): g is typeof g & { name: string } =>
-          g.id !== guest.id && g.name !== null,
-      )
+      .filter((g) => g.id !== guest.id)
       .sort((a, b) => {
         const order: Record<string, number> = {
           primary: 0,
@@ -41,17 +39,9 @@ export default defineEventHandler(async (event) => {
       })
       .map((g) => ({
         id: g.id,
-        name: g.name,
-        relationshipType: g.relationshipType,
+        displayName: g.name ?? `Guest of ${guestName}`,
         attending: g.isAttending,
-      })),
-    unknownGuests: guest.household.guests
-      .filter((g) => g.id !== g.id && g.name === null)
-      .map((g) => ({
-        id: g.id,
-        name: g.name,
-        relationshipType: g.relationshipType,
-        attending: g.isAttending,
+        isAnonymous: g.name === null && g.relationshipType === "plus_one",
       })),
   };
 });

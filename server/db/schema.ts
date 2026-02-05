@@ -7,6 +7,7 @@ import {
   text,
   boolean,
   check,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 
@@ -70,6 +71,9 @@ export const guests = pgTable(
       "relationship_type_check",
       sql`${table.relationshipType} IN ('primary', 'plus_one', 'child')`,
     ),
+    uniqueIndex("plus_one_per_household_idx")
+      .on(table.householdId)
+      .where(sql`${table.relationshipType} = 'plus_one'`),
   ],
 );
 

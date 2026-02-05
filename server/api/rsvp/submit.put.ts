@@ -2,14 +2,23 @@ import { z } from "zod";
 import {
   findGuestById,
   updateHouseholdAttendance,
+  updatePlusOneName,
 } from "~~/server/repository/guests";
 import { upsertRsvpResponse } from "~~/server/repository/rsvp";
+import { postToDiscord } from "~~/server/service/discord";
+import { getInitials } from "~~/server/utils/helpers";
 
 const bodySchema = z.object({
   mainGuestId: z.uuid(),
   attendingGuestIds: z.array(z.uuid()),
   accommodations: z.string().max(1000).optional().nullable(),
   songRecommendations: z.string().max(1000).optional().nullable(),
+  plusOne: z
+    .object({
+      id: z.uuid(),
+      name: z.string().min(1).max(255),
+    })
+    .optional(),
 });
 
 export default defineEventHandler(async (event) => {
@@ -29,12 +38,28 @@ export default defineEventHandler(async (event) => {
   const householdId = guest.householdId;
 
   // Update household attendance and RSVP response
-  await updateHouseholdAttendance(householdId, body.attendingGuestIds);
-  await upsertRsvpResponse(
-    householdId,
-    body.accommodations,
-    body.songRecommendations,
-  );
-
-  return { success: true };
+  return Promise.all([
+    updateHouseholdAttendance(householdId, body.attendingGuestIds),
+    upsertRsvpResponse(
+      householdId,
+      body.accommodations,
+      body.songRecommendations,
+    ),
+    body.plusOne
+      ? updatePlusOneName(householdId, body.plusOne.id, body.plusOne.name)
+      : Promise.resolve(),
+  ])
+    .then(() => {
+      const initials = getInitials(guest.name);
+      postToDiscord(`**RSVP response received!**\nSubmitted by: ${initials}`);
+      return { success: true };
+    })
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error("Error submitting RSVP:", error);
+      throw createError({
+        statusCode: 500,
+        message: "Failed to submit RSVP",
+      });
+    });
 });

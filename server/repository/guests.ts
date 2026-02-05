@@ -87,3 +87,21 @@ export const paginatedGuestList = async (limit: number, offset: number) => {
 
   return { guestList, totalCount };
 };
+
+export const updatePlusOneName = async (
+  householdId: string,
+  guestId: string,
+  name: string,
+) => {
+  const trimmedName = name.trim();
+  return db
+    .update(guests)
+    .set({ name: trimmedName })
+    .where(
+      and(
+        eq(guests.id, guestId),
+        eq(guests.householdId, householdId),
+        eq(guests.relationshipType, "plus_one"),
+      ),
+    );
+};

@@ -10,7 +10,7 @@
     />
     <label
       :for="value"
-      class="block rounded-lg py-4 pl-4 pr-10 border-2 border-foreground text-lg cursor-pointer peer-checked:bg-green-800/10 peer-focus-visible:outline-2 outline-offset-2 outline-accent select-none transition-colors ease-out duration-default"
+      class="block rounded-lg py-4 pl-4 pr-10 border-2 border-foreground text-lg cursor-pointer bg-background peer-checked:bg-green-800/10 peer-focus-visible:outline-2 outline-offset-2 outline-accent select-none transition-colors ease-out duration-default"
     >
       {{ label }}
     </label>

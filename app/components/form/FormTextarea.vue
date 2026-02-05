@@ -23,6 +23,7 @@ const { label, ...rest } = defineProps<{
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  maxlength?: number;
 }>();
 
 defineExpose({
