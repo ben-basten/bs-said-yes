@@ -9,10 +9,17 @@ export const useRsvpStore = defineStore("rsvp", () => {
   const attendingIds = ref<string[]>([]);
   const accommodations = ref("");
   const songRequests = ref("");
+  const plusOneName = ref("");
 
   // API response
   const self = ref<Guest | null>(null);
   const guests = ref<Guest[]>([]);
+
+  const anonymousGuest = computed(() => {
+    return guests.value.find(
+      (g) => g.isAnonymous && attendingIds.value.includes(g.id),
+    );
+  });
 
   const reset = () => {
     currentStep.value = 1;
@@ -54,9 +61,11 @@ export const useRsvpStore = defineStore("rsvp", () => {
 
   return {
     accommodations,
+    anonymousGuest,
     attendingIds,
     currentStep,
     guests,
+    plusOneName,
     self,
     songRequests,
     isAttending,

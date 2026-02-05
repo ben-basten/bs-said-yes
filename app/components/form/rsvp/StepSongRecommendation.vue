@@ -14,6 +14,7 @@
       name="song-recommendations"
       placeholder="E.g., your favorite song, artist, genre, etc."
       rows="4"
+      :maxlength="1000"
     />
   </StepContainer>
 </template>
@@ -31,6 +32,12 @@ const handleSubmit = async () => {
     attendingGuestIds: rsvpStore.attendingIds,
     accommodations: rsvpStore.accommodations,
     songRecommendations: rsvpStore.songRequests,
+    plusOne: rsvpStore.anonymousGuest
+      ? {
+          id: rsvpStore.anonymousGuest.id,
+          name: rsvpStore.plusOneName,
+        }
+      : undefined,
   })
     .then(() => {
       rsvpStore.toEnd();

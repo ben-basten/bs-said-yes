@@ -13,6 +13,7 @@
       name="accommodations"
       placeholder="E.g., vegetarian, gluten-free, accessibility needs, etc."
       rows="4"
+      :maxlength="1000"
     />
   </StepContainer>
 </template>
