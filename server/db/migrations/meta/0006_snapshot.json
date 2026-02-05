@@ -1,5 +1,5 @@
 {
-  "id": "cfc2ee01-4313-4467-91d5-3de1b5a661e5",
+  "id": "78a8c846-0180-4afa-9644-6528319b9c51",
   "prevId": "9c78f682-20d0-44d9-81af-69ab6d8319de",
   "version": "7",
   "dialect": "postgresql",
@@ -191,6 +191,58 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.memories": {
+      "name": "memories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "author": {
+          "name": "author",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "story": {
+          "name": "story",
+          "type": "varchar(5000)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.rsvp_responses": {
       "name": "rsvp_responses",
       "schema": "",
@@ -253,70 +305,6 @@
           "name": "rsvp_responses_household_id_unique",
           "nullsNotDistinct": false,
           "columns": ["household_id"]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.stories": {
-      "name": "stories",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "uuid": {
-          "name": "uuid",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "gen_random_uuid()"
-        },
-        "title": {
-          "name": "title",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "author": {
-          "name": "author",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "story": {
-          "name": "story",
-          "type": "varchar(5000)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "stories_uuid_unique": {
-          "name": "stories_uuid_unique",
-          "nullsNotDistinct": false,
-          "columns": ["uuid"]
         }
       },
       "policies": {},

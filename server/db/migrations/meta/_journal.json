@@ -47,15 +47,8 @@
     {
       "idx": 6,
       "version": "7",
-      "when": 1770297850179,
-      "tag": "0006_shocking_diamondback",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1770303847742,
-      "tag": "0007_common_pride",
+      "when": 1770328022282,
+      "tag": "0006_unusual_sumo",
       "breakpoints": true
     }
   ]
