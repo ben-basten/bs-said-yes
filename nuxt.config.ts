@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/plausible",
   ],
+  plausible: {
+    proxy: true,
+  },
   components: [
     {
       path: "~/components",
