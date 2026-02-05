@@ -9,14 +9,21 @@ export const useRsvpStore = defineStore("rsvp", () => {
   const attendingIds = ref<string[]>([]);
   const accommodations = ref("");
   const songRequests = ref("");
+  const plusOneName = ref("");
 
   // API response
-  const self = ref<Guest | null>(null);
+  const self = ref<Guest>({} as Guest);
   const guests = ref<Guest[]>([]);
+
+  const anonymousGuest = computed(() => {
+    return guests.value.find(
+      (g) => g.isAnonymous && attendingIds.value.includes(g.id),
+    );
+  });
 
   const reset = () => {
     currentStep.value = 1;
-    self.value = null;
+    self.value = {} as Guest;
     guests.value = [];
     attendingIds.value = [];
     accommodations.value = "";
@@ -50,13 +57,24 @@ export const useRsvpStore = defineStore("rsvp", () => {
   const setLookupResponse = (response: LookupResponse) => {
     self.value = response.self;
     guests.value = response.guests;
+
+    // pre-fill attendance status
+    const attending = response.guests
+      .filter((g) => g.attending)
+      .map((g) => g.id);
+    if (response.self.attending) {
+      attending.push(response.self.id);
+    }
+    attendingIds.value = attending;
   };
 
   return {
     accommodations,
+    anonymousGuest,
     attendingIds,
     currentStep,
     guests,
+    plusOneName,
     self,
     songRequests,
     isAttending,

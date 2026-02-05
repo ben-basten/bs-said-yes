@@ -1,6 +1,6 @@
 <template>
   <StepContainer
-    heading="Who will be attending?"
+    heading="Will you be attending?"
     description="Select all members of your party who will be attending the wedding."
     :primary-text="rsvpStore.isAttending() ? 'Next' : 'Submit'"
     secondary-text="Previous"
@@ -12,7 +12,7 @@
       <FormCheckbox
         v-if="rsvpStore.self"
         v-model="rsvpStore.attendingIds"
-        :label="rsvpStore.self.name"
+        :label="rsvpStore.self.displayName"
         :value="rsvpStore.self.id"
         name="attending"
       />
@@ -20,11 +20,20 @@
         v-for="guest in rsvpStore.guests"
         :key="guest.id"
         v-model="rsvpStore.attendingIds"
-        :label="guest.name"
+        :label="guest.displayName"
         :value="guest.id"
         name="attending"
       />
     </fieldset>
+    <FormInput
+      v-if="rsvpStore.anonymousGuest"
+      v-model="rsvpStore.plusOneName"
+      label="Who's joining you? Include their first and last name."
+      name="plus-one"
+      placeholder="ex. John Doe"
+      required
+      :maxlength="255"
+    />
   </StepContainer>
 </template>
 
@@ -38,7 +47,7 @@ const handleSubmit = async () => {
   if (!rsvpStore.isAttending()) {
     isLoading.value = true;
     submitRsvp({
-      mainGuestId: rsvpStore.self?.id,
+      mainGuestId: rsvpStore.self.id,
       attendingGuestIds: [],
       accommodations: null,
       songRecommendations: null,
