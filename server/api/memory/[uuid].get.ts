@@ -20,5 +20,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return memory;
+  return {
+    title: memory.title,
+    author: memory.author ? memory.author : "Anonymous",
+    story: memory.story,
+  };
 });
