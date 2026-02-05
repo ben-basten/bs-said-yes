@@ -26,22 +26,34 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const data = await fetchContentful<
-    PageStandardQuery,
-    PageStandardQueryVariables
-  >(PAGE_STANDARD_QUERY, {
-    slug,
-    preview: shouldPreview,
-  });
-
-  const page = data.pageStandardCollection?.items[0];
-
-  if (!page) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: `Page with slug '${slug}' not found`,
-    });
-  }
-
-  return page;
+  return cachedPage(slug, shouldPreview);
 });
+
+const cachedPage = defineCachedFunction(
+  async (slug: string, preview: boolean) => {
+    const data = await fetchContentful<
+      PageStandardQuery,
+      PageStandardQueryVariables
+    >(PAGE_STANDARD_QUERY, {
+      slug,
+      preview,
+    });
+
+    const page = data.pageStandardCollection?.items[0];
+
+    if (!page) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: `Page with slug '${slug}' not found`,
+      });
+    }
+
+    return page;
+  },
+  {
+    shouldBypassCache: (_, preview) => preview,
+    maxAge: 60 * 5, // 5 minutes
+    name: "pages",
+    getKey: (slug) => slug,
+  },
+);

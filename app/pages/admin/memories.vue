@@ -95,7 +95,7 @@ const page = ref(1);
 const limit = 10;
 
 interface Memory {
-  id: number;
+  id: string;
   title: string;
   author: string | null;
   story: string;

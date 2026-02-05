@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createMemory } from "~~/server/repository/memories";
-import { postToDiscord } from "../service/discord";
+import { postToDiscord } from "~~/server/service/discord";
+import { getMemoryUrl } from "~~/server/utils/helpers";
 
 const bodySchema = z.object({
   title: z.string().min(1).max(255),
@@ -20,8 +21,20 @@ export default defineEventHandler(async (event) => {
     author,
     story,
   })
-    .then(() => {
-      postToDiscord(`**New memory received!**\nTitle: ${title}`);
+    .then(async (result) => {
+      const memory = result[0];
+      if (!memory) {
+        throw createError({
+          statusCode: 500,
+          message: "Failed to save story",
+        });
+      }
+      const requestUrl = getRequestURL(event);
+
+      await postToDiscord(
+        `**New memory received!**\nTitle: ${title}\n${getMemoryUrl(requestUrl.origin, memory.id)}`,
+        "memory",
+      );
       return { success: true };
     })
     .catch((error) => {

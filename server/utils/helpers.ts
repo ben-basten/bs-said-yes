@@ -5,3 +5,7 @@ export const getInitials = (name: string | null): string => {
     .map((n) => n[0])
     .join("");
 };
+
+export const getMemoryUrl = (origin: string, id: string) => {
+  return `${origin}/memory/${id}`;
+};

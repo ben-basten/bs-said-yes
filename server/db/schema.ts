@@ -16,8 +16,8 @@ export const allowedUsers = pgTable("allowed_users", {
   githubEmail: varchar("github_email", { length: 255 }).notNull().unique(),
 });
 
-export const stories = pgTable("stories", {
-  id: serial("id").primaryKey(),
+export const memories = pgTable("memories", {
+  id: uuid("id").primaryKey().defaultRandom(),
   title: varchar("title", { length: 255 }).notNull(),
   author: varchar("author", { length: 255 }),
   story: varchar("story", { length: 5000 }).notNull(),
