@@ -1,37 +1,37 @@
 import { desc, eq } from "drizzle-orm";
 import { db } from "~~/server/db";
-import { stories } from "~~/server/db/schema";
+import { memories } from "~~/server/db/schema";
 
 export const getMemories = async (limit: number = 20, page: number = 1) => {
-  const [memories, totalResult] = await Promise.all([
+  const [memoriesCollection, totalResult] = await Promise.all([
     db
       .select({
-        id: stories.id,
-        title: stories.title,
-        author: stories.author,
-        story: stories.story,
+        id: memories.id,
+        title: memories.title,
+        author: memories.author,
+        story: memories.story,
       })
-      .from(stories)
-      .orderBy(desc(stories.createdAt))
+      .from(memories)
+      .orderBy(desc(memories.createdAt))
       .limit(limit)
       .offset((page - 1) * limit),
-    db.$count(stories),
+    db.$count(memories),
   ]);
 
   const total = totalResult ?? 0;
-  return { memories, total };
+  return { memories: memoriesCollection, total };
 };
 
-export const getMemoryByUuid = async (uuid: string) => {
+export const getMemoryById = async (id: string) => {
   return await db
     .select({
-      uuid: stories.uuid,
-      title: stories.title,
-      author: stories.author,
-      story: stories.story,
+      id: memories.id,
+      title: memories.title,
+      author: memories.author,
+      story: memories.story,
     })
-    .from(stories)
-    .where(eq(stories.uuid, uuid))
+    .from(memories)
+    .where(eq(memories.id, id))
     .then((res) => res[0]);
 };
 
@@ -40,5 +40,5 @@ export const createMemory = async (data: {
   author?: string;
   story: string;
 }) => {
-  return await db.insert(stories).values(data).returning();
+  return await db.insert(memories).values(data).returning();
 };

@@ -1,4 +1,4 @@
-import { getMemoryByUuid } from "~~/server/repository/memories";
+import { getMemoryById } from "~~/server/repository/memories";
 
 export default defineEventHandler(async (event) => {
   await requireUserSession(event);
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const memory = await getMemoryByUuid(uuid);
+  const memory = await getMemoryById(uuid);
 
   if (!memory) {
     throw createError({

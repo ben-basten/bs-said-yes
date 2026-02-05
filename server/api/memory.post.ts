@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
         });
       }
       postToDiscord(`**New memory received!**\nTitle: ${title}`);
-      return { success: true, uuid: memory.uuid };
+      return { success: true };
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
