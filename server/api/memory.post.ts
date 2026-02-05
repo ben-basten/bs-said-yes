@@ -20,9 +20,16 @@ export default defineEventHandler(async (event) => {
     author,
     story,
   })
-    .then(() => {
+    .then((result) => {
+      const memory = result[0];
+      if (!memory) {
+        throw createError({
+          statusCode: 500,
+          message: "Failed to save story",
+        });
+      }
       postToDiscord(`**New memory received!**\nTitle: ${title}`);
-      return { success: true };
+      return { success: true, uuid: memory.uuid };
     })
     .catch((error) => {
       // eslint-disable-next-line no-console

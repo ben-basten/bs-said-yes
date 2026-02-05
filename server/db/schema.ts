@@ -18,6 +18,7 @@ export const allowedUsers = pgTable("allowed_users", {
 
 export const stories = pgTable("stories", {
   id: serial("id").primaryKey(),
+  uuid: uuid("uuid").defaultRandom().unique(),
   title: varchar("title", { length: 255 }).notNull(),
   author: varchar("author", { length: 255 }),
   story: varchar("story", { length: 5000 }).notNull(),
