@@ -1,16 +1,17 @@
 <template>
   <ContentContainer margin>
-    <div
-      class="relative form-container mx-auto flex flex-col gap-y-7"
-      :inert="isSuccess"
-    >
+    <div class="relative form-container mx-auto flex flex-col gap-y-7">
       <Heading as="h2">Memories</Heading>
       <p class="max-w-copy">
         Tell us your favorite memory or moment you have of Ben/Sydney/both. You
         can write your name or leave it anonymous. Feel free to fill it out
         multiple times.
       </p>
-      <form class="flex flex-col gap-2" @submit.prevent="onSubmit">
+      <form
+        class="flex flex-col gap-2"
+        :inert="isSuccess"
+        @submit.prevent="onSubmit"
+      >
         <FormInput ref="titleInput" label="Title" name="title" required />
         <FormInput label="Author (optional)" name="author" />
         <FormTextarea label="Story" name="story" rows="6" required />
