@@ -5,6 +5,7 @@
     primary-text="Submit"
     secondary-text="Previous"
     :disabled="isLoading"
+    :error
     @submit.prevent="handleSubmit"
     @secondary="rsvpStore.previousStep()"
   >
@@ -22,10 +23,12 @@
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
 const isLoading = ref(false);
+const error = ref<string | undefined>(undefined);
 
 const handleSubmit = async () => {
   if (isLoading.value) return;
 
+  error.value = undefined;
   isLoading.value = true;
   submitRsvp({
     mainGuestId: rsvpStore.self.id,
@@ -43,6 +46,8 @@ const handleSubmit = async () => {
       rsvpStore.toEnd();
     })
     .catch(() => {
+      error.value =
+        "Something went wrong submitting your RSVP. Please try again.";
       // eslint-disable-next-line no-console
       console.error(
         "StepSongRecommendation: Failed to submit RSVP attendance.",

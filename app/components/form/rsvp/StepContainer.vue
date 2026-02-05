@@ -1,12 +1,17 @@
 <template>
-  <form class="flex flex-col gap-y-7" @submit.prevent="$emit('submit', $event)">
-    <Heading :id="headingId" as="h2" :tabindex="-1" class="outline-none">
-      {{ heading }}
-    </Heading>
-    <p class="max-w-copy">{{ description }}</p>
-    <slot />
+  <form @submit.prevent="$emit('submit', $event)">
+    <div class="flex flex-col gap-y-7">
+      <Heading :id="headingId" as="h2" :tabindex="-1" class="outline-none">
+        {{ heading }}
+      </Heading>
+      <p class="max-w-copy">{{ description }}</p>
+      <slot />
+    </div>
+    <div class="text-sm font-semibold text-error" aria-live="polite">
+      <span v-if="error" class="mt-3 block">{{ error }}</span>
+    </div>
     <div
-      class="flex gap-x-5 flex-row-reverse"
+      class="flex gap-x-5 flex-row-reverse mt-7"
       :class="{
         'justify-start': !secondaryText,
         'justify-between': secondaryText,
@@ -36,6 +41,7 @@ defineProps<{
   primaryText: string;
   secondaryText?: string;
   disabled?: boolean;
+  error?: string;
 }>();
 
 defineEmits<{

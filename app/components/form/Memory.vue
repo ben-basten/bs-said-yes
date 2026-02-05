@@ -1,6 +1,9 @@
 <template>
   <ContentContainer margin>
-    <div class="relative form-container mx-auto flex flex-col gap-y-7">
+    <div
+      class="relative form-container mx-auto flex flex-col gap-y-7"
+      :inert="isSuccess"
+    >
       <Heading as="h2">Memories</Heading>
       <p class="max-w-copy">
         Tell us your favorite memory or moment you have of Ben/Sydney/both. You
@@ -52,6 +55,8 @@ const titleInput = ref<{ inputRef: HTMLInputElement | null } | null>(null);
 const successHeading = ref<{ $el: HTMLElement } | null>(null);
 
 async function onSubmit(event: Event) {
+  if (isSubmitting.value) return;
+
   const form = event.currentTarget as HTMLFormElement;
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
