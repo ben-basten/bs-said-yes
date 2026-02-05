@@ -57,6 +57,15 @@ export const useRsvpStore = defineStore("rsvp", () => {
   const setLookupResponse = (response: LookupResponse) => {
     self.value = response.self;
     guests.value = response.guests;
+
+    // pre-fill attendance status
+    const attending = response.guests
+      .filter((g) => g.attending)
+      .map((g) => g.id);
+    if (response.self.attending) {
+      attending.push(response.self.id);
+    }
+    attendingIds.value = attending;
   };
 
   return {
