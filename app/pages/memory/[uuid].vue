@@ -1,5 +1,5 @@
 <template>
-  <ContentContainer margin class="mt-10 lg:mt-20">
+  <ContentContainer margin class="mt-nav-height nav:mt-10 lg:mt-20">
     <div class="max-w-3xl mx-auto">
       <div class="mb-10 text-center">
         <Heading as="h1" class="mb-4">{{ data?.title }}</Heading>
