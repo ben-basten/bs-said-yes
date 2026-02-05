@@ -9,7 +9,7 @@
       <div
         class="bg-secondary rounded-xl p-8 md:p-14 shadow-sm border border-black/5"
       >
-        <p class="type-body whitespace">
+        <p class="type-body">
           {{ data?.story }}
         </p>
       </div>
