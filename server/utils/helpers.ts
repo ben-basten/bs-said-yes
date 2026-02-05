@@ -5,3 +5,8 @@ export const getInitials = (name: string | null): string => {
     .map((n) => n[0])
     .join("");
 };
+
+export const getMemoryUrl = (id: string) => {
+  const { domain } = useRuntimeConfig();
+  return `https://${domain}/memory/${id}`;
+};
