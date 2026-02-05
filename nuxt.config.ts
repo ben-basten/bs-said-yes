@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     "nuxt-auth-utils",
     "@nuxt/image",
     "@pinia/nuxt",
+    "@nuxtjs/plausible",
   ],
   components: [
     {
