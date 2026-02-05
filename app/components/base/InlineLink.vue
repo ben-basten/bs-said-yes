@@ -4,7 +4,11 @@
     :target="external ? '_blank' : undefined"
     class="group inline-flex flex-row gap-px items-center"
   >
-    <IconRenderer :icon="typedIcon" aria-hidden class="size-5 shrink-0 mr-2" />
+    <IconRenderer
+      :icon="typedIcon"
+      aria-hidden="true"
+      class="size-5 shrink-0 mr-2"
+    />
     <slot />
     <IconArrowOutward
       v-if="external && showExternalIcon"
