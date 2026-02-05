@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createMemory } from "~~/server/repository/memories";
-import { postToDiscord } from "../service/discord";
-import { getMemoryUrl } from "../utils/helpers";
+import { postToDiscord } from "~~/server/service/discord";
+import { getMemoryUrl } from "~~/server/utils/helpers";
 
 const bodySchema = z.object({
   title: z.string().min(1).max(255),
