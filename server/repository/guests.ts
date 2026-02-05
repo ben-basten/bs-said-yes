@@ -93,9 +93,10 @@ export const updatePlusOneName = async (
   guestId: string,
   name: string,
 ) => {
+  const trimmedName = name.trim();
   return db
     .update(guests)
-    .set({ name })
+    .set({ name: trimmedName })
     .where(
       and(
         eq(guests.id, guestId),

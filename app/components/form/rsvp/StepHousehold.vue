@@ -47,7 +47,7 @@ const handleSubmit = async () => {
   if (!rsvpStore.isAttending()) {
     isLoading.value = true;
     submitRsvp({
-      mainGuestId: rsvpStore.self?.id,
+      mainGuestId: rsvpStore.self.id,
       attendingGuestIds: [],
       accommodations: null,
       songRecommendations: null,

@@ -1,5 +1,5 @@
 type Rsvp = {
-  mainGuestId?: string;
+  mainGuestId: string;
   attendingGuestIds: string[];
   accommodations: string | null;
   songRecommendations: string | null;

@@ -12,7 +12,7 @@ export const useRsvpStore = defineStore("rsvp", () => {
   const plusOneName = ref("");
 
   // API response
-  const self = ref<Guest | null>(null);
+  const self = ref<Guest>({} as Guest);
   const guests = ref<Guest[]>([]);
 
   const anonymousGuest = computed(() => {
@@ -23,7 +23,7 @@ export const useRsvpStore = defineStore("rsvp", () => {
 
   const reset = () => {
     currentStep.value = 1;
-    self.value = null;
+    self.value = {} as Guest;
     guests.value = [];
     attendingIds.value = [];
     accommodations.value = "";
