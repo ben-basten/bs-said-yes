@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     author,
     story,
   })
-    .then((result) => {
+    .then(async (result) => {
       const memory = result[0];
       if (!memory) {
         throw createError({
@@ -30,11 +30,10 @@ export default defineEventHandler(async (event) => {
         });
       }
       const requestUrl = getRequestURL(event);
-      event.waitUntil(
-        postToDiscord(
-          `**New memory received!**\nTitle: ${title}\n${getMemoryUrl(requestUrl.origin, memory.id)}`,
-          "memory",
-        ),
+
+      await postToDiscord(
+        `**New memory received!**\nTitle: ${title}\n${getMemoryUrl(requestUrl.origin, memory.id)}`,
+        "memory",
       );
       return { success: true };
     })
