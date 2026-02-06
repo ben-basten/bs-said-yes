@@ -43,5 +43,8 @@ export default defineEventHandler(async (event) => {
         attending: g.isAttending,
         isAnonymous: g.name === null && g.relationshipType === "plus_one",
       })),
+    accommodations: guest.household.rsvpResponse?.accommodations || null,
+    songRecommendations:
+      guest.household.rsvpResponse?.songRecommendations || null,
   };
 });

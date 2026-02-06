@@ -66,6 +66,9 @@ export const useRsvpStore = defineStore("rsvp", () => {
       attending.push(response.self.id);
     }
     attendingIds.value = attending;
+
+    accommodations.value = response.accommodations || "";
+    songRequests.value = response.songRecommendations || "";
   };
 
   return {

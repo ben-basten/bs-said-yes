@@ -15,6 +15,7 @@ export const findGuestByName = async (name: string) => {
       household: {
         with: {
           guests: true,
+          rsvpResponse: true,
         },
       },
     },
