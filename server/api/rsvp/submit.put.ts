@@ -49,9 +49,12 @@ export default defineEventHandler(async (event) => {
       ? updatePlusOneName(householdId, body.plusOne.id, body.plusOne.name)
       : Promise.resolve(),
   ])
-    .then(() => {
+    .then(async () => {
       const initials = getInitials(guest.name);
-      postToDiscord(`**RSVP response received!**\nSubmitted by: ${initials}`);
+      await postToDiscord(
+        `**RSVP response received!**\nSubmitted by: ${initials}`,
+        "rsvp",
+      );
       return { success: true };
     })
     .catch((error) => {

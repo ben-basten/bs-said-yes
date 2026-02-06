@@ -5,6 +5,7 @@
     :primary-text="rsvpStore.isAttending() ? 'Next' : 'Submit'"
     secondary-text="Previous"
     :disabled="isLoading"
+    :error
     @submit.prevent="handleSubmit"
     @secondary="rsvpStore.reset()"
   >
@@ -40,12 +41,14 @@
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
 const isLoading = ref(false);
+const error = ref<string | undefined>(undefined);
 
 const handleSubmit = async () => {
   if (isLoading.value) return;
 
   if (!rsvpStore.isAttending()) {
     isLoading.value = true;
+    error.value = undefined;
     submitRsvp({
       mainGuestId: rsvpStore.self.id,
       attendingGuestIds: [],
@@ -56,6 +59,8 @@ const handleSubmit = async () => {
         rsvpStore.toEnd();
       })
       .catch(() => {
+        error.value =
+          "Something went wrong submitting your RSVP. Please try again.";
         // eslint-disable-next-line no-console
         console.error("StepHousehold: Failed to submit RSVP for no attendees.");
       })

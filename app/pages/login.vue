@@ -58,6 +58,8 @@ watchEffect(() => {
 });
 
 async function login(event: SubmitEvent) {
+  if (isLoading.value) return;
+
   error.value = "";
   isLoading.value = true;
   const formData = new FormData(event.target as HTMLFormElement);

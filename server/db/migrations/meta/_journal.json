@@ -43,6 +43,13 @@
       "when": 1770256759820,
       "tag": "0005_large_nekra",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1770328022282,
+      "tag": "0006_unusual_sumo",
+      "breakpoints": true
     }
   ]
 }

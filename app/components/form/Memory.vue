@@ -7,7 +7,11 @@
         can write your name or leave it anonymous. Feel free to fill it out
         multiple times.
       </p>
-      <form class="flex flex-col gap-2" @submit.prevent="onSubmit">
+      <form
+        class="flex flex-col gap-2"
+        :inert="isSuccess"
+        @submit.prevent="onSubmit"
+      >
         <FormInput ref="titleInput" label="Title" name="title" required />
         <FormInput label="Author (optional)" name="author" />
         <FormTextarea label="Story" name="story" rows="6" required />
@@ -24,7 +28,7 @@
       </form>
       <div
         v-if="isSuccess"
-        class="absolute bg-secondary inset-0 flex flex-col gap-y-5 justify-center items-center"
+        class="absolute bg-secondary inset-0 flex flex-col gap-y-5 justify-center items-center p-6 text-center"
       >
         <Heading
           ref="successHeading"
@@ -35,7 +39,7 @@
         >
           Yay, thank you for sharing! 🎉
         </Heading>
-        <button type="button" class="button button-lg" @click="onReset">
+        <button type="button" class="button button-lg mt-2" @click="onReset">
           ...another one?
         </button>
       </div>
@@ -46,26 +50,34 @@
 <script setup lang="ts">
 const isSubmitting = ref(false);
 const isSuccess = ref(false);
+const submittedUuid = ref<string | null>(null);
 const error = ref<string | null>(null);
 
 const titleInput = ref<{ inputRef: HTMLInputElement | null } | null>(null);
 const successHeading = ref<{ $el: HTMLElement } | null>(null);
 
 async function onSubmit(event: Event) {
+  if (isSubmitting.value) return;
+
   const form = event.currentTarget as HTMLFormElement;
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
   isSubmitting.value = true;
   isSuccess.value = false;
+  submittedUuid.value = null;
   error.value = null;
 
   try {
-    await $fetch("/api/memory", {
-      method: "POST",
-      body: data,
-    });
+    const response = await $fetch<{ success: boolean; uuid: string }>(
+      "/api/memory",
+      {
+        method: "POST",
+        body: data,
+      },
+    );
     isSuccess.value = true;
+    submittedUuid.value = response.uuid;
     form.reset();
     error.value = null;
 
@@ -80,6 +92,7 @@ async function onSubmit(event: Event) {
 
 async function onReset() {
   isSuccess.value = false;
+  submittedUuid.value = null;
   await nextTick();
   titleInput.value?.inputRef?.focus();
 }

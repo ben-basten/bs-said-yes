@@ -30,7 +30,7 @@ export const cachedNavigation = defineCachedFunction(
   },
   {
     maxAge: 60 * 60, // 1 hour
-    name: "cms",
+    name: "template",
     getKey: () => "navigation",
   },
 );
