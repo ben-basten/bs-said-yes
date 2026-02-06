@@ -6,7 +6,7 @@ export const getAllowedUserByEmail = async (email: string) => {
   const result = await db
     .select()
     .from(allowedUsers)
-    .where(eq(allowedUsers.githubEmail, email))
+    .where(eq(allowedUsers.email, email))
     .limit(1);
 
   return result[0] || null;

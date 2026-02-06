@@ -2,36 +2,33 @@ import type { AuthError } from "~~/shared/types/AuthError";
 import { getAllowedUserByEmail } from "../../repository/users";
 import type { AllowedUser } from "~~/server/db/schema";
 
-export default defineOAuthGitHubEventHandler({
+export default defineOAuthZitadelEventHandler({
   config: {
-    emailRequired: true,
+    scope: ["openid", "email", "profile"],
   },
-  async onSuccess(event, { user: githubUser }) {
-    if (!githubUser.email) {
+  async onSuccess(event, { user: zitadelUser }) {
+    if (!zitadelUser.email) {
       const errorCode: AuthError = "unauthorized";
       return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
     let allowedUser: AllowedUser | null = null;
     try {
-      // Check if user is in the allowlist
-      allowedUser = await getAllowedUserByEmail(githubUser.email);
+      allowedUser = await getAllowedUserByEmail(zitadelUser.email);
     } catch {
       const errorCode: AuthError = "unknown";
       return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
     if (!allowedUser) {
-      // User is not authorized
       const errorCode: AuthError = "unauthorized";
       return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
-    // Set user session
     await setUserSession(event, {
       user: {
         permission: "admin",
-        name: githubUser.name,
+        name: zitadelUser.given_name,
       },
     });
 
