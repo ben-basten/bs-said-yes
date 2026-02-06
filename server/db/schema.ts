@@ -13,7 +13,7 @@ import { relations, sql } from "drizzle-orm";
 
 export const allowedUsers = pgTable("allowed_users", {
   id: serial("id").primaryKey(),
-  githubEmail: varchar("github_email", { length: 255 }).notNull().unique(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
 });
 
 export const memories = pgTable("memories", {
