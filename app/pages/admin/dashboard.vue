@@ -9,7 +9,9 @@
       class="mb-10"
     />
 
-    <GuestList />
+    <GuestList class="mb-12" />
+
+    <RsvpDetails />
   </ContentContainer>
 </template>
 
