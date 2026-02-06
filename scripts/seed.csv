@@ -1,7 +1,7 @@
 household_nickname,mailing_address,guest_name,relationship_type
 SNL Crew,"123 Maple St, London, UK",Marcello Hernandez,primary
-SNL Crew,"123 Maple St, London, UK",Ashley Padilla,primary
-SNL Crew,"123 Maple St, London, UK",Michael Che,child
-SNL Crew,"123 Maple St, London, UK",Chloe Fineman,child
+SNL Crew,,Ashley Padilla,primary
+SNL Crew,,Michael Che,child
+SNL Crew,,Chloe Fineman,child
 Jane Wickline,"456 Oak Ave, New York, NY",Jane Wickline,primary
-Jane Wickline,"456 Oak Ave, New York, NY",,plus_one
+Jane Wickline,,,plus_one

@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 
 interface Row {
   household_nickname: string;
-  mailing_address: string;
+  mailing_address?: string;
   guest_name?: string;
   relationship_type: "primary" | "plus_one" | "child";
 }
@@ -28,6 +28,7 @@ async function seed() {
   console.log(`🌱 Starting database seed from ${csvFileName}...`);
 
   const householdCache = new Map<string, string>();
+  const addressCache = new Map<string, string>();
 
   const stream = fs
     .createReadStream(csvPath)
@@ -36,15 +37,25 @@ async function seed() {
   for await (const row of stream) {
     const {
       household_nickname: nickname,
-      mailing_address: mailingAddress,
+      mailing_address: rowAddress,
       guest_name: guestName,
       relationship_type: relationshipType,
     } = row as Row;
 
-    if (!nickname || !mailingAddress || !relationshipType) {
-      console.warn("⚠️ Skipping row due to missing data:", row);
+    if (!nickname || !relationshipType) {
+      console.warn(
+        "⚠️ Skipping row due to missing nickname or relationship type:",
+        row,
+      );
       continue;
     }
+
+    // Update address cache if address is provided in this row
+    if (rowAddress) {
+      addressCache.set(nickname, rowAddress);
+    }
+
+    const mailingAddress = rowAddress || addressCache.get(nickname);
 
     let householdId = householdCache.get(nickname);
 
@@ -57,7 +68,16 @@ async function seed() {
       if (existing) {
         householdId = existing.id;
         householdCache.set(nickname, householdId);
+        if (existing.mailingAddress) {
+          addressCache.set(nickname, existing.mailingAddress);
+        }
       } else {
+        if (!mailingAddress) {
+          console.error(
+            `❌ Cannot create household "${nickname}": mailing address is missing. Please provide it in at least one row for this household.`,
+          );
+          continue;
+        }
         try {
           console.log(`🏠 Creating household: ${nickname}`);
           const insertedHouseholds = await db
