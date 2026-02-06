@@ -1,7 +1,7 @@
 <template>
   <StepContainer
     heading="Accommodations"
-    description="Are there any dietary or other accommodations we should be aware of? The dinner taco bar will include vegetarian, gluten-free, and vegan options."
+    description="Are there any dietary, accessibility, or other accommodations we should be aware of? The dinner taco bar will include vegetarian, gluten-free, and vegan options."
     primary-text="Next"
     secondary-text="Previous"
     @submit.prevent="rsvpStore.nextStep()"
@@ -9,7 +9,7 @@
   >
     <FormTextarea
       v-model="rsvpStore.accommodations"
-      label="Additional accommodations (optional)"
+      :label
       name="accommodations"
       placeholder="E.g., vegetarian, gluten-free, accessibility needs, etc."
       rows="4"
@@ -20,4 +20,12 @@
 
 <script setup lang="ts">
 const rsvpStore = useRsvpStore();
+
+const label = computed(() => {
+  const count = rsvpStore.attendingIds.length;
+  if (count === 1) {
+    return "Additional accommodations (optional)";
+  }
+  return "Additional accommodations for you and your party (optional)";
+});
 </script>
