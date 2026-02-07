@@ -45,24 +45,13 @@
                 {{ guest.relationshipType.replace(/_/g, " ") }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">
-                <span
-                  v-if="guest.isAttending === true"
-                  class="px-3 py-1 rounded-full text-xs font-semibold bg-green-500 text-foreground"
-                >
+                <Chip v-if="guest.isAttending === true" color="green">
                   Attending
-                </span>
-                <span
-                  v-else-if="guest.isAttending === false"
-                  class="px-3 py-1 rounded-full text-xs font-semibold bg-red-900 text-background"
-                >
+                </Chip>
+                <Chip v-else-if="guest.isAttending === false" color="red">
                   Not Attending
-                </span>
-                <span
-                  v-else
-                  class="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-500 text-foreground"
-                >
-                  Not Responded
-                </span>
+                </Chip>
+                <Chip v-else color="yellow">Not Responded</Chip>
               </td>
             </tr>
           </tbody>

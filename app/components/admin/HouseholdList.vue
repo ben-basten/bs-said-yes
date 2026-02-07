@@ -49,16 +49,9 @@
                 {{ household.nickname }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">
-                <span
-                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                  :class="
-                    household.inviteSent
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-yellow-100 text-yellow-800'
-                  "
-                >
+                <Chip :color="household.inviteSent ? 'green' : 'yellow'">
                   {{ household.inviteSent ? "Sent" : "Pending" }}
-                </span>
+                </Chip>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-slate">
                 {{ new Date(household.updatedAt).toLocaleDateString() }}
