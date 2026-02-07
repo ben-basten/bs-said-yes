@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <ContentContainer class="mt-10">
+    <ContentContainer class="mt-nav-height md:mt-10">
       <div
         class="max-w-160 text-center flex flex-col gap-7 md:gap-10 items-center mx-auto my-auto"
       >
