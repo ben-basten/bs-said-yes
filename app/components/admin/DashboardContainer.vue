@@ -1,15 +1,7 @@
 <template>
   <section class="bg-background border border-slate rounded-lg">
     <div class="p-6 border-b border-slate">
-      <Heading
-        :id="headingId"
-        as="h2"
-        variant="h4"
-        :tabindex="-1"
-        class="outline-none"
-      >
-        {{ title }}
-      </Heading>
+      <Heading as="h2" variant="h4">{{ title }}</Heading>
       <p v-if="subtitle" class="text-sm text-slate mt-1">
         {{ subtitle }}
       </p>
@@ -45,8 +37,6 @@
 </template>
 
 <script setup lang="ts">
-const headingId = useId();
-
 defineProps<{
   title: string;
   subtitle?: string;
@@ -59,8 +49,4 @@ defineProps<{
 defineEmits<{
   (e: "next" | "previous"): void;
 }>();
-
-onMounted(() => {
-  document.getElementById(headingId)?.focus();
-});
 </script>
