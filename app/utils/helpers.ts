@@ -11,7 +11,7 @@ export const formatResultsMessage = (pagination: Pagination | undefined) => {
 
   const total = pagination.total;
   if (total === 0) {
-    return "Showing 0 guests.";
+    return "Showing 0 results.";
   }
 
   const start = (pagination.page - 1) * pagination.limit + 1;

@@ -34,7 +34,7 @@ export const getAllRsvpResponses = async () => {
       updatedAt: rsvpResponses.updatedAt,
     })
     .from(rsvpResponses)
-    .leftJoin(households, eq(rsvpResponses.householdId, households.id))
+    .innerJoin(households, eq(rsvpResponses.householdId, households.id))
     .where(
       or(
         isNotNull(rsvpResponses.accommodations),

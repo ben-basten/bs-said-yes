@@ -21,7 +21,7 @@
       >
         Previous
       </button>
-      <span class="text-sm text-slate">
+      <span v-if="pagination.totalPages > 0" class="text-sm text-slate">
         Page {{ pagination.page }} of {{ pagination.totalPages }}
       </span>
       <button
@@ -37,13 +37,12 @@
 </template>
 
 <script setup lang="ts">
+import type { Pagination } from "~~/shared/types/Pagination";
+
 defineProps<{
   title: string;
   subtitle?: string;
-  pagination?: {
-    page: number;
-    totalPages: number;
-  };
+  pagination?: Pagination;
 }>();
 
 defineEmits<{
