@@ -37,6 +37,26 @@ Locally preview production build:
 pnpm preview
 ```
 
+### Environment Variables
+
+This project requires the following environment variables:
+
+- Contentful CMS
+  - `NUXT_CMS_ENV`: Contentful environment (ex. "master")
+  - `NUXT_CMS_API_KEY`: Contentful content delivery API key
+  - `NUXT_CMS_SPACE`: Contentful space ID
+  - `NUXT_CMS_PREVIEW_API_KEY`: Contentful preview API key, used for preview mode
+  - `NUXT_CMS_PREVIEW_SECRET`: Secret token for accessing preview mode, recommended to [generate a random string](https://www.lastpass.com/features/password-generator) with letters and numbers
+- Site password configuration
+  - `NUXT_SESSION_PASSWORD`: Secret token for encrypting session cookies, recommended to [generate a random string](https://www.lastpass.com/features/password-generator) with letters, numbers, and symbols, 32 characters
+  - `NUXT_SITE_PASSWORD`: Guest password for accessing the site
+- [OAuth Zitadel configuration](https://zitadel.com/docs/guides/integrate/login/oidc/device-authorization), for the admin dashboard login
+  - `NUXT_OAUTH_ZITADEL_CLIENT_ID`: Client ID from Zitadel OAuth app
+  - `NUXT_OAUTH_ZITADEL_CLIENT_SECRET`: Client secret from Zitadel OAuth app
+  - `NUXT_OAUTH_ZITADEL_DOMAIN`: Domain for Zitadel OAuth app
+- `DATABASE_URL`: Connection string for the [Neon](https://neon.com/) Postgres database
+- `NUXT_DISCORD_WEBHOOK_URL`: Webhook URL for sending notifications to Discord when a new RSVP or memory is submitted _(optional)_
+
 ## Database
 
 RSVPs and memory form submissions are stored using a Postgres database, with a [Neon](https://neon.com/) cloud database adapter. Drizzle ORM is used to query and run migrations against the database.
