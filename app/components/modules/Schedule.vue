@@ -24,7 +24,7 @@
         <Heading as="h4" class="mb-2">{{ event.title }}</Heading>
         <RichTextRenderer
           :json="event.copy?.json"
-          class="type-body text-muted"
+          class="type-body [&_>_p]:my-3!"
         />
       </div>
     </div>

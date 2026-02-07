@@ -5,7 +5,7 @@
       <RichTextRenderer
         :json="data?.text?.json"
         :assets="embeddedAssets"
-        class="type-body text-muted mx-auto"
+        class="type-body mx-auto"
       />
     </div>
   </ContentContainer>
