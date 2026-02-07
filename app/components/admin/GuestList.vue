@@ -1,7 +1,7 @@
 <template>
   <DashboardContainer
     title="Guest List"
-    :subtitle="resultsMessage"
+    :subtitle
     :pagination="listData?.pagination"
     @next="currentPage++"
     @previous="currentPage = Math.max(1, currentPage - 1)"
@@ -82,23 +82,7 @@ const { data: listData } = await useFetch(() => "/api/admin/guests/list", {
   query: { page: currentPage, limit: 20 },
 });
 
-const resultsMessage = computed(() => {
-  if (!listData.value?.pagination) {
-    return "No guests found.";
-  }
-
-  const total = listData.value.pagination.total;
-  if (total === 0) {
-    return "Showing 0 guests.";
-  }
-
-  const start =
-    (listData.value.pagination.page - 1) * listData.value.pagination.pageSize +
-    1;
-  const end = Math.min(
-    listData.value.pagination.page * listData.value.pagination.pageSize,
-    listData.value.pagination.total,
-  );
-  return `Showing ${start}-${end} of ${total} guests.`;
+const subtitle = computed(() => {
+  return formatResultsMessage(listData.value?.pagination);
 });
 </script>

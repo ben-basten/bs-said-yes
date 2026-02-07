@@ -11,22 +11,19 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 403, message: "Forbidden" });
   }
 
-  const { limit: pageSize, page } = await getValidatedQuery(
-    event,
-    querySchema.parse,
-  );
+  const { limit, page } = await getValidatedQuery(event, querySchema.parse);
 
-  const offset = (page - 1) * pageSize;
+  const offset = (page - 1) * limit;
 
-  const { guestList, totalCount } = await paginatedGuestList(pageSize, offset);
+  const { guestList, totalCount } = await paginatedGuestList(limit, offset);
 
   return {
     guests: guestList,
     pagination: {
       page,
-      pageSize,
+      limit,
       total: totalCount,
-      totalPages: Math.ceil(totalCount / pageSize),
+      totalPages: Math.ceil(totalCount / limit),
     },
   };
 });

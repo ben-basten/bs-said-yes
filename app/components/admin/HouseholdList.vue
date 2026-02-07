@@ -1,7 +1,7 @@
 <template>
   <DashboardContainer
     title="Households"
-    :subtitle="`Showing ${listData?.pagination?.total ?? 0} households`"
+    :subtitle
     :pagination="listData?.pagination"
     @next="currentPage++"
     @previous="currentPage--"
@@ -198,4 +198,8 @@ const updateHouseholdDetails = async () => {
     saving.value = false;
   }
 };
+
+const subtitle = computed(() => {
+  return formatResultsMessage(listData.value?.pagination);
+});
 </script>
