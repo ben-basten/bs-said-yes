@@ -1,12 +1,11 @@
 <template>
-  <div class="bg-background border border-slate rounded-lg shadow">
-    <div class="p-6 border-b border-slate">
-      <Heading as="h2" variant="h4">Guest List</Heading>
-      <p class="text-sm text-slate mt-1">
-        {{ resultsMessage }}
-      </p>
-    </div>
-
+  <DashboardContainer
+    title="Guest List"
+    :subtitle
+    :pagination="listData?.pagination"
+    @next="currentPage++"
+    @previous="currentPage = Math.max(1, currentPage - 1)"
+  >
     <div v-if="listData?.guests && listData.guests.length > 0">
       <div class="overflow-x-auto">
         <table class="w-full">
@@ -69,37 +68,11 @@
           </tbody>
         </table>
       </div>
-
-      <div
-        class="px-6 py-4 border-t border-slate flex items-center justify-between"
-      >
-        <button
-          :disabled="currentPage === 1"
-          class="px-4 py-2 text-sm font-medium text-foreground bg-background border border-slate rounded-lg hover:bg-secondary disabled:opacity-50 disabled:cursor-not-allowed"
-          @click="currentPage = Math.max(1, currentPage - 1)"
-        >
-          Previous
-        </button>
-        <span class="text-sm text-slate">
-          Page {{ listData?.pagination?.page ?? 1 }} of
-          {{ listData?.pagination?.totalPages ?? 1 }}
-        </span>
-        <button
-          :disabled="
-            !listData?.pagination ||
-            currentPage >= listData.pagination.totalPages
-          "
-          class="px-4 py-2 text-sm font-medium text-foreground bg-background border border-slate rounded-lg hover:bg-secondary disabled:opacity-50 disabled:cursor-not-allowed"
-          @click="currentPage = currentPage + 1"
-        >
-          Next
-        </button>
-      </div>
     </div>
     <div v-else class="p-12 text-center">
       <p class="text-slate">No guests have been added yet.</p>
     </div>
-  </div>
+  </DashboardContainer>
 </template>
 
 <script setup lang="ts">
@@ -109,23 +82,7 @@ const { data: listData } = await useFetch(() => "/api/admin/guests/list", {
   query: { page: currentPage, limit: 20 },
 });
 
-const resultsMessage = computed(() => {
-  if (!listData.value?.pagination) {
-    return "No guests found.";
-  }
-
-  const total = listData.value.pagination.total;
-  if (total === 0) {
-    return "Showing 0 guests.";
-  }
-
-  const start =
-    (listData.value.pagination.page - 1) * listData.value.pagination.pageSize +
-    1;
-  const end = Math.min(
-    listData.value.pagination.page * listData.value.pagination.pageSize,
-    listData.value.pagination.total,
-  );
-  return `Showing ${start}-${end} of ${total} guests.`;
+const subtitle = computed(() => {
+  return formatResultsMessage(listData.value?.pagination);
 });
 </script>

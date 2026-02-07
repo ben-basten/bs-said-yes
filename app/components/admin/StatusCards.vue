@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <Heading as="h2" variant="h3" class="mb-5">Attendance Status</Heading>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-white">
       <div
@@ -30,7 +30,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
