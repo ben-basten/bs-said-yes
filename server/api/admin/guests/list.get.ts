@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { paginatedGuestList } from "~~/server/repository/guests";
+import type { Pagination } from "~~/shared/types/Pagination";
 
 const querySchema = z.object({
   limit: z.coerce.number().min(1).max(50).optional().default(10),
@@ -24,6 +25,6 @@ export default defineEventHandler(async (event) => {
       limit,
       total: totalCount,
       totalPages: Math.ceil(totalCount / limit),
-    },
+    } satisfies Pagination,
   };
 });

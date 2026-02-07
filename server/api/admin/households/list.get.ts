@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getPaginatedHouseholds } from "~~/server/repository/households";
+import type { Pagination } from "~~/shared/types/Pagination";
 
 const querySchema = z.object({
   limit: z.coerce.number().min(1).max(100).default(20),
@@ -13,5 +14,9 @@ export default defineEventHandler(async (event) => {
 
   const { limit, page } = await getValidatedQuery(event, querySchema.parse);
 
-  return await getPaginatedHouseholds(limit, page);
+  const { items, pagination } = await getPaginatedHouseholds(limit, page);
+  return {
+    items,
+    pagination: pagination satisfies Pagination,
+  };
 });

@@ -1,10 +1,10 @@
+import type { Pagination } from "~~/shared/types/Pagination";
+
 export const ariaCurrent = (route: string, currentRoute: string) => {
   return route === currentRoute ? "page" : undefined;
 };
 
-export const formatResultsMessage = (
-  pagination: { total: number; page: number; limit: number } | undefined,
-) => {
+export const formatResultsMessage = (pagination: Pagination | undefined) => {
   if (!pagination) {
     return "No results found.";
   }
