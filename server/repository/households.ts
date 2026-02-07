@@ -1,4 +1,4 @@
-import { eq, desc } from "drizzle-orm";
+import { eq, asc } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { households } from "~~/server/db/schema";
 
@@ -9,7 +9,7 @@ export const getPaginatedHouseholds = async (limit: number, page: number) => {
     db
       .select()
       .from(households)
-      .orderBy(desc(households.createdAt))
+      .orderBy(asc(households.inviteSent), asc(households.nickname))
       .limit(limit)
       .offset(offset),
     db.$count(households),
