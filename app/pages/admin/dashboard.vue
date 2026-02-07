@@ -10,6 +10,7 @@
       />
       <GuestList />
       <RsvpDetails />
+      <HouseholdList />
     </div>
   </ContentContainer>
 </template>
