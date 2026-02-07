@@ -1,7 +1,7 @@
 <template>
   <StepContainer
     heading="Accommodations"
-    description="Are there any dietary, accessibility, or other accommodations we should be aware of? The dinner taco bar will include vegetarian, gluten-free, and vegan options."
+    description="Are there any dietary, accessibility, or other accommodations we should be aware of? Dinner will include vegetarian, gluten-free, and vegan options."
     primary-text="Next"
     secondary-text="Previous"
     @submit.prevent="rsvpStore.nextStep()"
