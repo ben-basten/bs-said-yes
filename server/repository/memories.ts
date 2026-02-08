@@ -2,7 +2,7 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { memories } from "~~/server/db/schema";
 
-export const getMemories = async (limit: number = 20, page: number = 1) => {
+export const getMemories = async (limit: number, page: number = 1) => {
   const [memoriesCollection, totalResult] = await Promise.all([
     db
       .select({

@@ -8,14 +8,13 @@
     </div>
 
     <div v-if="data?.memories?.length" class="grid gap-4">
-      <button
+      <InlineLink
         v-for="item in data.memories"
         :key="item.id"
-        type="button"
-        class="text-left bg-secondary rounded-2xl p-6 transition-all cursor-pointer group"
-        @click="openMemory(item)"
+        :href="`/memory/${item.id}`"
+        class="text-foreground no-underline hover:text-foreground bg-secondary rounded-2xl p-6 transition-all cursor-pointer group"
       >
-        <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center justify-between gap-4 w-full">
           <div>
             <h3 class="font-bold text-xl leading-tight mb-1">
               {{ item.title }}
@@ -29,7 +28,7 @@
             <IconArrowForward class="size-5" />
           </div>
         </div>
-      </button>
+      </InlineLink>
     </div>
     <div
       v-else-if="status !== 'pending'"
@@ -47,7 +46,7 @@
         label="Previous Page"
         :disabled="page === 1"
         class="disabled:opacity-20 disabled:cursor-not-allowed text-white bg-action hover:bg-action/80"
-        @click="page--"
+        @click="paginate(-1)"
       >
         <div class="rotate-180">
           <IconArrowForward class="size-6" />
@@ -62,22 +61,11 @@
         label="Next Page"
         :disabled="page === totalPages"
         class="disabled:opacity-20 disabled:cursor-not-allowed text-white bg-action hover:bg-action/80"
-        @click="page++"
+        @click="paginate(1)"
       >
         <IconArrowForward class="size-6" />
       </IconButton>
     </div>
-
-    <!-- Memory Detail Modal -->
-    <Modal v-model:open="isModalOpen" :title="selectedMemory?.title">
-      <Heading as="h2" variant="h4">
-        Shared by:
-        {{ selectedMemory?.author ? selectedMemory.author : "Anonymous" }}
-      </Heading>
-      <p class="type-body">
-        {{ selectedMemory?.story }}
-      </p>
-    </Modal>
   </ContentContainer>
 </template>
 
@@ -91,34 +79,27 @@ useHead({
   title: "Memories | Admin",
 });
 
-const page = ref(1);
-const limit = 10;
+const route = useRoute();
+const page = computed(() => Number(route.query.page) || 1);
+const limit = 20;
 
-interface Memory {
-  id: string;
-  title: string;
-  author: string | null;
-  story: string;
-}
+const paginate = (direction: 1 | -1) => {
+  const newPage = page.value + direction;
+  if (newPage < 1 || (totalPages.value > 0 && newPage > totalPages.value)) {
+    return;
+  }
+  navigateTo({ query: { ...route.query, page: newPage } });
+};
 
 const { data, status } = useFetch("/api/admin/memories", {
   query: {
     page,
     limit,
   },
-  watch: [page],
 });
 
 const totalPages = computed(() => {
   if (!data.value) return 0;
   return Math.ceil(data.value.total / limit);
 });
-
-const isModalOpen = ref(false);
-const selectedMemory = ref<Memory | null>(null);
-
-const openMemory = (memory: Memory) => {
-  selectedMemory.value = memory;
-  isModalOpen.value = true;
-};
 </script>

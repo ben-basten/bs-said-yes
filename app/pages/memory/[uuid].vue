@@ -13,10 +13,6 @@
           {{ data?.story }}
         </p>
       </div>
-
-      <div class="mt-16 text-center">
-        <InlineLink href="/">Go back home</InlineLink>
-      </div>
     </div>
   </ContentContainer>
 </template>
