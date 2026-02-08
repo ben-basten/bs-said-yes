@@ -52,6 +52,7 @@ export const createHousehold = async (data: {
         data.guests.map((guest) => ({
           ...guest,
           householdId: household.id,
+          isSearchable: guest.relationshipType === "primary",
         })),
       );
     }
