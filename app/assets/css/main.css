@@ -44,6 +44,7 @@
 @layer base {
   html {
     scroll-padding-top: var(--spacing-nav-height);
+    overflow-y: scroll;
   }
 
   body {
