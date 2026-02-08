@@ -1,10 +1,15 @@
 <template>
   <section class="bg-background border border-slate rounded-lg">
-    <div class="p-6 border-b border-slate">
-      <Heading as="h2" variant="h4">{{ title }}</Heading>
-      <p v-if="subtitle" class="text-sm text-slate mt-1">
-        {{ subtitle }}
-      </p>
+    <div class="p-6 border-b border-slate flex items-center justify-between">
+      <div>
+        <Heading as="h2" variant="h4">{{ title }}</Heading>
+        <p v-if="subtitle" class="text-sm text-slate mt-1">
+          {{ subtitle }}
+        </p>
+      </div>
+      <div v-if="$slots.actions">
+        <slot name="actions" />
+      </div>
     </div>
 
     <slot />

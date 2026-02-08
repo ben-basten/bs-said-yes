@@ -25,6 +25,8 @@ async function seed() {
     process.exit(1);
   }
 
+  const failures: string[] = [];
+
   console.log(`🌱 Starting database seed from ${csvFileName}...`);
 
   const householdCache = new Map<string, string>();
@@ -43,10 +45,9 @@ async function seed() {
     } = row as Row;
 
     if (!nickname || !relationshipType) {
-      console.warn(
-        "⚠️ Skipping row due to missing nickname or relationship type:",
-        row,
-      );
+      const msg = `⚠️ Skipping row due to missing nickname or relationship type: ${JSON.stringify(row)}`;
+      console.warn(msg);
+      failures.push(msg);
       continue;
     }
 
@@ -73,9 +74,9 @@ async function seed() {
         }
       } else {
         if (!mailingAddress) {
-          console.error(
-            `❌ Cannot create household "${nickname}": mailing address is missing. Please provide it in at least one row for this household.`,
-          );
+          const msg = `❌ Cannot create household "${nickname}": mailing address is missing. Please provide it in at least one row for this household.`;
+          console.error(msg);
+          failures.push(msg);
           continue;
         }
         try {
@@ -94,8 +95,10 @@ async function seed() {
 
           householdId = newHousehold.id;
           householdCache.set(nickname, householdId);
-        } catch (error) {
-          console.error(`❌ Failed to create household ${nickname}:`, error);
+        } catch (error: any) {
+          const msg = `❌ Failed to create household ${nickname}: ${error?.message || error}`;
+          console.error(msg);
+          failures.push(msg);
           continue; // Move to next row
         }
       }
@@ -119,12 +122,16 @@ async function seed() {
       ) {
         console.warn(`⚠️ Guest "${guestName}" already exists, skipping...`);
       } else {
-        console.error(
-          `❌ Failed to add guest "${guestName}":`,
-          error?.cause?.message,
-        );
+        const msg = `❌ "${guestName}" - failed to add guest: ${error?.cause?.message || error?.message || error}`;
+        failures.push(msg);
       }
     }
+  }
+
+  if (failures.length > 0) {
+    console.log("\n--- Seeding Failures Summary ---");
+    failures.forEach((f) => console.log(f));
+    console.log("-------------------------------\n");
   }
 
   console.log("✅ Seeding completed!");

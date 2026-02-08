@@ -1,0 +1,111 @@
+<template>
+  <Modal
+    v-model:open="isOpen"
+    :title="`Edit Household: ${household?.nickname}`"
+  >
+    <form
+      v-if="household"
+      class="space-y-6"
+      @submit.prevent="updateHouseholdDetails"
+    >
+      <FormInput
+        v-model="editForm.nickname"
+        label="Household Nickname"
+        name="nickname"
+        required
+      />
+
+      <FormTextarea
+        v-model="editForm.mailingAddress"
+        label="Mailing Address"
+        name="mailingAddress"
+        required
+        :rows="4"
+      />
+
+      <div class="flex items-center gap-3">
+        <input
+          id="inviteSentCheckbox"
+          v-model="editForm.inviteSent"
+          type="checkbox"
+          class="size-5 rounded border-2 border-foreground accent-accent cursor-pointer"
+        />
+        <label
+          for="inviteSentCheckbox"
+          class="text-lg font-semibold cursor-pointer"
+        >
+          Invitation Sent
+        </label>
+      </div>
+
+      <div class="pt-4 flex justify-end gap-3">
+        <button
+          type="button"
+          class="px-6 py-2 border-2 border-foreground rounded-xl hover:bg-secondary transition-colors"
+          @click="isOpen = false"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          :disabled="saving"
+          class="px-6 py-2 bg-foreground text-background rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
+        >
+          {{ saving ? "Saving..." : "Save Changes" }}
+        </button>
+      </div>
+    </form>
+  </Modal>
+</template>
+
+<script setup lang="ts">
+import type { Household } from "~/types/Household";
+
+const props = defineProps<{
+  household: Household | null;
+}>();
+
+const isOpen = defineModel<boolean>("open", { default: false });
+const emit = defineEmits(["success"]);
+
+const saving = ref(false);
+const editForm = reactive({
+  nickname: "",
+  mailingAddress: "",
+  inviteSent: false,
+});
+
+// Update form when household prop changes or when modal opens
+watch(
+  () => props.household,
+  (newHousehold) => {
+    if (newHousehold) {
+      editForm.nickname = newHousehold.nickname;
+      editForm.mailingAddress = newHousehold.mailingAddress;
+      editForm.inviteSent = newHousehold.inviteSent;
+    }
+  },
+  { immediate: true },
+);
+
+const updateHouseholdDetails = async () => {
+  if (!props.household || saving.value) return;
+
+  saving.value = true;
+  try {
+    await $fetch(`/api/admin/households/${props.household.id}`, {
+      method: "PATCH",
+      body: editForm,
+    });
+
+    emit("success");
+    isOpen.value = false;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Failed to update household:", error);
+    alert("An error occurred while saving.");
+  } finally {
+    saving.value = false;
+  }
+};
+</script>

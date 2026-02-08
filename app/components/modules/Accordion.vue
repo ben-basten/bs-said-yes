@@ -5,7 +5,7 @@
       <RichTextRenderer v-if="data?.copy" :json="data?.copy?.json" />
     </div>
 
-    <div class="col-span-12 md:col-span-6 md:col-start-7">
+    <div class="col-span-12 md:col-span-7 md:col-start-6">
       <AccordionRoot type="multiple" class="flex flex-col">
         <AccordionItem
           v-for="(item, index) in items"
