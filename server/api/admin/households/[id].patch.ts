@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { updateHousehold } from "~~/server/repository/households";
+import { requireAdminSession } from "~~/server/utils/admin";
 
 const bodySchema = z.object({
   nickname: z.string().min(1).optional(),
@@ -8,9 +9,7 @@ const bodySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-  if (!event.context.isAdmin) {
-    throw createError({ statusCode: 403, message: "Forbidden" });
-  }
+  await requireAdminSession(event);
 
   const id = getRouterParam(event, "id");
   if (!id) {

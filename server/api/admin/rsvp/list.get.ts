@@ -1,9 +1,8 @@
 import { getAllRsvpResponses } from "~~/server/repository/rsvp";
+import { requireAdminSession } from "~~/server/utils/admin";
 
 export default defineEventHandler(async (event) => {
-  if (!event.context.isAdmin) {
-    throw createError({ statusCode: 403, message: "Forbidden" });
-  }
+  await requireAdminSession(event);
 
   return await getAllRsvpResponses();
 });

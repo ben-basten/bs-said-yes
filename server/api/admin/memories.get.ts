@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getMemories } from "~~/server/repository/memories";
+import { requireAdminSession } from "~~/server/utils/admin";
 
 const querySchema = z.object({
   limit: z.coerce.number().min(1).max(50).optional(),
@@ -7,9 +8,7 @@ const querySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-  if (!event.context.isAdmin) {
-    throw createError({ statusCode: 403, message: "Forbidden" });
-  }
+  await requireAdminSession(event);
 
   const { limit = 20, page = 1 } = await getValidatedQuery(
     event,

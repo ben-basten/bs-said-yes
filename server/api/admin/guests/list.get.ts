@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { paginatedGuestList } from "~~/server/repository/guests";
+import { requireAdminSession } from "~~/server/utils/admin";
 import type { Pagination } from "~~/shared/types/Pagination";
 
 const querySchema = z.object({
@@ -8,9 +9,7 @@ const querySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-  if (!event.context.isAdmin) {
-    throw createError({ statusCode: 403, message: "Forbidden" });
-  }
+  await requireAdminSession(event);
 
   const { limit, page } = await getValidatedQuery(event, querySchema.parse);
 

@@ -1,9 +1,8 @@
 import { getAttendanceStatus } from "~~/server/repository/guests";
+import { requireAdminSession } from "~~/server/utils/admin";
 
 export default defineEventHandler(async (event) => {
-  if (!event.context.isAdmin) {
-    throw createError({ statusCode: 403, message: "Forbidden" });
-  }
+  await requireAdminSession(event);
 
   const result = await getAttendanceStatus();
 

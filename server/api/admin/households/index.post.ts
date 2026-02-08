@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { createHousehold } from "~~/server/repository/households";
+import { requireAdminSession } from "~~/server/utils/admin";
 
 const bodySchema = z.object({
   nickname: z.string().min(1),
@@ -15,9 +16,7 @@ const bodySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-  if (!event.context.isAdmin) {
-    throw createError({ statusCode: 403, message: "Forbidden" });
-  }
+  await requireAdminSession(event);
 
   const body = await readValidatedBody(event, bodySchema.parse);
 
