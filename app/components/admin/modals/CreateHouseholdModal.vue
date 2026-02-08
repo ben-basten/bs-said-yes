@@ -51,20 +51,11 @@
             :required="!(guest.relationshipType === 'plus_one')"
           />
 
-          <div class="space-y-1">
-            <label class="block text-lg font-semibold text-slate">
-              Relationship Type
-            </label>
-            <select
-              v-model="guest.relationshipType"
-              class="w-full px-4 py-2 bg-background border-2 border-foreground rounded-xl appearance-none"
-              required
-            >
-              <option value="primary">Primary</option>
-              <option value="plus_one">Plus One</option>
-              <option value="child">Child</option>
-            </select>
-          </div>
+          <FormSelect
+            v-model="guest.relationshipType"
+            label="Relationship Type"
+            :options="relationshipOptions"
+          />
         </div>
       </div>
 
@@ -98,6 +89,12 @@ const createForm = reactive({
   mailingAddress: "",
   guests: [{ name: "", relationshipType: "primary" }],
 });
+
+const relationshipOptions = [
+  { label: "Primary", value: "primary" },
+  { label: "Plus One", value: "plus_one" },
+  { label: "Child", value: "child" },
+];
 
 const addGuest = () => {
   createForm.guests.push({ name: "", relationshipType: "primary" });
