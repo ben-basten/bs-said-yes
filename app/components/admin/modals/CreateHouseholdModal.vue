@@ -35,17 +35,18 @@
           </IconButton>
 
           <FormInput
+            ref="nameRef"
             v-model="guest.name"
             label="Full Name"
             :name="`guest-${index}-name`"
             placeholder="Guest Name"
-            autofocus
             :required="
               !(
                 guest.relationshipType === 'plus_one' &&
                 createForm.guests.length > 1
               )
             "
+            @vue:mounted="handleMount(index)"
           />
 
           <FormSelect
@@ -86,9 +87,14 @@
 </template>
 
 <script setup lang="ts">
+import type { FormInput } from "#components";
+
 const isOpen = defineModel<boolean>("open", { default: false });
 const emit = defineEmits(["success"]);
 
+const guestNames = useTemplateRef<InstanceType<typeof FormInput>[] | null>(
+  "nameRef",
+);
 const saving = ref(false);
 const createForm = reactive({
   nickname: "",
@@ -102,12 +108,21 @@ const relationshipOptions = [
   { label: "Child", value: "child" },
 ];
 
+const handleMount = async (index: number) => {
+  if (index < 1) {
+    return;
+  }
+  guestNames.value?.[index]?.inputRef?.focus();
+};
+
 const addGuest = () => {
   createForm.guests.push({ name: "", relationshipType: "primary" });
 };
 
 const removeGuest = (index: number) => {
+  const previousIndex = createForm.guests.length - 2;
   createForm.guests.splice(index, 1);
+  guestNames.value?.[previousIndex]?.inputRef?.focus();
 };
 
 // Reset form when modal opens
