@@ -57,6 +57,13 @@
       "when": 1770338831352,
       "tag": "0007_damp_raider",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1770588664464,
+      "tag": "0008_yummy_black_cat",
+      "breakpoints": true
     }
   ]
 }
