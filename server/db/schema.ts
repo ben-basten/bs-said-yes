@@ -56,7 +56,7 @@ export const guests = pgTable(
       .notNull()
       .references(() => households.id, { onDelete: "cascade" }),
     // Name is intentionally unique to prevent needing to handle looking up multiple guests with the same name, will address if this becomes a problem
-    name: varchar("name", { length: 255 }).unique(),
+    name: varchar("name", { length: 255 }),
     relationshipType: varchar("relationship_type", { length: 20 }).notNull(),
     isAttending: boolean("is_attending"),
     isSearchable: boolean("is_searchable").notNull().default(true),
@@ -74,6 +74,7 @@ export const guests = pgTable(
     uniqueIndex("plus_one_per_household_idx")
       .on(table.householdId)
       .where(sql`${table.relationshipType} = 'plus_one'`),
+    uniqueIndex("name_lower_idx").on(sql`lower(${table.name})`),
   ],
 );
 
