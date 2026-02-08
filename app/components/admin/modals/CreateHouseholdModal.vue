@@ -18,16 +18,7 @@
       />
 
       <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <Heading as="h2" variant="h4" class="font-semibold">Guests</Heading>
-          <button
-            type="button"
-            class="text-sm font-medium underline"
-            @click="addGuest"
-          >
-            + Add Guest
-          </button>
-        </div>
+        <Heading as="h2" variant="h4" class="font-semibold">Guests</Heading>
 
         <div
           v-for="(guest, index) in createForm.guests"
@@ -48,6 +39,7 @@
             label="Full Name"
             :name="`guest-${index}-name`"
             placeholder="Guest Name"
+            autofocus
             :required="
               !(
                 guest.relationshipType === 'plus_one' &&
@@ -63,6 +55,14 @@
             required
           />
         </div>
+
+        <button
+          type="button"
+          class="text-sm font-medium underline"
+          @click="addGuest"
+        >
+          + Add Guest
+        </button>
       </div>
 
       <div class="pt-4 flex justify-end gap-3">
