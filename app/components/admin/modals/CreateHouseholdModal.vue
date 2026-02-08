@@ -48,13 +48,19 @@
             label="Full Name"
             :name="`guest-${index}-name`"
             placeholder="Guest Name"
-            :required="!(guest.relationshipType === 'plus_one')"
+            :required="
+              !(
+                guest.relationshipType === 'plus_one' &&
+                createForm.guests.length > 1
+              )
+            "
           />
 
           <FormSelect
             v-model="guest.relationshipType"
             label="Relationship Type"
             :options="relationshipOptions"
+            required
           />
         </div>
       </div>
