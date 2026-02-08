@@ -141,7 +141,14 @@ const createHouseholdSubmit = async () => {
   try {
     await $fetch("/api/admin/households", {
       method: "POST",
-      body: createForm,
+      body: {
+        nickname: createForm.nickname,
+        mailingAddress: createForm.mailingAddress,
+        guests: createForm.guests.map((guest) => ({
+          name: guest.name === "" ? null : guest.name,
+          relationshipType: guest.relationshipType,
+        })),
+      },
     });
 
     emit("success");

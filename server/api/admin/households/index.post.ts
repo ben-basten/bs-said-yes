@@ -7,7 +7,7 @@ const bodySchema = z.object({
   guests: z
     .array(
       z.object({
-        name: z.string().nullable(),
+        name: z.string().min(1).nullable(),
         relationshipType: z.enum(["primary", "plus_one", "child"]),
       }),
     )
