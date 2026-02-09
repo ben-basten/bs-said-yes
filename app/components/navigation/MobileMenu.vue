@@ -31,7 +31,7 @@
             <li
               v-for="(link, index) in links"
               :key="link?.url ?? index"
-              class="nav-item opacity-0"
+              class="nav-item animate-hide"
             >
               <InlineLink
                 v-if="link?.url"
@@ -43,7 +43,7 @@
                 {{ link.text }}
               </InlineLink>
             </li>
-            <li class="nav-item opacity-0">
+            <li class="nav-item animate-hide">
               <InlineLink
                 v-if="cta?.url"
                 :href="cta.url"
