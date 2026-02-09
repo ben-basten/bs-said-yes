@@ -8,14 +8,16 @@
         :not-attending="statusData?.status?.notAttending ?? null"
         :not-responded="statusData?.status?.notResponded ?? null"
       />
-      <GuestList />
+      <GuestList ref="guestRef" />
       <RsvpDetails />
-      <HouseholdList />
+      <HouseholdList @updated="guestRef?.refreshGuests" />
     </div>
   </ContentContainer>
 </template>
 
 <script setup lang="ts">
+import type { GuestList } from "#components";
+
 definePageMeta({
   middleware: "authenticated",
   layout: "admin",
@@ -24,6 +26,10 @@ definePageMeta({
 useHead({
   title: "Dashboard | Admin",
 });
+
+const guestRef = useTemplateRef<InstanceType<typeof GuestList> | null>(
+  "guestRef",
+);
 
 const { data: statusData } = await useFetch("/api/admin/guests/status");
 </script>

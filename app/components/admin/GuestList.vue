@@ -67,9 +67,20 @@
 <script setup lang="ts">
 const currentPage = ref(1);
 
-const { data: listData } = await useFetch(() => "/api/admin/guests/list", {
-  query: { page: currentPage, limit: 20 },
+const refreshGuests = () => {
+  refresh();
+};
+
+defineExpose({
+  refreshGuests,
 });
+
+const { data: listData, refresh } = await useFetch(
+  () => "/api/admin/guests/list",
+  {
+    query: { page: currentPage, limit: 20 },
+  },
+);
 
 const subtitle = computed(() => {
   return formatResultsMessage(listData.value?.pagination);

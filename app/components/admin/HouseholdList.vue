@@ -85,7 +85,10 @@
       @success="refresh"
     />
 
-    <CreateHouseholdModal v-model:open="isCreateModalOpen" @success="refresh" />
+    <CreateHouseholdModal
+      v-model:open="isCreateModalOpen"
+      @success="handleHouseholdSuccess"
+    />
   </DashboardContainer>
 </template>
 
@@ -105,6 +108,15 @@ const {
   query: { page: currentPage, limit: 20 },
   watch: [currentPage],
 });
+
+const emit = defineEmits<{
+  (e: "updated"): void;
+}>();
+
+const handleHouseholdSuccess = () => {
+  emit("updated");
+  refresh();
+};
 
 const openEditModal = (household: Household) => {
   selectedHousehold.value = household;
