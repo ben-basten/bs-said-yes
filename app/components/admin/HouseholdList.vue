@@ -7,9 +7,7 @@
     @previous="currentPage--"
   >
     <template #actions>
-      <button class="button button-sm" @click="openCreateModal">
-        Create Household
-      </button>
+      <button class="button button-sm" @click="openCreateModal">Create</button>
     </template>
 
     <div v-if="pending && !listData" class="p-12 text-center">

@@ -68,18 +68,18 @@
 
       <div class="pt-4 flex justify-end gap-3">
         <button
+          type="submit"
+          :disabled="saving"
+          class="order-1 px-6 py-2 bg-foreground text-background rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
+        >
+          {{ saving ? "Creating..." : "Create Household" }}
+        </button>
+        <button
           type="button"
-          class="px-6 py-2 border-2 border-foreground rounded-xl hover:bg-secondary transition-colors"
+          class="order-0 px-6 py-2 border-2 border-foreground rounded-xl hover:bg-secondary transition-colors"
           @click="isOpen = false"
         >
           Cancel
-        </button>
-        <button
-          type="submit"
-          :disabled="saving"
-          class="px-6 py-2 bg-foreground text-background rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
-        >
-          {{ saving ? "Creating..." : "Create Household" }}
         </button>
       </div>
     </form>

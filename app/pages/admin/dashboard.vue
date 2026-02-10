@@ -9,8 +9,8 @@
         :not-responded="statusData?.status?.notResponded ?? null"
       />
       <GuestList ref="guestRef" />
-      <RsvpDetails />
       <HouseholdList @updated="guestRef?.refreshGuests" />
+      <RsvpDetails />
     </div>
   </ContentContainer>
 </template>
