@@ -1,4 +1,14 @@
-import { eq, isNull, not, inArray, and, count, sql, desc } from "drizzle-orm";
+import {
+  eq,
+  isNull,
+  not,
+  inArray,
+  and,
+  count,
+  sql,
+  desc,
+  asc,
+} from "drizzle-orm";
 import { db } from "~~/server/db";
 import { guests, households } from "~~/server/db/schema";
 
@@ -68,7 +78,23 @@ export const getAttendanceStatus = async () => {
     .from(guests);
 };
 
-export const paginatedGuestList = async (limit: number, offset: number) => {
+export const paginatedGuestList = async (
+  limit: number,
+  offset: number,
+  sort: "name_asc" | "name_desc" | "updated_asc" | "updated_desc",
+) => {
+  const orderBy = (() => {
+    switch (sort) {
+      case "name_asc":
+        return asc(guests.name);
+      case "name_desc":
+        return desc(guests.name);
+      case "updated_asc":
+        return asc(guests.updatedAt);
+      case "updated_desc":
+        return desc(guests.updatedAt);
+    }
+  })();
   const [guestList, totalCount] = await Promise.all([
     db
       .select({
@@ -80,7 +106,7 @@ export const paginatedGuestList = async (limit: number, offset: number) => {
       })
       .from(guests)
       .leftJoin(households, eq(guests.householdId, households.id))
-      .orderBy(desc(guests.updatedAt))
+      .orderBy(orderBy)
       .limit(limit)
       .offset(offset),
     db.$count(guests),
