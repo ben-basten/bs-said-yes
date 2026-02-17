@@ -9,7 +9,7 @@
         :not-responded="statusData?.status?.notResponded ?? null"
       />
       <GuestList ref="guestRef" />
-      <HouseholdList @updated="guestRef?.refreshGuests" />
+      <HouseholdList @updated="onHouseholdUpdated" />
       <RsvpDetails />
     </div>
   </ContentContainer>
@@ -27,9 +27,16 @@ useHead({
   title: "Dashboard | Admin",
 });
 
+const onHouseholdUpdated = () => {
+  guestRef.value?.refreshGuests();
+  refreshStatus();
+};
+
 const guestRef = useTemplateRef<InstanceType<typeof GuestList> | null>(
   "guestRef",
 );
 
-const { data: statusData } = await useFetch("/api/admin/guests/status");
+const { data: statusData, refresh: refreshStatus } = await useFetch(
+  "/api/admin/guests/status",
+);
 </script>
