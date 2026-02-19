@@ -18,49 +18,31 @@
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead>
-            <tr class="border-b border-slate">
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Nickname
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Invitation Sent
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Last Updated
-              </th>
-              <th
-                class="px-6 py-3 text-right text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Actions
-              </th>
+            <tr>
+              <th>Nickname</th>
+              <th>Invitation Sent</th>
+              <th>Last Updated</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-secondary">
+          <tbody>
             <tr
               v-for="household in listData.items"
               :key="household.id"
               class="hover:bg-secondary transition-colors"
             >
-              <td
-                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground"
-              >
+              <td>
                 {{ household.nickname }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <td>
                 <Chip :color="household.inviteSent ? 'green' : 'yellow'">
                   {{ household.inviteSent ? "Sent" : "Pending" }}
                 </Chip>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate">
+              <td>
                 {{ new Date(household.updatedAt).toLocaleDateString() }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
+              <td>
                 <button
                   class="button button-sm font-medium"
                   :aria-label="`Edit ${household.nickname}`"

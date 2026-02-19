@@ -10,41 +10,25 @@
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead>
-            <tr class="border-b border-slate">
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Name
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Relationship
-              </th>
-              <th
-                class="px-6 py-3 text-left text-xs font-medium text-slate uppercase tracking-wider"
-              >
-                Status
-              </th>
+            <tr>
+              <th>Name</th>
+              <th>Relationship</th>
+              <th>Status</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-secondary">
+          <tbody>
             <tr
               v-for="guest in listData?.guests"
               :key="guest.id"
               class="hover:bg-secondary"
             >
-              <td
-                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground"
-              >
+              <td>
                 {{ guest.name || `— (${guest.householdNickname})` }}
               </td>
-              <td
-                class="px-6 py-4 whitespace-nowrap text-sm text-slate capitalize"
-              >
+              <td class="capitalize">
                 {{ guest.relationshipType.replace(/_/g, " ") }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <td>
                 <Chip v-if="guest.isAttending === true" color="green">
                   Attending
                 </Chip>
