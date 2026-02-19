@@ -40,7 +40,7 @@
                 </Chip>
               </td>
               <td>
-                {{ new Date(household.updatedAt).toLocaleDateString() }}
+                {{ formatDate(household.updatedAt) }}
               </td>
               <td>
                 <button

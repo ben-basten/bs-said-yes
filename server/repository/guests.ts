@@ -102,6 +102,7 @@ export const paginatedGuestList = async (
         isAttending: guests.isAttending,
         relationshipType: guests.relationshipType,
         householdNickname: households.nickname,
+        updatedAt: guests.updatedAt,
       })
       .from(guests)
       .leftJoin(households, eq(guests.householdId, households.id))

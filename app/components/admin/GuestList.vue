@@ -14,6 +14,7 @@
               <th>Name</th>
               <th>Relationship</th>
               <th>Status</th>
+              <th>Last Updated</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -37,6 +38,9 @@
                   Not Attending
                 </Chip>
                 <Chip v-else color="yellow">Not Responded</Chip>
+              </td>
+              <td>
+                {{ formatDate(guest.updatedAt) }}
               </td>
               <td>
                 <button

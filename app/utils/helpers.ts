@@ -18,3 +18,8 @@ export const formatResultsMessage = (pagination: Pagination | undefined) => {
   const end = Math.min(pagination.page * pagination.limit, pagination.total);
   return `Showing ${start}-${end} of ${total} results.`;
 };
+
+export const formatDate = (raw: string) => {
+  const date = new Date(raw);
+  return date.toLocaleDateString();
+};
