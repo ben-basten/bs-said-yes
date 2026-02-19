@@ -65,6 +65,10 @@
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits<{
+  (e: "updated"): void;
+}>();
+
 const currentPage = ref(1);
 const isEditModalOpen = ref(false);
 const selectedGuest = ref<{
@@ -83,6 +87,7 @@ const openEditModal = (id: string) => {
 
 const onEditSuccess = () => {
   refreshGuests();
+  emit("updated");
 };
 
 const refreshGuests = () => {

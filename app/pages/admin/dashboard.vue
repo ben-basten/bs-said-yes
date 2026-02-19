@@ -8,7 +8,7 @@
         :not-attending="statusData?.status?.notAttending ?? null"
         :not-responded="statusData?.status?.notResponded ?? null"
       />
-      <GuestList ref="guestRef" />
+      <GuestList ref="guestRef" @updated="refreshStatus" />
       <HouseholdList @updated="onHouseholdUpdated" />
       <RsvpDetails />
     </div>
