@@ -42,13 +42,13 @@
         <button
           type="submit"
           :disabled="saving"
-          class="order-1 px-6 py-2 bg-foreground text-background rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
+          class="order-1 button button-sm"
         >
           {{ saving ? "Saving..." : "Save Changes" }}
         </button>
         <button
           type="button"
-          class="px-6 py-2 border-2 border-foreground rounded-xl hover:bg-secondary transition-colors"
+          class="button-secondary button-sm"
           @click="isOpen = false"
         >
           Cancel

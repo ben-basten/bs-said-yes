@@ -105,3 +105,10 @@ export const updatePlusOneName = async (
       ),
     );
 };
+
+export const updateGuest = async (
+  id: string,
+  data: Partial<typeof guests.$inferInsert>,
+) => {
+  return db.update(guests).set(data).where(eq(guests.id, id)).returning();
+};
