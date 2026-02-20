@@ -30,12 +30,8 @@ const handleSubmit = async () => {
 
   error.value = undefined;
   isLoading.value = true;
-  const accommodations = rsvpStore.accommodations
-    ? rsvpStore.accommodations
-    : null;
-  const songRecommendations = rsvpStore.songRequests
-    ? rsvpStore.songRequests
-    : null;
+  const accommodations = rsvpStore.accommodations || null;
+  const songRecommendations = rsvpStore.songRequests || null;
   submitRsvp({
     mainGuestId: rsvpStore.self.id,
     attendingGuestIds: rsvpStore.attendingIds,
