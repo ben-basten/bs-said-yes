@@ -48,6 +48,7 @@
         :src="data.image.url"
         :alt="data.image.description ?? ''"
         sizes="95vw md:50vw lg:730px"
+        :quality="90"
         class="object-cover aspect-4/3 w-full md:h-full max-w-none"
       />
       <div

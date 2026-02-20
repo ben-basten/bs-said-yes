@@ -13,6 +13,7 @@
       <ContentfulImage
         :src="data.image.url"
         :alt="data.image.description ?? ''"
+        loading="eager"
         sizes="100vw md:1050px lg:1300px xl:1500px"
         class="w-full aspect-2/1 md:aspect-3/1 object-cover max-w-max-width mx-auto"
       />
