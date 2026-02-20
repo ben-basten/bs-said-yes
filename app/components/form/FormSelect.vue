@@ -7,7 +7,7 @@
       <select
         :id
         v-model="model"
-        class="w-full px-4 py-2 bg-background border-2 border-foreground rounded-xl appearance-none"
+        class="w-full pl-4 pr-10 py-2 bg-background border-2 border-foreground rounded-xl appearance-none"
         :required
       >
         <option
