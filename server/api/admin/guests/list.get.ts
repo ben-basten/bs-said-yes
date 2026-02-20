@@ -7,7 +7,7 @@ const querySchema = z.object({
   limit: z.coerce.number().min(1).max(50).optional().default(10),
   page: z.coerce.number().min(1).optional().default(1),
   sort: z
-    .enum(["name_asc", "name_desc", "updated_asc", "updated_desc"])
+    .enum(["name_asc", "name_desc", "updated_desc"])
     .optional()
     .default("updated_desc"),
 });

@@ -81,7 +81,7 @@ export const getAttendanceStatus = async () => {
 export const paginatedGuestList = async (
   limit: number,
   offset: number,
-  sort: "name_asc" | "name_desc" | "updated_asc" | "updated_desc",
+  sort: "name_asc" | "name_desc" | "updated_desc",
 ) => {
   const orderBy = (() => {
     switch (sort) {
@@ -89,8 +89,6 @@ export const paginatedGuestList = async (
         return asc(guests.name);
       case "name_desc":
         return desc(guests.name);
-      case "updated_asc":
-        return asc(guests.updatedAt);
       case "updated_desc":
         return desc(guests.updatedAt);
     }
