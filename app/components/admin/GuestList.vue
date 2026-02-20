@@ -3,14 +3,15 @@
     title="Guest List"
     :subtitle
     :pagination="listData?.pagination"
-    @next="currentPage++"
-    @previous="currentPage = Math.max(1, currentPage - 1)"
+    @next="handlePagination(1)"
+    @previous="handlePagination(-1)"
   >
     <template #actions>
       <FormSelect
-        v-model="currentSort"
+        :model-value="currentSort"
         label="Sort By"
         :options="sortOptions"
+        @update:model-value="handleSortChange"
       />
     </template>
 
@@ -99,6 +100,18 @@ const sortOptions: { label: string; value: SortOption }[] = [
   { label: "Last Updated (Newest)", value: "updated_desc" },
 ];
 
+const handleSortChange = (value: string | undefined) => {
+  if (!value) return;
+  currentSort.value = value as SortOption;
+  currentPage.value = 1;
+  refreshGuests();
+};
+
+const handlePagination = (dir: 1 | -1) => {
+  currentPage.value = Math.max(1, currentPage.value + dir);
+  refreshGuests();
+};
+
 const openEditModal = (id: string) => {
   const guest = listData.value?.guests.find((g) => g.id === id);
   if (!guest) return;
@@ -123,6 +136,7 @@ const { data: listData, refresh } = await useFetch(
   () => "/api/admin/guests/list",
   {
     query: { page: currentPage, limit: 20, sort: currentSort },
+    watch: false,
   },
 );
 
