@@ -11,24 +11,10 @@
         <table class="w-full">
           <thead>
             <tr>
-              <th
-                class="cursor-pointer select-none"
-                @click="toggleSort('name')"
-              >
-                Name
-                <span v-if="currentSort.startsWith('name_')">&#9662;</span>
-                <span v-else-if="currentSort === 'name_desc'">&#9662;</span>
-              </th>
+              <th>Name</th>
               <th>Relationship</th>
               <th>Status</th>
-              <th
-                class="cursor-pointer select-none"
-                @click="toggleSort('updated')"
-              >
-                Last Updated
-                <span v-if="currentSort === 'updated_asc'">&#9652;</span>
-                <span v-else-if="currentSort === 'updated_desc'">&#9662;</span>
-              </th>
+              <th>Last Updated</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -87,10 +73,7 @@ const emit = defineEmits<{
   (e: "updated"): void;
 }>();
 
-type SortValue = "name_asc" | "name_desc" | "updated_asc" | "updated_desc";
-
 const currentPage = ref(1);
-const currentSort = ref<SortValue>("updated_desc");
 const isEditModalOpen = ref(false);
 const selectedGuest = ref<{
   id: string;
@@ -104,13 +87,6 @@ const openEditModal = (id: string) => {
   if (!guest) return;
   selectedGuest.value = guest;
   isEditModalOpen.value = true;
-};
-
-const toggleSort = (column: "name" | "updated") => {
-  const asc = `${column}_asc` as SortValue;
-  const desc = `${column}_desc` as SortValue;
-  currentSort.value = currentSort.value === desc ? asc : desc;
-  currentPage.value = 1;
 };
 
 const onEditSuccess = () => {
@@ -129,7 +105,7 @@ defineExpose({
 const { data: listData, refresh } = await useFetch(
   () => "/api/admin/guests/list",
   {
-    query: { page: currentPage, limit: 20, sort: currentSort },
+    query: { page: currentPage, limit: 20 },
   },
 );
 
