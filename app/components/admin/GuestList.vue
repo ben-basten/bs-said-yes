@@ -3,9 +3,18 @@
     title="Guest List"
     :subtitle
     :pagination="listData?.pagination"
-    @next="currentPage++"
-    @previous="currentPage = Math.max(1, currentPage - 1)"
+    @next="handlePagination(1)"
+    @previous="handlePagination(-1)"
   >
+    <template #actions>
+      <FormSelect
+        :model-value="currentSort"
+        label="Sort By"
+        :options="sortOptions"
+        @update:model-value="handleSortChange"
+      />
+    </template>
+
     <div v-if="listData?.guests && listData.guests.length > 0">
       <div class="overflow-x-auto">
         <table class="w-full">
@@ -14,6 +23,7 @@
               <th>Name</th>
               <th>Relationship</th>
               <th>Status</th>
+              <th>Last Updated</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -37,6 +47,9 @@
                   Not Attending
                 </Chip>
                 <Chip v-else color="yellow">Not Responded</Chip>
+              </td>
+              <td>
+                {{ formatDate(guest.updatedAt) }}
               </td>
               <td>
                 <button
@@ -69,14 +82,35 @@ const emit = defineEmits<{
   (e: "updated"): void;
 }>();
 
+type SortOption = "name_asc" | "name_desc" | "updated_desc";
+
 const currentPage = ref(1);
 const isEditModalOpen = ref(false);
+const currentSort = ref<SortOption>("updated_desc");
 const selectedGuest = ref<{
   id: string;
   name: string | null;
   isAttending: boolean | null;
   householdNickname: string | null;
 } | null>(null);
+
+const sortOptions: { label: string; value: SortOption }[] = [
+  { label: "Name (A-Z)", value: "name_asc" },
+  { label: "Name (Z-A)", value: "name_desc" },
+  { label: "Last Updated (Newest)", value: "updated_desc" },
+];
+
+const handleSortChange = (value: string | undefined) => {
+  if (!value) return;
+  currentSort.value = value as SortOption;
+  currentPage.value = 1;
+  refreshGuests();
+};
+
+const handlePagination = (dir: 1 | -1) => {
+  currentPage.value = Math.max(1, currentPage.value + dir);
+  refreshGuests();
+};
 
 const openEditModal = (id: string) => {
   const guest = listData.value?.guests.find((g) => g.id === id);
@@ -101,7 +135,8 @@ defineExpose({
 const { data: listData, refresh } = await useFetch(
   () => "/api/admin/guests/list",
   {
-    query: { page: currentPage, limit: 20 },
+    query: { page: currentPage, limit: 20, sort: currentSort },
+    watch: false,
   },
 );
 
