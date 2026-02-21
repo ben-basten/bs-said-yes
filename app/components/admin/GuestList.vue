@@ -91,6 +91,7 @@ const selectedGuest = ref<{
   id: string;
   name: string | null;
   isAttending: boolean | null;
+  isSearchable: boolean;
   householdNickname: string | null;
 } | null>(null);
 

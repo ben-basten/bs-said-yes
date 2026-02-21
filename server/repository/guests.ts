@@ -99,6 +99,7 @@ export const paginatedGuestList = async (
         id: guests.id,
         name: guests.name,
         isAttending: guests.isAttending,
+        isSearchable: guests.isSearchable,
         relationshipType: guests.relationshipType,
         householdNickname: households.nickname,
         updatedAt: guests.updatedAt,
