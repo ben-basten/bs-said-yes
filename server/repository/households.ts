@@ -7,7 +7,13 @@ export const getPaginatedHouseholds = async (limit: number, page: number) => {
 
   const [items, total] = await Promise.all([
     db
-      .select()
+      .select({
+        id: households.id,
+        nickname: households.nickname,
+        mailingAddress: households.mailingAddress,
+        inviteSent: households.inviteSent,
+        updatedAt: households.updatedAt,
+      })
       .from(households)
       .orderBy(asc(households.inviteSent), asc(households.nickname))
       .limit(limit)
