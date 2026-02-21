@@ -10,14 +10,14 @@
     @secondary="rsvpStore.reset()"
   >
     <fieldset class="flex flex-col gap-y-4">
-      <FormCheckbox
+      <RsvpCheckbox
         v-if="rsvpStore.self"
         v-model="rsvpStore.attendingIds"
         :label="rsvpStore.self.displayName"
         :value="rsvpStore.self.id"
         name="attending"
       />
-      <FormCheckbox
+      <RsvpCheckbox
         v-for="guest in rsvpStore.guests"
         :key="guest.id"
         v-model="rsvpStore.attendingIds"

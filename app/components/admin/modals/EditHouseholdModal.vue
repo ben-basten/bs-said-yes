@@ -23,20 +23,7 @@
         :rows="4"
       />
 
-      <div class="flex items-center gap-3">
-        <input
-          id="inviteSentCheckbox"
-          v-model="editForm.inviteSent"
-          type="checkbox"
-          class="size-5 rounded border-2 border-foreground accent-accent cursor-pointer"
-        />
-        <label
-          for="inviteSentCheckbox"
-          class="text-lg font-semibold cursor-pointer"
-        >
-          Invitation Sent
-        </label>
-      </div>
+      <FormCheckbox v-model="editForm.inviteSent" label="Invitation Sent" />
 
       <div class="pt-4 flex justify-end gap-3">
         <button
