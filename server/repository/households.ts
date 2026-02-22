@@ -19,6 +19,7 @@ export const getPaginatedHouseholds = async (limit: number, page: number) => {
           columns: {
             name: true,
             relationshipType: true,
+            isAttending: true,
           },
         },
       },

@@ -40,13 +40,7 @@
                 {{ formatRelationshipType(guest.relationshipType) }}
               </td>
               <td>
-                <Chip v-if="guest.isAttending === true" color="green">
-                  Attending
-                </Chip>
-                <Chip v-else-if="guest.isAttending === false" color="red">
-                  Not Attending
-                </Chip>
-                <Chip v-else color="yellow">Not Responded</Chip>
+                <StatusChip :is-attending="guest.isAttending" />
               </td>
               <td>
                 {{ formatDate(guest.updatedAt) }}

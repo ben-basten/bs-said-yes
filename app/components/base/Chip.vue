@@ -1,6 +1,6 @@
 <template>
   <span
-    class="px-3 py-1 rounded-full text-xs font-semibold"
+    class="px-3 py-1 rounded-full text-xs font-semibold text-center h-min"
     :class="colorClass"
   >
     <slot />

@@ -27,11 +27,18 @@
 
       <div>
         <Heading as="h2" variant="h4">Guests in this Household</Heading>
-        <p v-for="(guest, index) in guests" :key="index" class="mt-2">
-          {{ guest.name || "Unnamed Guest" }} ({{
-            formatRelationshipType(guest.relationshipType)
-          }})
-        </p>
+        <div
+          v-for="(guest, index) in guests"
+          :key="index"
+          class="mt-2 flex gap-x-3 justify-between"
+        >
+          <p>
+            {{ guest.name || "Unnamed Guest" }} ({{
+              formatRelationshipType(guest.relationshipType)
+            }})
+          </p>
+          <StatusChip :is-attending="guest.isAttending" class="shrink-0" />
+        </div>
       </div>
 
       <div class="pt-4 flex justify-end gap-3">
