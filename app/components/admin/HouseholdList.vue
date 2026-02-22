@@ -88,7 +88,7 @@ const {
   pending,
   refresh,
 } = await useFetch(() => `/api/admin/households/list`, {
-  query: { page: currentPage, limit: 10 },
+  query: { page: currentPage, limit: 20 },
   watch: [currentPage],
 });
 
