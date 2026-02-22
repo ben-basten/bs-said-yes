@@ -23,19 +23,15 @@
         :rows="4"
       />
 
-      <div class="flex items-center gap-3">
-        <input
-          id="inviteSentCheckbox"
-          v-model="editForm.inviteSent"
-          type="checkbox"
-          class="size-5 rounded border-2 border-foreground accent-accent cursor-pointer"
-        />
-        <label
-          for="inviteSentCheckbox"
-          class="text-lg font-semibold cursor-pointer"
-        >
-          Invitation Sent
-        </label>
+      <FormCheckbox v-model="editForm.inviteSent" label="Invitation Sent" />
+
+      <div>
+        <Heading as="h2" variant="h4">Guests in this Household</Heading>
+        <p v-for="(guest, index) in guests" :key="index" class="mt-2">
+          {{ guest.name || "Unnamed Guest" }} ({{
+            formatRelationshipType(guest.relationshipType)
+          }})
+        </p>
       </div>
 
       <div class="pt-4 flex justify-end gap-3">
@@ -108,4 +104,6 @@ const updateHouseholdDetails = async () => {
     saving.value = false;
   }
 };
+
+const guests = computed(() => props.household?.guests || []);
 </script>

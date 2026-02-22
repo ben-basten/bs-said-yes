@@ -1,32 +1,22 @@
 <template>
-  <div class="relative">
+  <div class="flex items-center gap-3">
     <input
-      :id="value"
+      :id
       v-model="model"
       type="checkbox"
-      :name="name"
-      :value="value"
-      class="peer sr-only"
+      class="size-5 rounded border-2 border-foreground accent-accent cursor-pointer"
     />
-    <label
-      :for="value"
-      class="block rounded-lg py-4 pl-4 pr-10 border-2 border-foreground text-lg cursor-pointer bg-background peer-checked:bg-green-800/10 peer-focus-visible:outline-2 outline-offset-2 outline-accent select-none transition-colors ease-out duration-default"
-    >
+    <label :for="id" class="text-lg font-semibold cursor-pointer">
       {{ label }}
     </label>
-    <IconCheck
-      aria-hidden
-      class="size-7 absolute right-3 top-1/2 -translate-y-1/2 invisible peer-checked:visible"
-    />
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  label: string;
-  value: string;
-  name: string;
-}>();
+const model = defineModel<boolean>();
+const id = useId();
 
-const model = defineModel<string[] | boolean>();
+const { label } = defineProps<{
+  label: string;
+}>();
 </script>

@@ -18,6 +18,11 @@
         :options="attendanceOptions"
       />
 
+      <FormCheckbox
+        v-model="editForm.isSearchable"
+        label="Searchable from RSVP form"
+      />
+
       <div class="pt-4 flex justify-end gap-3">
         <button
           type="submit"
@@ -39,13 +44,10 @@
 </template>
 
 <script setup lang="ts">
+import type { AdminGuest } from "~/types/Guest";
+
 const props = defineProps<{
-  guest: {
-    id: string;
-    name: string | null;
-    isAttending: boolean | null;
-    householdNickname: string | null;
-  } | null;
+  guest: AdminGuest | null;
 }>();
 
 const isOpen = defineModel<boolean>("open", { default: false });
@@ -55,6 +57,7 @@ const saving = ref(false);
 const editForm = reactive({
   name: "",
   isAttending: "",
+  isSearchable: false,
 });
 
 const attendanceOptions = [
@@ -71,6 +74,7 @@ watch(
       editForm.name = newGuest.name || "";
       editForm.isAttending =
         newGuest.isAttending === null ? "null" : String(newGuest.isAttending);
+      editForm.isSearchable = newGuest.isSearchable;
     }
   },
   { immediate: true },
@@ -88,6 +92,7 @@ const updateGuestDetails = async () => {
       body: {
         name: editForm.name,
         isAttending,
+        isSearchable: editForm.isSearchable,
       },
     });
 

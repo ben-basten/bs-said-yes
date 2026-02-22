@@ -36,8 +36,8 @@
               <td>
                 {{ guest.name || `— (${guest.householdNickname})` }}
               </td>
-              <td class="capitalize">
-                {{ guest.relationshipType.replace(/_/g, " ") }}
+              <td>
+                {{ formatRelationshipType(guest.relationshipType) }}
               </td>
               <td>
                 <Chip v-if="guest.isAttending === true" color="green">
@@ -78,6 +78,8 @@
 </template>
 
 <script setup lang="ts">
+import type { AdminGuest } from "~/types/Guest";
+
 const emit = defineEmits<{
   (e: "updated"): void;
 }>();
@@ -87,12 +89,7 @@ type SortOption = "name_asc" | "name_desc" | "updated_desc";
 const currentPage = ref(1);
 const isEditModalOpen = ref(false);
 const currentSort = ref<SortOption>("updated_desc");
-const selectedGuest = ref<{
-  id: string;
-  name: string | null;
-  isAttending: boolean | null;
-  householdNickname: string | null;
-} | null>(null);
+const selectedGuest = ref<AdminGuest | null>(null);
 
 const sortOptions: { label: string; value: SortOption }[] = [
   { label: "Name (A-Z)", value: "name_asc" },

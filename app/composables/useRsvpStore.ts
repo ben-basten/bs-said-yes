@@ -1,5 +1,5 @@
 import type { InternalApi } from "nitropack";
-import type { Guest } from "~/types/Guest";
+import type { RsvpGuest } from "~/types/Guest";
 
 type LookupResponse = InternalApi["/api/rsvp/lookup"]["get"];
 
@@ -12,8 +12,8 @@ export const useRsvpStore = defineStore("rsvp", () => {
   const plusOneName = ref("");
 
   // API response
-  const self = ref<Guest>({} as Guest);
-  const guests = ref<Guest[]>([]);
+  const self = ref<RsvpGuest>({} as RsvpGuest);
+  const guests = ref<RsvpGuest[]>([]);
 
   const anonymousGuest = computed(() => {
     return guests.value.find(
@@ -23,7 +23,7 @@ export const useRsvpStore = defineStore("rsvp", () => {
 
   const reset = () => {
     currentStep.value = 1;
-    self.value = {} as Guest;
+    self.value = {} as RsvpGuest;
     guests.value = [];
     attendingIds.value = [];
     accommodations.value = "";

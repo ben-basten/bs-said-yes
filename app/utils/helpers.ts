@@ -23,3 +23,16 @@ export const formatDate = (raw: string) => {
   const date = new Date(raw);
   return date.toLocaleDateString();
 };
+
+export const formatRelationshipType = (type: string) => {
+  switch (type) {
+    case "primary":
+      return "Primary";
+    case "plus_one":
+      return "Plus One";
+    case "child":
+      return "Child";
+    default:
+      return type;
+  }
+};

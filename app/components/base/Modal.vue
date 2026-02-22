@@ -7,12 +7,15 @@
       <DialogContent
         class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-150 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-background p-8 shadow-2xl focus:outline-none overflow-y-auto"
       >
-        <div class="flex justify-between items-center mb-6">
+        <div class="flex justify-between gap-x-2 items-center mb-6">
           <DialogTitle v-if="title">
             <Heading as="h1" variant="h3">{{ title }}</Heading>
           </DialogTitle>
           <DialogClose as-child>
-            <IconButton label="Close" class="border-2 border-foreground -mr-2">
+            <IconButton
+              label="Close"
+              class="border-2 border-foreground hover:border-slate hover:bg-slate hover:text-background transition-colors -mr-2 shrink-0"
+            >
               <IconClose class="size-6" />
             </IconButton>
           </DialogClose>

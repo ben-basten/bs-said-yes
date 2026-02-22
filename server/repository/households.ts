@@ -1,4 +1,4 @@
-import { eq, asc } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { households, guests } from "~~/server/db/schema";
 
@@ -6,12 +6,29 @@ export const getPaginatedHouseholds = async (limit: number, page: number) => {
   const offset = (page - 1) * limit;
 
   const [items, total] = await Promise.all([
-    db
-      .select()
-      .from(households)
-      .orderBy(asc(households.inviteSent), asc(households.nickname))
-      .limit(limit)
-      .offset(offset),
+    db.query.households.findMany({
+      columns: {
+        id: true,
+        nickname: true,
+        mailingAddress: true,
+        inviteSent: true,
+        updatedAt: true,
+      },
+      with: {
+        guests: {
+          columns: {
+            name: true,
+            relationshipType: true,
+          },
+        },
+      },
+      orderBy: (households, { asc }) => [
+        asc(households.inviteSent),
+        asc(households.nickname),
+      ],
+      limit,
+      offset,
+    }),
     db.$count(households),
   ]);
 
