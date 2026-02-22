@@ -3,7 +3,7 @@
     <div
       class="p-6 border-b border-slate flex items-center justify-between gap-5 flex-wrap"
     >
-      <div>
+      <div aria-live="polite">
         <Heading as="h2" variant="h4">{{ title }}</Heading>
         <p v-if="subtitle" class="text-sm text-slate mt-1">
           {{ subtitle }}

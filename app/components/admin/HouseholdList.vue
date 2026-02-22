@@ -3,8 +3,8 @@
     title="Households"
     :subtitle
     :pagination="listData?.pagination"
-    @next="currentPage++"
-    @previous="currentPage--"
+    @next="handlePagination(1)"
+    @previous="handlePagination(-1)"
   >
     <template #actions>
       <button class="button button-sm" @click="openCreateModal">Create</button>
@@ -25,10 +25,11 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody ref="tbodyRef">
             <tr
               v-for="household in listData.items"
               :key="household.id"
+              tabindex="-1"
               class="hover:bg-secondary transition-colors"
             >
               <td>
@@ -78,6 +79,8 @@ import type { Household } from "~/types/Household";
 const isEditModalOpen = ref(false);
 const isCreateModalOpen = ref(false);
 const selectedHousehold = ref<Household | null>(null);
+const tbodyRef = ref<HTMLTableSectionElement | null>(null);
+let isPaginating = false;
 
 const currentPage = ref(1);
 const {
@@ -85,8 +88,20 @@ const {
   pending,
   refresh,
 } = await useFetch(() => `/api/admin/households/list`, {
-  query: { page: currentPage, limit: 20 },
+  query: { page: currentPage, limit: 10 },
   watch: [currentPage],
+});
+
+watch(listData, async () => {
+  if (isPaginating) {
+    await nextTick();
+    if (tbodyRef.value) {
+      const firstRow = tbodyRef.value.querySelector("tr");
+      firstRow?.focus({ preventScroll: true });
+      firstRow?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    isPaginating = false;
+  }
 });
 
 const emit = defineEmits<{
@@ -105,6 +120,11 @@ const openEditModal = (household: Household) => {
 
 const openCreateModal = () => {
   isCreateModalOpen.value = true;
+};
+
+const handlePagination = (dir: 1 | -1) => {
+  currentPage.value = Math.max(1, currentPage.value + dir);
+  isPaginating = true;
 };
 
 const subtitle = computed(() => {

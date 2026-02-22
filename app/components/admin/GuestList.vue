@@ -27,10 +27,11 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody ref="tbodyRef">
             <tr
               v-for="guest in listData?.guests"
               :key="guest.id"
+              tabindex="-1"
               class="hover:bg-secondary"
             >
               <td>
@@ -84,6 +85,8 @@ const currentPage = ref(1);
 const isEditModalOpen = ref(false);
 const currentSort = ref<SortOption>("updated_desc");
 const selectedGuest = ref<AdminGuest | null>(null);
+const tbodyRef = ref<HTMLTableSectionElement | null>(null);
+let isPaginating = false;
 
 const sortOptions: { label: string; value: SortOption }[] = [
   { label: "Name (A-Z)", value: "name_asc" },
@@ -100,6 +103,7 @@ const handleSortChange = (value: string | undefined) => {
 
 const handlePagination = (dir: 1 | -1) => {
   currentPage.value = Math.max(1, currentPage.value + dir);
+  isPaginating = true;
   refreshGuests();
 };
 
@@ -130,6 +134,18 @@ const { data: listData, refresh } = await useFetch(
     watch: false,
   },
 );
+
+watch(listData, async () => {
+  if (isPaginating) {
+    await nextTick();
+    if (tbodyRef.value) {
+      const firstRow = tbodyRef.value.querySelector("tr");
+      firstRow?.focus({ preventScroll: true });
+      firstRow?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    isPaginating = false;
+  }
+});
 
 const subtitle = computed(() => {
   return formatResultsMessage(listData.value?.pagination);
