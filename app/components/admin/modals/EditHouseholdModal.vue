@@ -25,6 +25,15 @@
 
       <FormCheckbox v-model="editForm.inviteSent" label="Invitation Sent" />
 
+      <div>
+        <Heading as="h2" variant="h4">Guests in this Household</Heading>
+        <p v-for="(guest, index) in guests" :key="index" class="mt-2">
+          {{ guest.name || "Unnamed Guest" }} ({{
+            formatRelationshipType(guest.relationshipType)
+          }})
+        </p>
+      </div>
+
       <div class="pt-4 flex justify-end gap-3">
         <button
           type="submit"
@@ -95,4 +104,6 @@ const updateHouseholdDetails = async () => {
     saving.value = false;
   }
 };
+
+const guests = computed(() => props.household?.guests || []);
 </script>

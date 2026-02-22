@@ -1,7 +1,6 @@
-export interface Household {
-  id: string;
-  nickname: string;
-  mailingAddress: string;
-  inviteSent: boolean;
-  updatedAt: string;
-}
+import type { InternalApi } from "nitropack";
+
+type Household =
+  InternalApi["/api/admin/households/list"]["get"]["items"][number];
+
+export type { Household };
