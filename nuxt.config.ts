@@ -9,6 +9,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  routeRules: {
+    "/admin": { redirect: "/admin/dashboard" },
+  },
   modules: [
     "@nuxt/fonts",
     "@nuxt/eslint",
