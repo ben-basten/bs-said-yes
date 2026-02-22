@@ -36,8 +36,8 @@
               <td>
                 {{ guest.name || `— (${guest.householdNickname})` }}
               </td>
-              <td class="capitalize">
-                {{ guest.relationshipType.replace(/_/g, " ") }}
+              <td>
+                {{ formatRelationshipType(guest.relationshipType) }}
               </td>
               <td>
                 <Chip v-if="guest.isAttending === true" color="green">
