@@ -1,6 +1,14 @@
 <template>
-  <Modal v-model:open="isOpen" title="Create New Household">
-    <form class="space-y-6" @submit.prevent="createHouseholdSubmit">
+  <Modal
+    v-model:open="isOpen"
+    title="Create New Household"
+    :primary-text="saving ? 'Creating...' : 'Create Household'"
+    secondary-text="Cancel"
+    :primary-disabled="saving"
+    @primary="createHouseholdSubmit"
+    @secondary="isOpen = false"
+  >
+    <form class="space-y-6">
       <FormInput
         v-model="createForm.nickname"
         label="Household Nickname"
@@ -63,23 +71,6 @@
           @click="addGuest"
         >
           + Add Guest
-        </button>
-      </div>
-
-      <div class="pt-4 flex justify-end gap-3">
-        <button
-          type="submit"
-          :disabled="saving"
-          class="order-1 button button-sm"
-        >
-          {{ saving ? "Creating..." : "Create Household" }}
-        </button>
-        <button
-          type="button"
-          class="button-secondary button-sm"
-          @click="isOpen = false"
-        >
-          Cancel
         </button>
       </div>
     </form>

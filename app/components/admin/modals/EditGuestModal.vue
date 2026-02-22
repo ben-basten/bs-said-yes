@@ -2,8 +2,13 @@
   <Modal
     v-model:open="isOpen"
     :title="`Edit Guest: ${guest?.name || `Unknown (${guest?.householdNickname})`}`"
+    :primary-text="saving ? 'Saving...' : 'Save Changes'"
+    secondary-text="Cancel"
+    :primary-disabled="saving"
+    @primary="updateGuestDetails"
+    @secondary="isOpen = false"
   >
-    <form v-if="guest" class="space-y-6" @submit.prevent="updateGuestDetails">
+    <form v-if="guest" class="space-y-6">
       <FormInput
         v-model="editForm.name"
         label="Guest Name"
@@ -22,23 +27,6 @@
         v-model="editForm.isSearchable"
         label="Searchable from RSVP form"
       />
-
-      <div class="pt-4 flex justify-end gap-3">
-        <button
-          type="submit"
-          :disabled="saving"
-          class="order-1 button button-sm"
-        >
-          {{ saving ? "Saving..." : "Save Changes" }}
-        </button>
-        <button
-          type="button"
-          class="button-secondary button-sm"
-          @click="isOpen = false"
-        >
-          Cancel
-        </button>
-      </div>
     </form>
   </Modal>
 </template>

@@ -23,6 +23,28 @@
         <div>
           <slot />
         </div>
+        <div
+          v-if="primaryText || secondaryText"
+          class="pt-4 flex justify-end gap-3 mt-6"
+        >
+          <button
+            v-if="primaryText"
+            type="button"
+            :disabled="primaryDisabled"
+            class="order-1 button button-sm"
+            @click="$emit('primary')"
+          >
+            {{ primaryText }}
+          </button>
+          <button
+            v-if="secondaryText"
+            type="button"
+            class="button-secondary button-sm"
+            @click="$emit('secondary')"
+          >
+            {{ secondaryText }}
+          </button>
+        </div>
       </DialogContent>
     </DialogPortal>
   </DialogRoot>
@@ -42,9 +64,13 @@ import { IconClose } from "#components";
 defineProps<{
   open?: boolean;
   title?: string;
+  primaryText?: string;
+  secondaryText?: string;
+  primaryDisabled?: boolean;
 }>();
 
 defineEmits<{
   (e: "update:open", value: boolean): void;
+  (e: "primary" | "secondary"): void;
 }>();
 </script>

@@ -2,12 +2,13 @@
   <Modal
     v-model:open="isOpen"
     :title="`Edit Household: ${household?.nickname}`"
+    :primary-text="saving ? 'Saving...' : 'Save Changes'"
+    secondary-text="Cancel"
+    :primary-disabled="saving"
+    @primary="updateHouseholdDetails"
+    @secondary="isOpen = false"
   >
-    <form
-      v-if="household"
-      class="space-y-6"
-      @submit.prevent="updateHouseholdDetails"
-    >
+    <form v-if="household" class="space-y-6">
       <FormInput
         v-model="editForm.nickname"
         label="Household Nickname"
@@ -39,23 +40,6 @@
           </p>
           <StatusChip :is-attending="guest.isAttending" class="shrink-0" />
         </div>
-      </div>
-
-      <div class="pt-4 flex justify-end gap-3">
-        <button
-          type="submit"
-          :disabled="saving"
-          class="order-1 button button-sm"
-        >
-          {{ saving ? "Saving..." : "Save Changes" }}
-        </button>
-        <button
-          type="button"
-          class="button-secondary button-sm"
-          @click="isOpen = false"
-        >
-          Cancel
-        </button>
       </div>
     </form>
   </Modal>
