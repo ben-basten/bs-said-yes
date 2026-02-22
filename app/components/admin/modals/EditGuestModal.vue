@@ -44,14 +44,10 @@
 </template>
 
 <script setup lang="ts">
+import type { AdminGuest } from "~/types/Guest";
+
 const props = defineProps<{
-  guest: {
-    id: string;
-    name: string | null;
-    isAttending: boolean | null;
-    isSearchable: boolean;
-    householdNickname: string | null;
-  } | null;
+  guest: AdminGuest | null;
 }>();
 
 const isOpen = defineModel<boolean>("open", { default: false });

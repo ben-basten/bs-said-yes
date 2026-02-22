@@ -78,6 +78,8 @@
 </template>
 
 <script setup lang="ts">
+import type { AdminGuest } from "~/types/Guest";
+
 const emit = defineEmits<{
   (e: "updated"): void;
 }>();
@@ -87,13 +89,7 @@ type SortOption = "name_asc" | "name_desc" | "updated_desc";
 const currentPage = ref(1);
 const isEditModalOpen = ref(false);
 const currentSort = ref<SortOption>("updated_desc");
-const selectedGuest = ref<{
-  id: string;
-  name: string | null;
-  isAttending: boolean | null;
-  isSearchable: boolean;
-  householdNickname: string | null;
-} | null>(null);
+const selectedGuest = ref<AdminGuest | null>(null);
 
 const sortOptions: { label: string; value: SortOption }[] = [
   { label: "Name (A-Z)", value: "name_asc" },
