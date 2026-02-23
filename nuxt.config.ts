@@ -11,6 +11,8 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/admin": { redirect: "/admin/dashboard" },
+    "/admin/login": { prerender: true },
+    "/login": { prerender: true },
   },
   modules: [
     "@nuxt/fonts",
