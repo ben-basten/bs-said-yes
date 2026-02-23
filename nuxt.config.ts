@@ -10,9 +10,16 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/admin": { redirect: "/admin/dashboard" },
+    // CDN-cached content pages (5 min SWR)
+    "/": { swr: 300 },
+    "/**": { swr: 300 },
+
+    // No caching for API, admin, login, or memory routes
     "/api/**": { swr: false },
-    "/": { swr: true },
+    "/admin": { redirect: "/admin/dashboard" },
+    "/admin/**": { swr: false },
+    "/login": { swr: false },
+    "/memory/**": { swr: false },
   },
   modules: [
     "@nuxt/fonts",
