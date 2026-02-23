@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/admin": { redirect: "/admin/dashboard" },
+    "/**": { swr: true },
   },
   modules: [
     "@nuxt/fonts",
