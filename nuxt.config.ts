@@ -10,11 +10,9 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/": { swr: 300 },
-    "/rsvp": { swr: 300 },
-    "/travel": { swr: 300 },
-    "/our-story": { swr: 300 },
     "/admin": { redirect: "/admin/dashboard" },
+    "/admin/login": { prerender: true },
+    "/login": { prerender: true },
   },
   modules: [
     "@nuxt/fonts",
