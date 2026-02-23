@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/admin": { redirect: "/admin/dashboard" },
+    "/api/**": { swr: false },
     "/**": { swr: true },
   },
   modules: [
