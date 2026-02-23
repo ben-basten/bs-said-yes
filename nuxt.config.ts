@@ -14,6 +14,11 @@ export default defineNuxtConfig({
     "/admin/login": { prerender: true },
     "/login": { prerender: true },
   },
+  nitro: {
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
   modules: [
     "@nuxt/fonts",
     "@nuxt/eslint",
