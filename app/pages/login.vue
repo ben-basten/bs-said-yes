@@ -35,8 +35,15 @@ definePageMeta({
   layout: "minimal",
 });
 
+const { data } = await useFetch("/api/cms/seo");
 useHead({
-  title: "Login",
+  title: data.value?.title,
+  meta: [
+    {
+      property: "og:image",
+      content: data.value?.ogImage?.url,
+    },
+  ],
 });
 
 const { loggedIn, fetch: refreshSession } = useUserSession();
