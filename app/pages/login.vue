@@ -35,7 +35,11 @@ definePageMeta({
   layout: "minimal",
 });
 
-useSeoHead("Login");
+const { data } = await useFetch("/api/cms/seo");
+useSeoHead(
+  data.value?.title ?? undefined,
+  data.value?.ogImage?.url ?? undefined,
+);
 
 const { loggedIn, fetch: refreshSession } = useUserSession();
 const route = useRoute();

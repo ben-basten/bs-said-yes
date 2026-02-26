@@ -1,12 +1,10 @@
-export const useSeoHead = (title: string | undefined) => {
-  const url = useRequestURL();
-
+export const useSeoHead = (title: string | undefined, image?: string) => {
   useHead({
     title,
     meta: [
       {
         property: "og:image",
-        content: `${url.origin}/img/bench-og.jpg`,
+        content: image,
       },
       {
         property: "og:title",
