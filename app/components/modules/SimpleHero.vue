@@ -45,7 +45,7 @@ onMounted(() => {
   if (!imageRef.value) return;
   const tl = gsap.timeline({
     defaults: {
-      duration: 0.5,
+      duration: 0.75,
       ease: "power3.out",
     },
   });

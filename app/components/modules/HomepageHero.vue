@@ -57,8 +57,13 @@ const images = computed(() =>
 );
 
 const heroText = ref<HTMLElement | null>(null);
+const { prefersReducedMotion } = usePrefersReducedMotion();
 
 onMounted(() => {
+  if (prefersReducedMotion.value) {
+    return;
+  }
+
   const tl = gsap.timeline({
     defaults: {
       duration: 1,
@@ -87,5 +92,9 @@ onMounted(() => {
     },
     "-=0.6",
   );
+
+  return () => {
+    tl.kill();
+  };
 });
 </script>
