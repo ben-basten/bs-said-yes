@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     "/admin": { redirect: "/admin/dashboard" },
     "/admin/login": { prerender: true },
     "/login": {
-      prerender: true,
+      isr: true,
       // required to get correct hostname in meta tags
       cache: { varies: ["host", "x-forwarded-host"] },
     },
