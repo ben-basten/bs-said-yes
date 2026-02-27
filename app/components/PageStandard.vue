@@ -33,23 +33,10 @@ if (error.value) {
   });
 }
 
-const url = useRequestURL();
 watch(
   data,
   () => {
-    useHead({
-      title: data.value?.seoTitle || undefined,
-      meta: [
-        {
-          property: "og:image",
-          content: `${url.origin}/img/bench-og.jpg`,
-        },
-        {
-          property: "og:title",
-          content: data.value?.seoTitle || undefined,
-        },
-      ],
-    });
+    useSeoHead(data.value?.seoTitle || undefined);
   },
   { immediate: true },
 );

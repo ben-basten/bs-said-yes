@@ -35,20 +35,7 @@ definePageMeta({
   layout: "minimal",
 });
 
-const url = useRequestURL();
-useHead({
-  title: "Login",
-  meta: [
-    {
-      property: "og:image",
-      content: `${url.origin}/img/bench-og.jpg`,
-    },
-    {
-      property: "og:title",
-      content: "Login",
-    },
-  ],
-});
+useSeoHead("Login");
 
 const { loggedIn, fetch: refreshSession } = useUserSession();
 const route = useRoute();
