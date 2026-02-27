@@ -36,9 +36,7 @@ if (error.value) {
 watch(
   data,
   () => {
-    useHead({
-      title: data.value?.seoTitle || undefined,
-    });
+    useSeoHead(data.value?.seoTitle || undefined);
   },
   { immediate: true },
 );

@@ -35,9 +35,7 @@ definePageMeta({
   layout: "minimal",
 });
 
-useHead({
-  title: "Login",
-});
+useSeoHead("Login");
 
 const { loggedIn, fetch: refreshSession } = useUserSession();
 const route = useRoute();
