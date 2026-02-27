@@ -35,13 +35,13 @@ definePageMeta({
   layout: "minimal",
 });
 
-const { data } = await useFetch("/api/cms/seo");
+const url = useRequestURL();
 useHead({
-  title: data.value?.title,
+  title: "Login",
   meta: [
     {
       property: "og:image",
-      content: data.value?.ogImage?.url,
+      content: `${url.origin}/img/bench-og.jpg`,
     },
   ],
 });
