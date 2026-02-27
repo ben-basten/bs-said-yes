@@ -43,6 +43,10 @@ useHead({
       property: "og:image",
       content: `${url.origin}/img/bench-og.jpg`,
     },
+    {
+      property: "og:title",
+      content: "Login",
+    },
   ],
 });
 
