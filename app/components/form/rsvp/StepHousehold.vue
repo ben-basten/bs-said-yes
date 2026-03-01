@@ -25,6 +25,9 @@
         :value="guest.id"
         name="attending"
       />
+      <p class="text-sm font-bold -mt-2 text-center">
+        {{ message }}
+      </p>
     </fieldset>
     <FormInput
       v-if="rsvpStore.anonymousGuest"
@@ -42,6 +45,13 @@
 const rsvpStore = useRsvpStore();
 const isLoading = ref(false);
 const error = ref<string | undefined>(undefined);
+
+const message = computed(() => {
+  if (!rsvpStore.isAttending()) {
+    return "Not attending";
+  }
+  return `${rsvpStore.attendingCount} guest${rsvpStore.attendingCount > 1 ? "s" : ""} attending`;
+});
 
 const handleSubmit = async () => {
   if (isLoading.value) return;

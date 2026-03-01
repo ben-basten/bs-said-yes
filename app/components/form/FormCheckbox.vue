@@ -6,7 +6,7 @@
       type="checkbox"
       class="size-5 rounded border-2 border-foreground accent-accent cursor-pointer"
     />
-    <label :for="id" class="text-lg font-semibold cursor-pointer">
+    <label :for="id" class="text-lg font-semibold cursor-pointer select-none">
       {{ label }}
     </label>
   </div>
