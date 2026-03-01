@@ -54,6 +54,10 @@ export const useRsvpStore = defineStore("rsvp", () => {
     return attendingIds.value.length > 0;
   };
 
+  const attendingCount = computed(() => {
+    return attendingIds.value.length;
+  });
+
   const setLookupResponse = (response: LookupResponse) => {
     self.value = response.self;
     guests.value = response.guests;
@@ -74,6 +78,7 @@ export const useRsvpStore = defineStore("rsvp", () => {
   return {
     accommodations,
     anonymousGuest,
+    attendingCount,
     attendingIds,
     currentStep,
     guests,

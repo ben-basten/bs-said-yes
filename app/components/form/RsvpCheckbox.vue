@@ -18,6 +18,10 @@
       aria-hidden
       class="size-7 absolute right-3 top-1/2 -translate-y-1/2 invisible peer-checked:visible"
     />
+    <IconClose
+      aria-hidden
+      class="size-7 absolute right-3 top-1/2 -translate-y-1/2 visible peer-checked:invisible"
+    />
   </div>
 </template>
 
@@ -28,5 +32,5 @@ defineProps<{
   name: string;
 }>();
 
-const model = defineModel<string[] | boolean>();
+const model = defineModel<string[]>();
 </script>
