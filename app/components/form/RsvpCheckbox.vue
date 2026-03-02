@@ -20,7 +20,7 @@
     />
     <IconClose
       aria-hidden
-      class="size-7 absolute right-3 top-1/2 -translate-y-1/2 visible peer-checked:invisible"
+      class="text-error size-7 absolute right-3 top-1/2 -translate-y-1/2 visible peer-checked:invisible"
     />
   </div>
 </template>
