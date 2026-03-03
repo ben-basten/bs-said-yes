@@ -84,6 +84,11 @@ export const paginatedGuestList = async (
   offset: number,
   sort: GuestSort,
 ) => {
+  const customStatusOrder = sql`CASE 
+    WHEN ${guests.isAttending} IS NULL THEN 0
+    WHEN ${guests.isAttending} = false THEN 1
+    WHEN ${guests.isAttending} = true THEN 2
+  END`;
   const orderBy = (() => {
     switch (sort) {
       case "name_asc":
@@ -93,17 +98,9 @@ export const paginatedGuestList = async (
       case "updated_desc":
         return desc(guests.updatedAt);
       case "status_asc":
-        return sql`CASE 
-          WHEN ${guests.isAttending} IS NULL THEN 0
-          WHEN ${guests.isAttending} = false THEN 1
-          WHEN ${guests.isAttending} = true THEN 2
-        END ASC`;
+        return asc(customStatusOrder);
       case "status_desc":
-        return sql`CASE 
-          WHEN ${guests.isAttending} = true THEN 0
-          WHEN ${guests.isAttending} = false THEN 1
-          WHEN ${guests.isAttending} IS NULL THEN 2
-        END ASC`;
+        return desc(customStatusOrder);
     }
   })();
   const [guestList, totalCount] = await Promise.all([
