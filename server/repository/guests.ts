@@ -11,6 +11,7 @@ import {
 } from "drizzle-orm";
 import { db } from "~~/server/db";
 import { guests, households } from "~~/server/db/schema";
+import type { GuestSort } from "~~/shared/types/Pagination";
 
 export const findGuestByName = async (name: string) => {
   const trimmedName = name.trim();
@@ -81,8 +82,13 @@ export const getAttendanceStatus = async () => {
 export const paginatedGuestList = async (
   limit: number,
   offset: number,
-  sort: "name_asc" | "name_desc" | "updated_desc",
+  sort: GuestSort,
 ) => {
+  const customStatusOrder = sql`CASE 
+    WHEN ${guests.isAttending} IS NULL THEN 0
+    WHEN ${guests.isAttending} = false THEN 1
+    WHEN ${guests.isAttending} = true THEN 2
+  END`;
   const orderBy = (() => {
     switch (sort) {
       case "name_asc":
@@ -91,6 +97,10 @@ export const paginatedGuestList = async (
         return desc(guests.name);
       case "updated_desc":
         return desc(guests.updatedAt);
+      case "status_asc":
+        return asc(customStatusOrder);
+      case "status_desc":
+        return desc(customStatusOrder);
     }
   })();
   const [guestList, totalCount] = await Promise.all([

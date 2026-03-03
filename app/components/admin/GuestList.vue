@@ -74,29 +74,30 @@
 
 <script setup lang="ts">
 import type { AdminGuest } from "~/types/Guest";
+import type { GuestSort } from "~~/shared/types/Pagination";
 
 const emit = defineEmits<{
   (e: "updated"): void;
 }>();
 
-type SortOption = "name_asc" | "name_desc" | "updated_desc";
-
 const currentPage = ref(1);
 const isEditModalOpen = ref(false);
-const currentSort = ref<SortOption>("updated_desc");
+const currentSort = ref<GuestSort>("updated_desc");
 const selectedGuest = ref<AdminGuest | null>(null);
 const tbodyRef = ref<HTMLTableSectionElement | null>(null);
 let isPaginating = false;
 
-const sortOptions: { label: string; value: SortOption }[] = [
+const sortOptions: { label: string; value: GuestSort }[] = [
+  { label: "Last Updated (Newest)", value: "updated_desc" },
   { label: "Name (A-Z)", value: "name_asc" },
   { label: "Name (Z-A)", value: "name_desc" },
-  { label: "Last Updated (Newest)", value: "updated_desc" },
+  { label: "RSVP Status (No response)", value: "status_asc" },
+  { label: "RSVP Status (Attending)", value: "status_desc" },
 ];
 
 const handleSortChange = (value: string | undefined) => {
   if (!value) return;
-  currentSort.value = value as SortOption;
+  currentSort.value = value as GuestSort;
   currentPage.value = 1;
   refreshGuests();
 };
