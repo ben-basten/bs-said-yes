@@ -93,9 +93,17 @@ export const paginatedGuestList = async (
       case "updated_desc":
         return desc(guests.updatedAt);
       case "status_asc":
-        return asc(guests.isAttending);
+        return sql`CASE 
+          WHEN ${guests.isAttending} IS NULL THEN 0
+          WHEN ${guests.isAttending} = false THEN 1
+          WHEN ${guests.isAttending} = true THEN 2
+        END ASC`;
       case "status_desc":
-        return desc(guests.isAttending);
+        return sql`CASE 
+          WHEN ${guests.isAttending} = true THEN 0
+          WHEN ${guests.isAttending} = false THEN 1
+          WHEN ${guests.isAttending} IS NULL THEN 2
+        END ASC`;
     }
   })();
   const [guestList, totalCount] = await Promise.all([
