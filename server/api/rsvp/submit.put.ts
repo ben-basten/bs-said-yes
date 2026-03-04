@@ -51,8 +51,9 @@ export default defineEventHandler(async (event) => {
   ])
     .then(async () => {
       const initials = getInitials(guest.name);
+      const attendanceIcon = body.attendingGuestIds.length > 0 ? "🟢" : "🔴";
       await postToDiscord(
-        `**RSVP response received!**\nSubmitted by: ${initials}`,
+        `**RSVP response received!** ${attendanceIcon}\nSubmitted by: ${initials}`,
         "rsvp",
       );
       return { success: true };

@@ -20,6 +20,7 @@
           <thead>
             <tr>
               <th>Nickname</th>
+              <th>Status</th>
               <th>Invitation Sent</th>
               <th>Last Updated</th>
               <th>Actions</th>
@@ -34,6 +35,9 @@
             >
               <td>
                 {{ household.nickname }}
+              </td>
+              <td>
+                <StatusChip :is-attending="household.isAttending" />
               </td>
               <td>
                 <Chip :color="household.inviteSent ? 'green' : 'yellow'">
