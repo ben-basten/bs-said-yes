@@ -9,3 +9,11 @@ export const getInitials = (name: string | null): string => {
 export const getMemoryUrl = (origin: string, id: string) => {
   return `${origin}/memory/${id}`;
 };
+
+export const isHouseholdAttending = (
+  guests: { isAttending: boolean | null }[],
+) => {
+  if (guests.some((guest) => guest.isAttending === null)) return null;
+  if (guests.some((guest) => guest.isAttending === true)) return true;
+  return false;
+};
