@@ -20,6 +20,7 @@
           <thead>
             <tr>
               <th>Nickname</th>
+              <th>Status</th>
               <th>Invitation Sent</th>
               <th>Last Updated</th>
               <th>Actions</th>
@@ -34,6 +35,9 @@
             >
               <td>
                 {{ household.nickname }}
+              </td>
+              <td>
+                <StatusChip :is-attending="isAttending(household)" />
               </td>
               <td>
                 <Chip :color="household.inviteSent ? 'green' : 'yellow'">
@@ -125,6 +129,12 @@ const openCreateModal = () => {
 const handlePagination = (dir: 1 | -1) => {
   currentPage.value = Math.max(1, currentPage.value + dir);
   isPaginating = true;
+};
+
+const isAttending = (household: Household) => {
+  if (household.guests.some((guest) => guest.isAttending === null)) return null;
+  if (household.guests.some((guest) => guest.isAttending === true)) return true;
+  return false;
 };
 
 const subtitle = computed(() => {
