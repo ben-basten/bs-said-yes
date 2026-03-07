@@ -66,6 +66,9 @@ export default defineNuxtConfig({
         secure: !import.meta.dev,
       },
     },
+    public: {
+      analyticsUrl: "",
+    },
   },
   vite: {
     plugins: [tailwindcss()],
