@@ -27,7 +27,7 @@
   --ease-default: cubic-bezier(0.516, 0.005, 0.198, 0.843);
 
   /* Spacing */
-  --spacing-vertical: 50px;
+  --spacing-vertical: 60px;
   --spacing-vertical-lg: 100px;
   --spacing-side: 50px;
   --spacing-side-mobile: 25px;

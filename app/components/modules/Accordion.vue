@@ -1,5 +1,5 @@
 <template>
-  <ContentContainer as="section" grid margin class="gap-y-7">
+  <ContentContainer as="section" grid margin class="gap-y-8">
     <div class="col-span-12 md:col-span-5 max-w-copy flex flex-col gap-y-6">
       <Heading as="h2">{{ data.heading }}</Heading>
       <RichTextRenderer v-if="data?.copy" :json="data?.copy?.json" />
@@ -16,6 +16,9 @@
           <AccordionHeader as="h3">
             <AccordionTrigger
               class="group flex gap-x-4 w-full items-center justify-between py-6 text-left type-h4 cursor-pointer"
+              :class="{
+                'pt-0': index === 0,
+              }"
             >
               <span>{{ item.title }}</span>
               <IconChevronDown
