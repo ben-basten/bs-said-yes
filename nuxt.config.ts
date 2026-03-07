@@ -12,11 +12,7 @@ export default defineNuxtConfig({
   routeRules: {
     "/admin": { redirect: "/admin/dashboard" },
     "/admin/login": { prerender: true },
-    "/login": {
-      isr: true,
-      // required to get correct hostname in meta tags
-      cache: { varies: ["host", "x-forwarded-host"] },
-    },
+    "/login": { isr: 3600 },
   },
   nitro: {
     prerender: {
