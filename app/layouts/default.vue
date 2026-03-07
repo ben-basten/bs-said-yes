@@ -25,9 +25,22 @@ type Navigation = NonNullable<
   NonNullable<NavigationQuery["navigationCollection"]>["items"][number]
 >;
 
+const route = useRoute();
+const { analyticsUrl } = useRuntimeConfig().public;
+
 const { data: navigation } = await useFetch<Navigation>("/api/cms/navigation");
 
 useHead({
   meta: [{ name: "robots", content: "noindex, nofollow" }],
+  script: analyticsUrl
+    ? [
+        {
+          src: "//gc.zgo.at/count.js",
+          async: true,
+          "data-goatcounter": analyticsUrl,
+          key: computed(() => `goatcounter-${route.path}`),
+        },
+      ]
+    : [],
 });
 </script>
