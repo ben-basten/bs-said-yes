@@ -26,19 +26,21 @@ type Navigation = NonNullable<
 >;
 
 const route = useRoute();
-const config = useRuntimeConfig();
+const { analyticsUrl } = useRuntimeConfig().public;
 
 const { data: navigation } = await useFetch<Navigation>("/api/cms/navigation");
 
 useHead({
   meta: [{ name: "robots", content: "noindex, nofollow" }],
-  script: [
-    {
-      src: "//gc.zgo.at/count.js",
-      async: true,
-      "data-goatcounter": config.public.analyticsUrl,
-      key: computed(() => `goatcounter-${route.path}`),
-    },
-  ],
+  script: analyticsUrl
+    ? [
+        {
+          src: "//gc.zgo.at/count.js",
+          async: true,
+          "data-goatcounter": analyticsUrl,
+          key: computed(() => `goatcounter-${route.path}`),
+        },
+      ]
+    : [],
 });
 </script>
