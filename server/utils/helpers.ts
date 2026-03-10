@@ -1,9 +1,6 @@
 export const getInitials = (name: string | null): string => {
   if (!name) return "N/A";
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("");
+  return name.split(" ").at(0) ?? "N/A";
 };
 
 export const getMemoryUrl = (origin: string, id: string) => {
