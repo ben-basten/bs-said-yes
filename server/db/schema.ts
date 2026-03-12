@@ -90,7 +90,7 @@ export const rsvpResponses = pgTable("rsvp_responses", {
   householdId: uuid("household_id")
     .notNull()
     .unique()
-    .references(() => households.id),
+    .references(() => households.id, { onDelete: "cascade" }),
   accommodations: text("accommodations"),
   songRecommendations: text("song_recommendations"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
