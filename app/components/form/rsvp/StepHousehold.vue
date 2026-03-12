@@ -25,10 +25,10 @@
         :value="guest.id"
         name="attending"
       />
-      <p class="text-sm font-bold -mt-2 text-center">
-        {{ message }}
-      </p>
     </fieldset>
+    <p class="text-sm font-bold text-center">
+      {{ message }}
+    </p>
     <FormInput
       v-if="rsvpStore.anonymousGuest"
       v-model="rsvpStore.plusOneName"
