@@ -26,7 +26,7 @@
         name="attending"
       />
     </fieldset>
-    <p class="text-sm font-bold text-center">
+    <p class="text-sm font-bold">
       {{ message }}
     </p>
     <FormInput
