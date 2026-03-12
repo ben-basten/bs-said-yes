@@ -64,6 +64,13 @@
       "when": 1770588664464,
       "tag": "0008_yummy_black_cat",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1773284232192,
+      "tag": "0009_bored_thunderbolt_ross",
+      "breakpoints": true
     }
   ]
 }
