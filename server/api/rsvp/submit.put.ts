@@ -6,6 +6,7 @@ import {
 } from "~~/server/repository/guests";
 import { upsertRsvpResponse } from "~~/server/repository/rsvp";
 import { postToDiscord } from "~~/server/service/discord";
+import { postToHomeAssistant } from "~~/server/service/homeassistant";
 import { getInitials } from "~~/server/utils/helpers";
 
 const bodySchema = z.object({
@@ -52,10 +53,16 @@ export default defineEventHandler(async (event) => {
     .then(async () => {
       const initials = getInitials(guest.name);
       const attendanceIcon = body.attendingGuestIds.length > 0 ? "🟢" : "🔴";
-      await postToDiscord(
-        `**RSVP response received!** ${attendanceIcon}\nSubmitted by: ${initials}`,
-        "rsvp",
-      );
+      await Promise.all([
+        postToDiscord(
+          `**RSVP response received!** ${attendanceIcon}\nSubmitted by: ${initials}`,
+          "rsvp",
+        ),
+        postToHomeAssistant({
+          personName: initials,
+          isAttending: body.attendingGuestIds.length > 0,
+        }),
+      ]);
       return { success: true };
     })
     .catch((error) => {
