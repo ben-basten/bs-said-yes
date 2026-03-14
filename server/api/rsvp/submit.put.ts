@@ -52,7 +52,8 @@ export default defineEventHandler(async (event) => {
   ])
     .then(async () => {
       const initials = getInitials(guest.name);
-      const attendanceIcon = body.attendingGuestIds.length > 0 ? "🟢" : "🔴";
+      const isAttending = body.attendingGuestIds.length > 0;
+      const attendanceIcon = isAttending ? "🟢" : "🔴";
       await Promise.all([
         postToDiscord(
           `**RSVP response received!** ${attendanceIcon}\nSubmitted by: ${initials}`,
@@ -60,7 +61,7 @@ export default defineEventHandler(async (event) => {
         ),
         postToHomeAssistant({
           personName: initials,
-          isAttending: body.attendingGuestIds.length > 0,
+          isAttending,
         }),
       ]);
       return { success: true };
