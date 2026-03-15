@@ -30,8 +30,8 @@ importers:
         specifier: ^0.45.1
         version: 0.45.1(@neondatabase/serverless@1.0.2)(@types/pg@8.16.0)(postgres@3.4.8)
       gqlmin:
-        specifier: ^0.3.1
-        version: 0.3.1
+        specifier: ^0.3.2
+        version: 0.3.2
       graphql-request:
         specifier: ^7.4.0
         version: 7.4.0(graphql@16.12.0)
@@ -3852,8 +3852,8 @@ packages:
     resolution: {integrity: sha512-+A4Hq7m7Ze592k9gZRy4gJ27DrXRNnC1vPjxTt1qQxEY8RxagBkBxivkCwg7FxSTG0iLLEMaUx13oOr0R2/qcQ==}
     engines: {node: '>=20'}
 
-  gqlmin@0.3.1:
-    resolution: {integrity: sha512-UTkeFjVvfdAOyPVCw05WlysiYaelNxjGo/6n+T5fTwUjS4qH1xitdSqVziWlckYONrZvsGoTVSmHQtG//vTNLA==}
+  gqlmin@0.3.2:
+    resolution: {integrity: sha512-Tr9+w93PY/okoCkiOrLPn4jvV5OnHdQujv5r/CQUvl9tTWl5vq+tw1oOa1XvsZSdl5yKj5qlAh9oCY0e+dQNTw==}
     hasBin: true
 
   graceful-fs@4.2.11:
@@ -4563,6 +4563,9 @@ packages:
 
   moo@0.5.2:
     resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==}
+
+  moo@0.5.3:
+    resolution: {integrity: sha512-m2fmM2dDm7GZQsY7KK2cme8agi+AAljILjQnof7p1ZMDe6dQ4bdnSMx0cPppudoeNv5hEFQirN6u+O4fDE0IWA==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -9962,10 +9965,10 @@ snapshots:
       slash: 5.1.0
       unicorn-magic: 0.4.0
 
-  gqlmin@0.3.1:
+  gqlmin@0.3.2:
     dependencies:
       '@types/moo': 0.5.10
-      moo: 0.5.2
+      moo: 0.5.3
 
   graceful-fs@4.2.11: {}
 
@@ -10628,6 +10631,8 @@ snapshots:
   mocked-exports@0.1.1: {}
 
   moo@0.5.2: {}
+
+  moo@0.5.3: {}
 
   mrmime@2.0.1: {}
 
