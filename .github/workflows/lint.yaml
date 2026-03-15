@@ -12,6 +12,8 @@ on:
 jobs:
   lint:
     name: Lint and format
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
