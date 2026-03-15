@@ -8,6 +8,8 @@ on:
 jobs:
   migrate:
     name: Run ${{ github.ref_name == 'main' && 'Production' || 'Staging' }} migrations
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
     steps:
