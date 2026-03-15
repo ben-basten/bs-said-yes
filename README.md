@@ -56,6 +56,7 @@ This project requires the following environment variables:
   - `NUXT_OAUTH_ZITADEL_DOMAIN`: Domain for Zitadel OAuth app
 - `DATABASE_URL`: Connection string for the [Neon](https://neon.com/) Postgres database
 - `NUXT_DISCORD_WEBHOOK_URL`: Webhook URL for sending notifications to Discord when a new RSVP or memory is submitted _(optional)_
+- `NUXT_HOME_ASSISTANT_WEBHOOK_URL`: Webhook URL for sending notifications to Home Assistant when a new RSVP is submitted _(optional)_
 - `NUXT_PUBLIC_ANALYTICS_URL`: URL for the [GoatCounter](https://kagi.com/search?q=goatcounter) analytics script.
 
 ## Database

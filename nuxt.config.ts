@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     sessionPassword: "",
     sitePassword: "",
     discordWebhookUrl: "",
+    homeAssistantWebhookUrl: "",
     // @ts-expect-error - cookie workaround
     session: {
       // Workaround to get login working on Safari locally: https://github.com/atinux/nuxt-auth-utils/issues/190#issuecomment-2393305396
