@@ -14,3 +14,6 @@ export const isHouseholdAttending = (
   if (guests.some((guest) => guest.isAttending === true)) return true;
   return false;
 };
+
+export const normalizeNameSpacing = (value: string) =>
+  value.replace(/ {2,}/g, " ");
