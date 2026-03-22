@@ -3,7 +3,7 @@ import { updateGuest } from "~~/server/repository/guests";
 import { requireAdminSession } from "~~/server/utils/admin";
 
 const bodySchema = z.object({
-  name: z.string().min(1).optional(),
+  name: z.string().min(1).trim().optional(),
   isAttending: z.coerce.boolean().nullable().optional(),
   isSearchable: z.coerce.boolean().optional(),
 });
