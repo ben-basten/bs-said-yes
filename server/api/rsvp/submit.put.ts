@@ -17,7 +17,7 @@ const bodySchema = z.object({
   plusOne: z
     .object({
       id: z.uuid(),
-      name: z.string().min(1).max(255),
+      name: z.string().min(1).trim().max(255),
     })
     .optional(),
 });
