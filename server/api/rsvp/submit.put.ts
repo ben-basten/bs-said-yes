@@ -7,7 +7,7 @@ import {
 import { upsertRsvpResponse } from "~~/server/repository/rsvp";
 import { postToDiscord } from "~~/server/service/discord";
 import { postToHomeAssistant } from "~~/server/service/homeassistant";
-import { getInitials } from "~~/server/utils/helpers";
+import { getInitials, normalizeNameSpacing } from "~~/server/utils/helpers";
 
 const bodySchema = z.object({
   mainGuestId: z.uuid(),
@@ -17,7 +17,7 @@ const bodySchema = z.object({
   plusOne: z
     .object({
       id: z.uuid(),
-      name: z.string().min(1).trim().max(255),
+      name: z.string().trim().min(1).max(255).transform(normalizeNameSpacing),
     })
     .optional(),
 });

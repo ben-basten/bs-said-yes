@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { updateGuest } from "~~/server/repository/guests";
 import { requireAdminSession } from "~~/server/utils/admin";
+import { normalizeNameSpacing } from "~~/server/utils/helpers";
 
 const bodySchema = z.object({
-  name: z.string().min(1).trim().optional(),
+  name: z.string().trim().min(1).transform(normalizeNameSpacing).optional(),
   isAttending: z.coerce.boolean().nullable().optional(),
   isSearchable: z.coerce.boolean().optional(),
 });
