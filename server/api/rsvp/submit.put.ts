@@ -17,7 +17,7 @@ const bodySchema = z.object({
   plusOne: z
     .object({
       id: z.uuid(),
-      name: z.string().trim().min(1).max(255).transform(normalizeNameSpacing),
+      name: z.string().min(1).max(255).trim().transform(normalizeNameSpacing),
     })
     .optional(),
 });
