@@ -68,7 +68,8 @@ export const createHousehold = async (data: {
     if (data.guests.length > 0) {
       await tx.insert(guests).values(
         data.guests.map((guest) => ({
-          ...guest,
+          name: guest.name?.trim() || null,
+          relationshipType: guest.relationshipType,
           householdId: household.id,
           isSearchable: guest.relationshipType === "primary",
         })),
