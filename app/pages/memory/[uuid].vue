@@ -6,9 +6,7 @@
         <p class="type-body">Shared by: {{ data?.author }}</p>
       </div>
 
-      <div
-        class="bg-secondary rounded-xl p-8 md:p-14 shadow-sm border border-black/5"
-      >
+      <div class="bg-secondary rounded-xl p-8 md:p-14 border-default">
         <p class="type-body">
           {{ data?.story }}
         </p>
