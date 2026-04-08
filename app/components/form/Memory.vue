@@ -5,7 +5,8 @@
       <p class="max-w-copy">
         Tell us your favorite memory or moment you have of Ben/Sydney/both. You
         can write your name or leave it anonymous. Feel free to fill it out
-        multiple times.
+        multiple times. This will not be shared at the wedding - it is only for
+        us to enjoy together!
       </p>
       <form
         class="flex flex-col gap-2"
