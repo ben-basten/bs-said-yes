@@ -24,7 +24,7 @@ export default defineNuxtRouteMiddleware((to) => {
   if (to.path === "/login") {
     // If already logged in with site password, redirect to home
     if (loggedIn.value) {
-      const redirect = (to.query.redirect as string) || "/";
+      const redirect = getRedirectUrl(to.query.redirect);
       return navigateTo(redirect);
     }
     return;

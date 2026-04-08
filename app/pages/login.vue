@@ -48,7 +48,7 @@ const isLoading = shallowRef(false);
 const passwordRef = ref<InstanceType<typeof FormInput> | null>(null);
 
 const proceedToSite = async () => {
-  const redirect = (route.query.redirect as string) || "/";
+  const redirect = getRedirectUrl(route.query.redirect);
   await navigateTo(redirect, { replace: true });
 };
 
