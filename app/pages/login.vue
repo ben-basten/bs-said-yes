@@ -49,6 +49,8 @@ const passwordRef = ref<InstanceType<typeof FormInput> | null>(null);
 
 const proceedToSite = async () => {
   const redirect = getRedirectUrl(route.query.redirect);
+  // eslint-disable-next-line no-console
+  console.log("Redirecting to:", redirect);
   try {
     await navigateTo(redirect, { replace: true });
   } catch {
