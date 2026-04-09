@@ -7,5 +7,5 @@ export default defineCachedEventHandler(
     const data = await fetchContentful<SeoQuery, SeoQueryVariables>(SEO_QUERY);
     return data.componentSeo;
   },
-  { maxAge: 60, swr: false },
+  { maxAge: 60 * 60, swr: false },
 );

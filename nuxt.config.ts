@@ -12,7 +12,6 @@ export default defineNuxtConfig({
   routeRules: {
     "/admin": { redirect: "/admin/dashboard" },
     "/admin/login": { prerender: true },
-    "/login": { isr: 3600 },
   },
   nitro: {
     prerender: {
