@@ -49,7 +49,12 @@ const passwordRef = ref<InstanceType<typeof FormInput> | null>(null);
 
 const proceedToSite = async () => {
   const redirect = getRedirectUrl(route.query.redirect);
-  await navigateTo(redirect, { replace: true });
+  try {
+    await navigateTo(redirect, { replace: true });
+  } catch {
+    // If the redirect URL is invalid or malicious, fallback to home page
+    await navigateTo("/", { replace: true });
+  }
 };
 
 // Redirect if already logged in
