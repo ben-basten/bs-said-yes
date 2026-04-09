@@ -48,8 +48,13 @@ const isLoading = shallowRef(false);
 const passwordRef = ref<InstanceType<typeof FormInput> | null>(null);
 
 const proceedToSite = async () => {
-  const redirect = (route.query.redirect as string) || "/";
-  await navigateTo(redirect, { replace: true });
+  const redirect = getRedirectUrl(route.query.redirect);
+  try {
+    await navigateTo(redirect, { replace: true });
+  } catch {
+    // If the redirect URL is invalid or malicious, fallback to home page
+    await navigateTo("/", { replace: true });
+  }
 };
 
 // Redirect if already logged in

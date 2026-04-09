@@ -19,18 +19,27 @@ import type { NuxtError } from "nuxt/app";
 import type { PageStandardFragment } from "~~/shared/types/graphql";
 
 const { slug } = defineProps<{ slug: string }>();
-const { query } = useRoute();
+const { query, path } = useRoute();
+const { clear } = useUserSession();
 
-const { data, error } = useFetch<PageStandardFragment>("/api/cms/standard", {
-  query: { slug, token: query.token || undefined },
-});
+const { data, error } = await useFetch<PageStandardFragment>(
+  "/api/cms/standard",
+  {
+    query: { slug, token: query.token || undefined },
+  },
+);
 
 if (error.value) {
   const statusCode = (error.value as NuxtError).statusCode || 500;
-  throw createError({
-    statusCode,
-    statusMessage: statusCode === 404 ? "Not Found" : "Something went wrong",
-  });
+  if (statusCode === 401) {
+    clear();
+    await navigateTo({ path: "/login", query: { redirect: path } });
+  } else {
+    throw createError({
+      statusCode,
+      statusMessage: statusCode === 404 ? "Not Found" : "Something went wrong",
+    });
+  }
 }
 
 watch(
