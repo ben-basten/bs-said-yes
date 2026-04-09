@@ -5,9 +5,9 @@
         class="max-w-160 text-center flex flex-col gap-7 md:gap-10 items-center mx-auto my-auto"
       >
         <Heading as="h1" variant="h2">{{ message }}</Heading>
-        <InlineLink href="/" class="button button-lg" @click="handleError">
+        <button class="button button-lg" @click="handleError">
           Go back home
-        </InlineLink>
+        </button>
       </div>
     </ContentContainer>
   </NuxtLayout>
