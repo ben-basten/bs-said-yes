@@ -26,7 +26,7 @@ const uuid = route.params.uuid as string;
 const { data } = await useFetch(`/api/memory/${uuid}`);
 
 if (!data.value) {
-  throw createError({ statusCode: 404, statusMessage: "Memory not found" });
+  throw createError({ status: 404, statusMessage: "Memory not found" });
 }
 
 useHead({

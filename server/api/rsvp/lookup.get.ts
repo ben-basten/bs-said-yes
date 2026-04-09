@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 
   if (!guest) {
     throw createError({
-      statusCode: 404,
+      status: 404,
       statusMessage: `Person not found`,
     });
   }

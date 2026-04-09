@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 
   const id = getRouterParam(event, "id");
   if (!id) {
-    throw createError({ statusCode: 400, message: "Missing household ID" });
+    throw createError({ status: 400, message: "Missing household ID" });
   }
 
   const body = await readValidatedBody(event, bodySchema.parse);
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   const updated = await updateHousehold(id, body);
 
   if (!updated.length) {
-    throw createError({ statusCode: 404, message: "Household not found" });
+    throw createError({ status: 404, message: "Household not found" });
   }
 
   return updated[0];
