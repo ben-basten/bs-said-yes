@@ -4,6 +4,6 @@ export const requireAdminSession = async (event: H3Event) => {
   const { user } = await getUserSession(event);
   const isAdmin = user?.permission === "admin" || false;
   if (!isAdmin) {
-    throw createError({ statusCode: 401, message: "Unauthorized" });
+    throw createError({ status: 401, message: "Unauthorized" });
   }
 };

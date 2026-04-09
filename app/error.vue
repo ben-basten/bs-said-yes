@@ -21,9 +21,9 @@ const { error } = defineProps({
 });
 
 const message = computed(() => {
-  if (error?.statusCode === 404) {
+  if (error?.status === 404) {
     return "Ope! That page could not be found.";
-  } else if (error?.statusCode === 403) {
+  } else if (error?.status === 403) {
     return "Unauthorized";
   } else {
     return "Something unexpected went wrong.";

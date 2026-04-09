@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
   const id = getRouterParam(event, "id");
   if (!id) {
-    throw createError({ statusCode: 400, message: "Missing guest ID" });
+    throw createError({ status: 400, message: "Missing guest ID" });
   }
 
   const body = await readValidatedBody(event, bodySchema.parse);
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const updated = await updateGuest(id, body);
 
   if (!updated.length) {
-    throw createError({ statusCode: 404, message: "Guest not found" });
+    throw createError({ status: 404, message: "Guest not found" });
   }
 
   return updated[0];

@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       const memory = result[0];
       if (!memory) {
         throw createError({
-          statusCode: 500,
+          status: 500,
           message: "Failed to save story",
         });
       }
@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
       // eslint-disable-next-line no-console
       console.error("Error inserting story:", error);
       throw createError({
-        statusCode: 500,
+        status: 500,
         message: "Failed to save story",
       });
     });

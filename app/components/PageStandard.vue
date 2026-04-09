@@ -30,14 +30,14 @@ const { data, error } = await useFetch<PageStandardFragment>(
 );
 
 if (error.value) {
-  const statusCode = (error.value as NuxtError).statusCode || 500;
-  if (statusCode === 401) {
+  const status = (error.value as NuxtError).status || 500;
+  if (status === 401) {
     clear();
     await navigateTo({ path: "/login", query: { redirect: path } });
   } else {
     throw createError({
-      statusCode,
-      statusMessage: statusCode === 404 ? "Not Found" : "Something went wrong",
+      status,
+      statusMessage: status === 404 ? "Not Found" : "Something went wrong",
     });
   }
 }

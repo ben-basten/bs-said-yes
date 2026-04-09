@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
 
   if (!guest) {
     throw createError({
-      statusCode: 404,
+      status: 404,
       statusMessage: "Guest not found",
     });
   }
@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
       // eslint-disable-next-line no-console
       console.error("Error submitting RSVP:", error);
       throw createError({
-        statusCode: 500,
+        status: 500,
         message: "Failed to submit RSVP",
       });
     });

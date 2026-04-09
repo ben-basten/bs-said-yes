@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
   if (!uuid) {
     throw createError({
-      statusCode: 400,
+      status: 400,
       message: "Missing UUID",
     });
   }
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
   if (!memory) {
     throw createError({
-      statusCode: 404,
+      status: 404,
       message: "Memory not found",
     });
   }

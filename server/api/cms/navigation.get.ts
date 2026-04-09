@@ -21,7 +21,7 @@ export const cachedNavigation = defineCachedFunction(
 
     if (!navigation) {
       throw createError({
-        statusCode: 404,
+        status: 404,
         statusMessage: "Navigation not found",
       });
     }

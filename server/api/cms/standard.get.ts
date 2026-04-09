@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   const shouldPreview = token === previewSecret;
   if (token && !shouldPreview) {
     throw createError({
-      statusCode: 403,
+      status: 403,
       statusMessage: "Forbidden",
     });
   }
@@ -43,7 +43,7 @@ const cachedPage = defineCachedFunction(
 
     if (!page) {
       throw createError({
-        statusCode: 404,
+        status: 404,
         statusMessage: `Page with slug '${slug}' not found`,
       });
     }
