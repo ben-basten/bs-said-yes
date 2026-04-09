@@ -60,11 +60,15 @@ const proceedToSite = async () => {
 };
 
 // Redirect if already logged in
-watchEffect(() => {
-  if (loggedIn.value) {
-    proceedToSite();
-  }
-});
+watch(
+  () => loggedIn.value,
+  (loggedIn) => {
+    if (loggedIn) {
+      proceedToSite();
+    }
+  },
+  { immediate: true },
+);
 
 async function login(event: SubmitEvent) {
   if (isLoading.value) return;
