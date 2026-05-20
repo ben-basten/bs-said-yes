@@ -31,7 +31,10 @@
             class="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
           >
             <div class="pb-4 type-body">
-              <RichTextRenderer :json="item.copy?.json" />
+              <RichTextRenderer
+                :json="item.copy?.json"
+                :assets="getEmbeddedAssets(item.copy?.links)"
+              />
             </div>
           </AccordionContent>
         </AccordionItem>

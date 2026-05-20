@@ -1,3 +1,4 @@
+import type { EmbeddedAsset } from "~/components/render/RichTextRenderer.vue";
 import type { Pagination } from "~~/shared/types/Pagination";
 
 export const ariaCurrent = (route: string, currentRoute: string) => {
@@ -35,4 +36,13 @@ export const formatRelationshipType = (type: string) => {
     default:
       return type;
   }
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getEmbeddedAssets = (links: any): EmbeddedAsset[] => {
+  const blockAssets = (links?.assets?.block ?? []) as (EmbeddedAsset | null)[];
+  if (!blockAssets?.length) return [];
+  return blockAssets.filter(
+    (asset): asset is EmbeddedAsset => asset !== null && asset.sys?.id != null,
+  );
 };

@@ -12,17 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import type { EmbeddedAsset } from "~/components/render/RichTextRenderer.vue";
 import type { ModuleProps } from "~/types/module";
 import type { CenterTextFragment } from "~~/shared/types/graphql";
 
 const { data } = defineProps<ModuleProps<CenterTextFragment>>();
 
-const embeddedAssets = computed((): EmbeddedAsset[] => {
-  const blockAssets = data?.text?.links?.assets?.block;
-  if (!blockAssets?.length) return [];
-  return blockAssets.filter(
-    (asset): asset is EmbeddedAsset => asset !== null && asset.sys?.id != null,
-  );
+const embeddedAssets = computed(() => {
+  return getEmbeddedAssets(data?.text?.links);
 });
 </script>

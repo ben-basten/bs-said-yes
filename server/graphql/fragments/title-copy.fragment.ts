@@ -5,6 +5,16 @@ export const TITLE_COPY_FRAGMENT = gql`
     title
     copy {
       json
+      links {
+        assets {
+          block {
+            sys {
+              id
+            }
+            ...Image
+          }
+        }
+      }
     }
   }
 `;
