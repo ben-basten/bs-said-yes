@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center p-4">
+  <div class="flex flex-1 items-center justify-center p-4">
     <div class="form-container flex flex-col gap-y-5 items-center">
       <Heading as="h1" variant="h2">Login</Heading>
       <p class="type-body">Enter the password from your save the date.</p>
