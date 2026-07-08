@@ -12,7 +12,7 @@ export default defineOAuthZitadelEventHandler({
       return sendRedirect(event, `/admin/login?error=${errorCode}`);
     }
 
-    let allowedUser: AllowedUser | null = null;
+    let allowedUser: AllowedUser | null;
     try {
       allowedUser = await getAllowedUserByEmail(zitadelUser.email);
     } catch {
