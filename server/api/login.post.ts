@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
   const { sitePassword } = useRuntimeConfig();
 
-  let isValidPassword = false;
+  let isValidPassword: boolean;
   try {
     isValidPassword = timingSafeEqual(
       Buffer.from(password),
