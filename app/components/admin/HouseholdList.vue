@@ -31,7 +31,7 @@
               v-for="household in listData.items"
               :key="household.id"
               tabindex="-1"
-              class="hover:bg-secondary transition-colors"
+              class="hover:bg-secondary"
             >
               <td>
                 {{ household.nickname }}
