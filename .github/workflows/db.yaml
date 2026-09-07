@@ -3,11 +3,10 @@ on:
   push:
     branches:
       - main
-      - staging
 
 jobs:
   migrate:
-    name: Run ${{ github.ref_name == 'main' && 'Production' || 'Staging' }} migrations
+    name: Run Production migrations
     permissions:
       contents: read
     runs-on: ubuntu-latest

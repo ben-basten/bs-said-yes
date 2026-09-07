@@ -63,7 +63,7 @@ This project requires the following environment variables:
 
 RSVPs are stored using a Postgres database, with a [Neon](https://neon.com/) cloud database adapter. Drizzle ORM is used to query and run migrations against the database.
 
-Database migrations are automatically run by GitHub actions on push to the "staging" and "main" branches.
+Database migrations are automatically run by GitHub actions on push to the "main" branch.
 
 **Other common database commands include:**
 
