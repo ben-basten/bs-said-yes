@@ -55,13 +55,13 @@ This project requires the following environment variables:
   - `NUXT_OAUTH_ZITADEL_CLIENT_SECRET`: Client secret from Zitadel OAuth app
   - `NUXT_OAUTH_ZITADEL_DOMAIN`: Domain for Zitadel OAuth app
 - `DATABASE_URL`: Connection string for the [Neon](https://neon.com/) Postgres database
-- `NUXT_DISCORD_WEBHOOK_URL`: Webhook URL for sending notifications to Discord when a new RSVP or memory is submitted _(optional)_
+- `NUXT_DISCORD_WEBHOOK_URL`: Webhook URL for sending notifications to Discord when a new RSVP is submitted _(optional)_
 - `NUXT_HOME_ASSISTANT_WEBHOOK_URL`: Webhook URL for sending notifications to Home Assistant when a new RSVP is submitted _(optional)_
 - `NUXT_PUBLIC_ANALYTICS_URL`: URL for the [GoatCounter](https://kagi.com/search?q=goatcounter) analytics script.
 
 ## Database
 
-RSVPs and memory form submissions are stored using a Postgres database, with a [Neon](https://neon.com/) cloud database adapter. Drizzle ORM is used to query and run migrations against the database.
+RSVPs are stored using a Postgres database, with a [Neon](https://neon.com/) cloud database adapter. Drizzle ORM is used to query and run migrations against the database.
 
 Database migrations are automatically run by GitHub actions on push to the "staging" and "main" branches.
 
