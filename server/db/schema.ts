@@ -16,18 +16,6 @@ export const allowedUsers = pgTable("allowed_users", {
   email: varchar("email", { length: 255 }).notNull().unique(),
 });
 
-export const memories = pgTable("memories", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  title: varchar("title", { length: 255 }).notNull(),
-  author: varchar("author", { length: 255 }),
-  story: varchar("story", { length: 5000 }).notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at")
-    .notNull()
-    .defaultNow()
-    .$onUpdate(() => new Date()),
-});
-
 export const households = pgTable("households", {
   id: uuid("id").primaryKey().defaultRandom(),
   nickname: varchar("nickname", { length: 255 }).notNull(),

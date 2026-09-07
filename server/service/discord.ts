@@ -1,7 +1,4 @@
-export const postToDiscord = async (
-  message: string,
-  reason: "memory" | "rsvp",
-) => {
+export const postToDiscord = async (message: string, reason: "rsvp") => {
   const url = useRuntimeConfig().discordWebhookUrl;
   if (!url) {
     // eslint-disable-next-line no-console

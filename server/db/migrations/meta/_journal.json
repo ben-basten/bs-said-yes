@@ -71,6 +71,13 @@
       "when": 1773284232192,
       "tag": "0009_bored_thunderbolt_ross",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1788813277476,
+      "tag": "0010_awesome_eternals",
+      "breakpoints": true
     }
   ]
 }
