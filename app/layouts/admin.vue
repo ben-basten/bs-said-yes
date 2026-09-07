@@ -9,6 +9,7 @@ async function logout() {
 const menuItems = [
   { label: "Home", path: "/" },
   { label: "Dashboard", path: "/admin/dashboard" },
+  { label: "RSVP", path: "/admin/rsvp" },
 ];
 const route = useRoute();
 </script>
