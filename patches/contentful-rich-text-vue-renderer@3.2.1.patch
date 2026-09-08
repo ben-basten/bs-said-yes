@@ -1,0 +1,24 @@
+diff --git a/package.json b/package.json
+index 861da21b5c65dfe852396c158a65611ce7ca98e6..6b5bf1e0382be09526f6e49929b62310566b9157 100644
+--- a/package.json
++++ b/package.json
+@@ -13,9 +13,16 @@
+   "files": [
+     "dist"
+   ],
+-  "main": "dist/index.cjs.js",
+-  "module": "dist/index.esm.js",
+-  "browser": "dist/index.umd.js",
++  "main": "./dist/index.cjs.js",
++  "module": "./dist/index.esm.js",
++  "exports": {
++    ".": {
++      "import": "./dist/index.esm.js",
++      "require": "./dist/index.cjs.js",
++      "default": "./dist/index.esm.js"
++    },
++    "./umd": "./dist/index.umd.js"
++  },
+   "scripts": {
+     "build": "rollup -c",
+     "prepublish": "npm run build",
