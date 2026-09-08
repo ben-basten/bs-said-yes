@@ -20,6 +20,9 @@ const config: CodegenConfig = {
       config: {
         avoidOptionals: true,
         useTypeImports: true,
+        scalars: {
+          JSON: "@contentful/rich-text-types#Document",
+        },
       },
       plugins: ["typescript", "typescript-operations"],
     },
