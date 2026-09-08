@@ -7,8 +7,4 @@ export type Pagination = {
 };
 
 export type GuestSort =
-  | "name_asc"
-  | "name_desc"
-  | "updated_desc"
-  | "status_asc"
-  | "status_desc";
+  "name_asc" | "name_desc" | "updated_desc" | "status_asc" | "status_desc";
