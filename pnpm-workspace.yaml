@@ -5,3 +5,5 @@ allowBuilds:
   unrs-resolver: false
   vue-demi: false
 minimumReleaseAge: 1440
+patchedDependencies:
+  contentful-rich-text-vue-renderer@3.2.1: patches/contentful-rich-text-vue-renderer@3.2.1.patch
