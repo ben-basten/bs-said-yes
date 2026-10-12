@@ -1,8 +1,5 @@
 <template>
-  <DashboardContainer
-    title="Accommodation Requests"
-    subtitle="Special requirements and dietary notes from guests."
-  >
+  <DashboardContainer title="Accommodation Requests">
     <div v-if="accommodationRequests.length > 0">
       <div class="overflow-x-auto">
         <table class="w-full">
@@ -42,10 +39,7 @@
     </div>
   </DashboardContainer>
 
-  <DashboardContainer
-    title="Song Recommendations"
-    subtitle="Tracks suggested by guests to play at the wedding."
-  >
+  <DashboardContainer title="Song Recommendations">
     <div v-if="songRequests.length > 0">
       <div class="overflow-x-auto">
         <table class="w-full">
