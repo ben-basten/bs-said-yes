@@ -1,3 +1,9 @@
+import {
+  createError,
+  defineEventHandler,
+  getRouterParam,
+  readValidatedBody,
+} from "nuxt/server";
 import { z } from "zod";
 import { updateHousehold } from "~~/server/repository/households";
 import { requireAdminSession } from "~~/server/utils/admin";
@@ -11,7 +17,7 @@ const bodySchema = z.object({
 export default defineEventHandler(async (event) => {
   await requireAdminSession(event);
 
-  const id = getRouterParam(event, "id");
+  const id = getRouterParam(event, "id", { decode: true });
   if (!id) {
     throw createError({ status: 400, message: "Missing household ID" });
   }

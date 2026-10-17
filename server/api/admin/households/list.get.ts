@@ -1,3 +1,4 @@
+import { defineEventHandler, getValidatedQuery } from "nuxt/server";
 import { z } from "zod";
 import { getPaginatedHouseholds } from "~~/server/repository/households";
 import { isHouseholdAttending } from "~~/server/utils/helpers";

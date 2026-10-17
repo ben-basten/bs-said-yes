@@ -1,3 +1,4 @@
+import { defineEventHandler } from "nuxt/server";
 import { getAllRsvpResponses } from "~~/server/repository/rsvp";
 import { requireAdminSession } from "~~/server/utils/admin";
 

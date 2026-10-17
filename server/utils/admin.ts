@@ -1,6 +1,6 @@
-import type { H3Event } from "h3";
+import { createError, type RequestEvent } from "nuxt/server";
 
-export const requireAdminSession = async (event: H3Event) => {
+export const requireAdminSession = async (event: RequestEvent) => {
   const { user } = await getUserSession(event);
   const isAdmin = user?.permission === "admin" || false;
   if (!isAdmin) {

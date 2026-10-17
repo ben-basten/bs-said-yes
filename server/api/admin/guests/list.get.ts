@@ -1,3 +1,4 @@
+import { defineEventHandler, getValidatedQuery } from "nuxt/server";
 import { z } from "zod";
 import { paginatedGuestList } from "~~/server/repository/guests";
 import { requireAdminSession } from "~~/server/utils/admin";

@@ -1,10 +1,17 @@
+import { defineCachedFunction } from "nitropack/runtime";
+import {
+  createError,
+  defineEventHandler,
+  getValidatedQuery,
+  useRuntimeConfig,
+} from "nuxt/server";
+import { z } from "zod";
 import { fetchContentful } from "~~/server/service/contentful";
 import { PAGE_STANDARD_QUERY } from "~~/server/graphql/queries/page-standard.query";
 import type {
   PageStandardQuery,
   PageStandardQueryVariables,
 } from "~~/shared/types/graphql";
-import { z } from "zod";
 
 const querySchema = z.object({
   slug: z.string().regex(/^[a-zA-Z0-9-]+$/, { message: "Invalid slug" }),
@@ -22,7 +29,7 @@ export default defineEventHandler(async (event) => {
   if (token && !shouldPreview) {
     throw createError({
       status: 403,
-      statusMessage: "Forbidden",
+      statusText: "Forbidden",
     });
   }
 
@@ -44,7 +51,7 @@ const cachedPage = defineCachedFunction(
     if (!page) {
       throw createError({
         status: 404,
-        statusMessage: `Page with slug '${slug}' not found`,
+        statusText: `Page with slug '${slug}' not found`,
       });
     }
 

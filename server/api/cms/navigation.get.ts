@@ -1,3 +1,5 @@
+import { defineCachedFunction } from "nitropack/runtime";
+import { createError, defineEventHandler } from "nuxt/server";
 import { fetchContentful } from "~~/server/service/contentful";
 import { NAVIGATION_QUERY } from "~~/server/graphql/queries/navigation.query";
 import type {
@@ -22,7 +24,7 @@ export const cachedNavigation = defineCachedFunction(
     if (!navigation) {
       throw createError({
         status: 404,
-        statusMessage: "Navigation not found",
+        statusText: "Navigation not found",
       });
     }
 

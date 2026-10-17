@@ -1,3 +1,5 @@
+import { useRuntimeConfig } from "nuxt/server";
+
 export const postToDiscord = async (message: string, reason: "rsvp") => {
   const url = useRuntimeConfig().discordWebhookUrl;
   if (!url) {

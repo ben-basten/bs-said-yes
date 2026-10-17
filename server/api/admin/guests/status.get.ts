@@ -1,3 +1,4 @@
+import { defineEventHandler } from "nuxt/server";
 import { getAttendanceStatus } from "~~/server/repository/guests";
 import { requireAdminSession } from "~~/server/utils/admin";
 

@@ -1,3 +1,5 @@
+import { useRuntimeConfig } from "nuxt/server";
+
 export const postToHomeAssistant = async (
   payload: Record<string, string | boolean>,
 ) => {
