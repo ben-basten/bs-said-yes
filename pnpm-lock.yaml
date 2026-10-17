@@ -203,8 +203,8 @@ importers:
         specifier: ^4.6.2
         version: 4.6.2(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7(supports-color@10.2.2)))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7(supports-color@10.2.2)))(@oxc-project/types@0.148.0)(@parcel/watcher@2.6.0)(@types/node@24.13.2)(@vue/compiler-sfc@3.5.44)(acorn@8.18.0)(confbox@0.3.1)(db0@0.3.4(drizzle-orm@0.45.2(@neondatabase/serverless@1.1.0)))(dotenv@17.4.2)(drizzle-orm@0.45.2(@neondatabase/serverless@1.1.0))(esbuild@0.28.1)(eslint@10.5.0(jiti@2.7.0)(supports-color@10.2.2))(giget@3.3.0)(ioredis@5.11.1(supports-color@10.2.2))(lightningcss@1.33.0)(magicast@0.5.4)(mlly@1.8.2)(optionator@0.9.4)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3)))(rolldown@1.2.14)(rollup-plugin-visualizer@7.0.1(rolldown@1.2.14)(rollup@4.62.2))(rollup@4.62.2)(srvx@0.11.22)(supports-color@10.2.2)(terser@5.48.0)(tsx@4.23.13)(typescript@6.0.3)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0))(vue-tsc@3.3.13(typescript@6.0.3))(yaml@2.9.0)
       nuxt-auth-utils:
-        specifier: ^0.5.30
-        version: 0.5.30(magic-string@1.4.3)(magicast@0.5.4)(rolldown@1.2.14)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.14)(rollup@4.62.2)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0)))
+        specifier: ^0.5.32
+        version: 0.5.32(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.0)(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(rolldown@1.2.14)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.14)(rollup@4.62.2)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0)))
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3))
@@ -5192,8 +5192,8 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
-  nuxt-auth-utils@0.5.30:
-    resolution: {integrity: sha512-KtHMHy/OQAy/RYAmORBDvtNRs0BYbeLQOOrMv0FpBpWUYqMBA2lhumqnTACljFHGLGNpMy25Ck7cWVhVUjc6vA==}
+  nuxt-auth-utils@0.5.32:
+    resolution: {integrity: sha512-QtvKTxx3WrEBVwxJ1qHBfE1LZD927fk3Ubfj11zaBqlh2HvsXLjnzHfgbXYHpA86TyZMRINc8/RfryeLlYvkLg==}
     peerDependencies:
       '@atproto/api': ^0.13.15
       '@atproto/oauth-client-node': ^0.2.0
@@ -11770,13 +11770,14 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nuxt-auth-utils@0.5.30(magic-string@1.4.3)(magicast@0.5.4)(rolldown@1.2.14)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.14)(rollup@4.62.2)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0))):
+  nuxt-auth-utils@0.5.32(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.0)(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(rolldown@1.2.14)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.14)(rollup@4.62.2)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0))):
     dependencies:
       '@adonisjs/hash': 9.1.1
-      '@nuxt/kit': 4.5.2(magic-string@1.4.3)(magicast@0.5.4)(rolldown@1.2.14)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.14)(rollup@4.62.2)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0)))
+      '@nuxt/kit': 4.6.2(@nuxt/schema@4.6.2)(confbox@0.3.1)(dotenv@17.4.2)(giget@3.3.0)(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(rolldown@1.2.14)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.14)(rollup@4.62.2)(vite@8.3.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.13)(yaml@2.9.0)))
+      '@nuxt/schema': 4.6.2
       defu: 6.1.7
       h3: 1.15.11
-      hookable: 6.1.1
+      hookable: 6.1.2
       jose: 6.2.3
       ofetch: 1.5.1
       openid-client: 6.8.4
@@ -11786,8 +11787,12 @@ snapshots:
     transitivePeerDependencies:
       - argon2
       - bcrypt
+      - confbox
+      - dotenv
+      - giget
+      - jiti
       - magic-string
-      - magicast
+      - mlly
       - oxc-parser
       - rolldown
       - unplugin
