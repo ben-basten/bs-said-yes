@@ -39,8 +39,8 @@
     "pinia": "^3.0.4",
     "reka-ui": "^2.10.0",
     "tailwindcss": "^4.3.3",
-    "vue": "^3.5.42",
-    "vue-router": "^5.3.1",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0",
     "zod": "^4.5.4"
   },
   "devDependencies": {
@@ -57,7 +57,7 @@
     "prettier": "^3.9.6",
     "tsx": "^4.23.13",
     "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.11"
+    "vue-tsc": "^3.3.13"
   },
   "nano-staged": {
     "*.{js,mjs,jsx,ts,vue}": [
