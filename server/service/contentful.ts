@@ -1,5 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 import gqlmin from "gqlmin";
+import { createError, useRuntimeConfig } from "nuxt/server";
 
 const { cmsSpace, cmsApiKey, cmsPreviewApiKey, cmsEnv } = useRuntimeConfig();
 
@@ -37,7 +38,7 @@ export const fetchContentful = async <
     }
     throw createError({
       status: 500,
-      statusMessage: "Failed to fetch CMS data.",
+      statusText: "Failed to fetch CMS data.",
     });
   });
 };

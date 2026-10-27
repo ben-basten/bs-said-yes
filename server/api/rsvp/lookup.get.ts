@@ -1,3 +1,8 @@
+import {
+  createError,
+  defineEventHandler,
+  getValidatedQuery,
+} from "nuxt/server";
 import z from "zod";
 import { findGuestByName } from "~~/server/repository/guests";
 
@@ -14,7 +19,7 @@ export default defineEventHandler(async (event) => {
   if (!guest) {
     throw createError({
       status: 404,
-      statusMessage: `Person not found`,
+      statusText: "Person not found",
     });
   }
 

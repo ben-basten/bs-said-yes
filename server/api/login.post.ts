@@ -1,5 +1,11 @@
-import { z } from "zod";
 import { timingSafeEqual } from "node:crypto";
+import {
+  createError,
+  defineEventHandler,
+  readValidatedBody,
+  useRuntimeConfig,
+} from "nuxt/server";
+import { z } from "zod";
 
 const bodySchema = z.object({
   password: z.string().max(50).min(1),

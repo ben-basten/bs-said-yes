@@ -1,3 +1,8 @@
+import {
+  createError,
+  defineEventHandler,
+  readValidatedBody,
+} from "nuxt/server";
 import { z } from "zod";
 import {
   findGuestById,
@@ -32,7 +37,7 @@ export default defineEventHandler(async (event) => {
   if (!guest) {
     throw createError({
       status: 404,
-      statusMessage: "Guest not found",
+      statusText: "Guest not found",
     });
   }
 
