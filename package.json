@@ -32,6 +32,7 @@
     "contentful-rich-text-vue-renderer": "^3.2.1",
     "drizzle-orm": "^0.45.2",
     "gqlmin": "^0.3.2",
+    "graphql": "^17.1.0",
     "graphql-request": "^7.4.0",
     "gsap": "^3.15.0",
     "nuxt": "^4.6.2",
@@ -45,7 +46,7 @@
   },
   "devDependencies": {
     "@contentful/rich-text-types": "^17.2.7",
-    "@graphql-codegen/cli": "^7.4.0",
+    "@graphql-codegen/cli": "^8.0.0",
     "@nuxt/eslint": "^1.16.0",
     "@parcel/watcher": "^2.6.0",
     "@types/node": "^24.13.2",
