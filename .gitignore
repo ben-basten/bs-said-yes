@@ -26,3 +26,4 @@ logs
 # GraphQL
 schema.graphql
 shared/types/graphql.ts
+households.txt

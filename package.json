@@ -21,6 +21,7 @@
     "db:seed": "tsx --env-file=.env ./scripts/seed.ts",
     "db:seed:prd": "tsx --env-file=.env ./scripts/seed.ts guests.csv",
     "db:list-attending": "tsx --env-file=.env ./scripts/list-attending-guests.ts",
+    "db:export-households": "tsx --env-file=.env ./scripts/export-households.ts",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
